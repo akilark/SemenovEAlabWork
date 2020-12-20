@@ -8,23 +8,36 @@ namespace laba1
 
 	class PersonList
 	{
-		public void CreateListofPerson()
+		public Person[] CreateListofPerson()
 		{
 			int quantity = 3;
 			Person personRnd = new Person();
-			Person[] ListOfPerson1 = new Person[quantity];
-			Person[] ListOfPerson2 = new Person[quantity];
+			Person[] ListOfPerson = new Person[quantity];
 			for(int i=0;i< quantity;i++)
 			{
-				ListOfPerson1[i] = personRnd.GetRandomPerson();
-				ListOfPerson1[i].GetInfo();
+				ListOfPerson[i] = personRnd.GetRandomPerson();
 			}
+			return ListOfPerson;
+		}
 
+		public Person[] addElement(Person[] listofperson, Person newelement)
+		{
+			int elementCount = listofperson.Length;
+			Array.Resize(ref listofperson, listofperson.Length + 1);
+			listofperson[elementCount] = newelement;
+			return listofperson;
 		}
 		
-
-		
 					
+		public void Showmassive(Person[] listofperson)
+		{
+			int elementCount = listofperson.Length;
+			for (int i = 0; i < elementCount; i++)
+			{
+				listofperson[i].GetInfo();
+			}
+		}
+
 		
 	}
 }
