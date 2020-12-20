@@ -12,8 +12,9 @@ namespace laba1
 		public genderType gender = (genderType)Enum.GetValues(typeof(genderType)).GetValue(0);
 
 
-		public void GetRandomPerson()
+		public Person GetRandomPerson()
 		{
+			Person returnPerson = new Person();
 			first_name = "";
 			second_name = "";
 			age = null;
@@ -75,16 +76,22 @@ namespace laba1
 				string[] LastNameEnd = { "о" };
 				second_name += LastNameEnd[rand.Next(LastNameEnd.Length)];
 			}
+			returnPerson.first_name = first_name;
+			returnPerson.second_name = second_name;
+			returnPerson.gender = gender;
+			returnPerson.age = age;
+			return returnPerson;
 
 		}
 
 		public void GetInfo()
 		{
-			Console.WriteLine($"Имя: {first_name} Фамилия: {second_name} Возраст: {age} Пол: {gender}");
+			Console.WriteLine($"Имя: {first_name}; Фамилия: {second_name}; Возраст: {age}; Пол: {gender}");
 		}
 
-		public void addPerson()
+		public Person addPerson()
 		{
+			Person returnPerson = new Person();
 			first_name = "Неизвестно";
 			second_name = "Неизвестно";
 			age = null;
@@ -163,6 +170,11 @@ namespace laba1
 					}
 				}
 			}
+			returnPerson.first_name = first_name;
+			returnPerson.second_name = second_name;
+			returnPerson.gender = gender;
+			returnPerson.age = age;
+			return returnPerson;
 		}
 	}
 }

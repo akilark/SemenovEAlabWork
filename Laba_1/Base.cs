@@ -11,9 +11,9 @@ namespace laba1
 			string exit;
 			while (true)
 			{
-				Person person = new Person();
-				person.addPerson();
-				person.GetInfo();
+				PersonList perslist = new PersonList();
+				perslist.CreateListofPerson();
+				
 
 				Console.WriteLine("для выхода из программы нажмите 'q'");
 				exit = Console.ReadLine();
