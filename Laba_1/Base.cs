@@ -9,12 +9,15 @@ namespace laba1
 		static void Main(string[] args)
 		{
 			string exit;
+			Person newPerson = new Person();
+			PersonList perslist = new PersonList();
+			Person[] ListOfPerson1;
+			Person[] ListOfPerson2;
 			while (true)
 			{
 				Console.WriteLine("Cоздание массивов, для продолжение нажмите любую кнопку");
-				Person[] ListOfPerson1 = new Person[3];
-				Person[] ListOfPerson2 = new Person[3];
-				PersonList perslist = new PersonList();
+				
+				
 				ListOfPerson1=perslist.CreateListofPerson();
 				ListOfPerson2 = perslist.CreateListofPerson();
 				Console.ReadKey();
@@ -31,13 +34,43 @@ namespace laba1
 
 
 				//c
-				int elementCount = ListOfPerson1.Length;
-				Person newPerson = new Person();
+				Console.WriteLine("Добавление человека в первый массив:");
 				ListOfPerson1 = perslist.addElement(ListOfPerson1, newPerson.addPerson());
 				Console.WriteLine();
 				Console.WriteLine("Расширенный массив:");
 				perslist.Showmassive(ListOfPerson1);
 				Console.WriteLine();
+				Console.ReadKey();
+
+				//d
+				Console.WriteLine("Перенос человеа из первого массива во второй:");
+				Person seelectedperson = new Person();
+				seelectedperson = perslist.selectPerson(ListOfPerson1,1);
+				ListOfPerson2 = perslist.addElement(ListOfPerson2, seelectedperson);
+				Console.WriteLine("Первый массив:");
+				perslist.Showmassive(ListOfPerson1);
+				Console.WriteLine();
+				Console.WriteLine("Второй массив:");
+				perslist.Showmassive(ListOfPerson2);
+				Console.WriteLine();
+				Console.ReadKey();
+
+				//e
+				int index = new int();
+				index = 1;
+				ListOfPerson1 = perslist.deleteElement(ListOfPerson1, index);
+				Console.WriteLine($"Удаление элемента с индексом {index}:");
+				Console.WriteLine("Первый массив:");
+				perslist.Showmassive(ListOfPerson1);
+				Console.WriteLine();
+				Console.WriteLine("Второй массив:");
+				perslist.Showmassive(ListOfPerson2);
+				Console.WriteLine();
+				Console.ReadKey();
+
+
+
+
 
 				Console.WriteLine("для выхода из программы нажмите 'q'");
 				exit = Console.ReadLine();
@@ -45,8 +78,9 @@ namespace laba1
 				if (exit == "q" || exit == "Q" || exit == "й" || exit == "Й")
 				{
 					break;
-
 				}
+
+				
 			}
 		}
 	}
