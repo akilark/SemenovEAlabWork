@@ -21,11 +21,10 @@ namespace laba1
 			Random rand = new Random();
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
 			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
-			int lenght = rand.Next(1, 3);
-
-			age = rand.Next(12, 101);
-
 			Array gendervalues = Enum.GetValues(typeof(genderType));
+
+			int lenght = rand.Next(1, 3);
+			age = rand.Next(12, 101);
 			gender = (genderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
 
 			int firstLetter = rand.Next(0, 100);
@@ -98,6 +97,7 @@ namespace laba1
 			gender = (genderType)Enum.GetValues(typeof(genderType)).GetValue(0);
 			string pattern = @"[^a-zа-я-]";
 			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
+
 			Console.WriteLine("Введите имя ");
 			first_name = Console.ReadLine();
 			Match mat = reg.Match(first_name);

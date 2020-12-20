@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 
 namespace laba1
@@ -22,7 +21,8 @@ namespace laba1
 		}
 
 		public Person[] addElement(Person[] listofperson, Person newelement)
-		{ int elementCount = listofperson.Length;
+		{ 
+			int elementCount = array_dimension(listofperson);
 
 			Array.Resize(ref listofperson, listofperson.Length + 1);
 			listofperson[elementCount] = newelement;
@@ -32,7 +32,8 @@ namespace laba1
 
 		public void Showmassive(Person[] listofperson)
 		{
-			int elementCount = listofperson.Length;
+			int elementCount = array_dimension(listofperson);
+
 			for (int i = 0; i < elementCount; i++)
 			{
 				listofperson[i].GetInfo();
@@ -41,8 +42,9 @@ namespace laba1
 
 		public Person[] deleteElement(Person[] listofperson, int Index)
 		{
-			int elementCount = listofperson.Length;
+			int elementCount = array_dimension(listofperson);
 			bool flag = false;
+
 			Person[] listofpersonsmall = new Person[elementCount - 1];
 			for (int i = 0; i < elementCount - 1; i++)
 			{
@@ -69,6 +71,10 @@ namespace laba1
 			return returnPerson;
 		}
 		
-
+		public int array_dimension(Person[] listofperson)
+		{
+			int elementCount = listofperson.Length;
+			return elementCount;
+		}
 	}
 }

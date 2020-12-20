@@ -13,6 +13,8 @@ namespace laba1
 			PersonList perslist = new PersonList();
 			Person[] ListOfPerson1;
 			Person[] ListOfPerson2;
+			Person seelectedperson;
+			int index;
 			while (true)
 			{
 				Console.WriteLine("Cоздание массивов, для продолжение нажмите любую кнопку");
@@ -44,7 +46,7 @@ namespace laba1
 
 				//d
 				Console.WriteLine("Перенос человеа из первого массива во второй:");
-				Person seelectedperson = new Person();
+				
 				seelectedperson = perslist.selectPerson(ListOfPerson1,1);
 				ListOfPerson2 = perslist.addElement(ListOfPerson2, seelectedperson);
 				Console.WriteLine("Первый массив:");
@@ -56,7 +58,7 @@ namespace laba1
 				Console.ReadKey();
 
 				//e
-				int index = new int();
+				
 				index = 1;
 				ListOfPerson1 = perslist.deleteElement(ListOfPerson1, index);
 				Console.WriteLine($"Удаление элемента с индексом {index}:");
