@@ -6,7 +6,13 @@ namespace laba1
 {
 
 	class PersonList
-	{
+    {
+        private Person[] _localPersonArray= new Person[1];
+
+		public Person[] Persons => _localPersonArray;
+
+        public int Count => _localPersonArray.Length;
+
 		public Person[] CreateListofPerson()
 		{
 			int quantity = 3;
@@ -20,29 +26,26 @@ namespace laba1
 			return ListOfPerson;
 		}
 
-		public Person[] addElement(Person[] listofperson, Person newelement)
+		public void addElement(Person newelement)
 		{ 
-			int elementCount = array_dimension(listofperson);
+			int elementCount = Count;
 
-			Array.Resize(ref listofperson, listofperson.Length + 1);
-			listofperson[elementCount] = newelement;
-			return listofperson;
+			Array.Resize(ref _localPersonArray, _localPersonArray.Length + 1);
+            _localPersonArray[elementCount] = newelement;
 		}
 
 
 		public void Showmassive(Person[] listofperson)
 		{
-			int elementCount = array_dimension(listofperson);
-
-			for (int i = 0; i < elementCount; i++)
+			for (int i = 0; i < Count; i++)
 			{
 				listofperson[i].GetInfo();
 			}
 		}
 
-		public Person[] deleteElement(Person[] listofperson, int Index)
+		public Person[] deleteElement(int Index)
 		{
-			int elementCount = array_dimension(listofperson);
+			int elementCount = Count;
 			bool flag = false;
 
 			Person[] listofpersonsmall = new Person[elementCount - 1];
@@ -54,27 +57,21 @@ namespace laba1
 				}
 				if (flag == false)
 				{
-					listofpersonsmall[i] = listofperson[i];
+					listofpersonsmall[i] = _localPersonArray[i];
 				}
 				if (flag == true)
 				{
-					listofpersonsmall[i] = listofperson[i + 1];
+					listofpersonsmall[i] = _localPersonArray[i + 1];
 				}
 
 			}
 			return listofpersonsmall;
 		}
 
-		public Person selectPerson(Person[] listofperson, int Index)
+		public Person FindByIndex(int Index)
 		{
-			Person returnPerson = listofperson[Index];
-			return returnPerson;
+			return _localPersonArray[Index];
 		}
 		
-		public int array_dimension(Person[] listofperson)
-		{
-			int elementCount = listofperson.Length;
-			return elementCount;
-		}
 	}
 }

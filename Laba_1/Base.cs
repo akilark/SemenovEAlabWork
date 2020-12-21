@@ -11,8 +11,8 @@ namespace laba1
 			string exit;
 			Person newPerson = new Person();
 			PersonList perslist = new PersonList();
-			Person[] ListOfPerson1;
-			Person[] ListOfPerson2;
+			PersonList ListOfPerson1;
+            PersonList ListOfPerson2;
 			Person seelectedperson;
 			int index;
 			while (true)
