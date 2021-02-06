@@ -6,19 +6,39 @@ namespace Laba_1.Logic
 {
 	class Person
 	{
-		public string first_name;
-		public string second_name;
-		public int? age;
-		public GenderType gender = GenderType.unknown;
+		private string _localName;
+		private string _localSecondName;
+		private int? _localAge;
+		private GenderType _localGender = GenderType.unknown;
 
 
 		
 
 		public string GetInfo()
 		{
-			return $"Имя: {first_name}; Фамилия: {second_name}; Возраст: {age}; Пол: {gender}";
+			return $"Имя: {_localName}; Фамилия: {_localSecondName}; Возраст: {_localAge}; Пол: {_localGender}";
 		}
 
+		public void AddName(string Name)
+		{
+			_localName = Name;
+		}
+
+		public void AddSecondName(string SecondName)
+		{
+			_localSecondName = SecondName;
+		}
+
+		public void AddAge(int? Age)
+		{
+			_localAge = Age;
+		}
+
+		public void AddGender(GenderType Gender)
+		{
+			_localGender = Gender;
+		}
+		/*
 		public Person addPerson()
 		{
 			Person returnPerson = new Person();
@@ -107,5 +127,6 @@ namespace Laba_1.Logic
 			returnPerson.age = age;
 			return returnPerson;
 		}
+		*/
 	}
 }

@@ -23,7 +23,7 @@ namespace Laba_1.Logic
 		}
 
 
-		public string[] Showmassive()
+		public string[] PersonsInfo()
 		{
 			string[] PersonInfoArray = new string[Count];
 			for (int i = 0; i < Count; i++)

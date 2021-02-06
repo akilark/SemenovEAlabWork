@@ -30,34 +30,34 @@ namespace Laba_1.Output
 
 				//b
 				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1.Showmassive());
+				ShowInfo(ListOfPerson1.PersonsInfo());
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2.Showmassive());
+				ShowInfo(ListOfPerson2.PersonsInfo());
 				Console.WriteLine();
 				Console.WriteLine("для продолжение нажмите любую кнопку");
 				Console.ReadKey();
 
-
+				/*
 				//c
 				Console.WriteLine("Добавление человека в первый массив:");
 				ListOfPerson1.addElement(newPerson.addPerson());
 				Console.WriteLine();
 				Console.WriteLine("Расширенный массив:");
-				ShowInfo(ListOfPerson1.Showmassive());
+				ShowInfo(ListOfPerson1.PersonsInfo());
 				Console.WriteLine();
 				Console.ReadKey();
-
+				*/
 				//d
 				Console.WriteLine("Перенос человеа из первого массива во второй:");
 				index = 1;
 				seelectedperson = ListOfPerson1.FindByIndex(index);
 				ListOfPerson2.addElement(seelectedperson);
 				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1.Showmassive());
+				ShowInfo(ListOfPerson1.PersonsInfo());
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2.Showmassive());
+				ShowInfo(ListOfPerson2.PersonsInfo());
 				Console.WriteLine();
 				Console.ReadKey();
 
@@ -67,10 +67,10 @@ namespace Laba_1.Output
 				ListOfPerson1.deleteElement(index);
 				Console.WriteLine($"Удаление элемента с индексом {index}:");
 				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1.Showmassive());
+				ShowInfo(ListOfPerson1.PersonsInfo());
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2.Showmassive());
+				ShowInfo(ListOfPerson2.PersonsInfo());
 				Console.WriteLine();
 				Console.ReadKey();
 
