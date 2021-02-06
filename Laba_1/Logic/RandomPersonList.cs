@@ -14,7 +14,7 @@ namespace Laba_1.Logic
 
 			for (int i = 0; i < quantity; i++)
 			{
-				PersonArray.addElement(personRnd.GetPerson());
+				PersonArray.AddElement(personRnd.GetPerson());
 			}
 			return PersonArray;
 		}

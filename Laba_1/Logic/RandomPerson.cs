@@ -8,15 +8,14 @@ namespace Laba_1.Logic
 	{
 		private string _localNameRadom;
 		private string _localSecondNameRandom;
-		private int? _localAgeRandom;
-		private GenderType _localGenderRandom = GenderType.unknown;
+		private int _localAgeRandom;
+		private GenderType _localGenderRandom = GenderType.Unknown;
 
 		public Person GetPerson()
 		{
 			Person returnPerson = new Person();
 			_localNameRadom = "";
 			_localSecondNameRandom = "";
-			_localAgeRandom = null;
 			Random rand = new Random();
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
 			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
@@ -40,19 +39,19 @@ namespace Laba_1.Logic
 
 			switch(_localGenderRandom)
 			{
-				case GenderType.male:
+				case GenderType.Male:
 					{
 						string[] LastNameEnd = { "ов", "ев", "ин" };
 						_localSecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
 						break;
 					}
-				case GenderType.female:
+				case GenderType.Female:
 					{
 						string[] LastNameEnd = { "ова", "ева", "ина" };
 						_localSecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
 						break;
 					}
-				case GenderType.unknown:
+				case GenderType.Unknown:
 					{
 						string[] LastNameEnd = { "о" };
 						_localSecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];

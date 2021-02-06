@@ -14,12 +14,12 @@ namespace Laba_1.Logic
         public int Count => _localPersonArray.Length;
 
 
-		public void addElement(Person newelement)
+		public void AddElement(Person newElement)
 		{ 
 			int elementCount = Count;
 
 			Array.Resize(ref _localPersonArray, elementCount + 1);
-            _localPersonArray[elementCount] = newelement;
+            _localPersonArray[elementCount] = newElement;
 		}
 
 
@@ -33,7 +33,7 @@ namespace Laba_1.Logic
 			return PersonInfoArray;
 		}
 
-		public void deleteElement(int index)
+		public void DeleteElement(int index)
 		{
 			int elementCount = Count;
 			
@@ -48,9 +48,9 @@ namespace Laba_1.Logic
 
 		}
 
-		public Person FindByIndex(int Index)
+		public Person FindByIndex(int index)
 		{
-			return _localPersonArray[Index];
+			return _localPersonArray[index];
 		}
 		
 	}
