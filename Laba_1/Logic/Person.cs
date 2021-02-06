@@ -2,14 +2,14 @@
 using System.Text.RegularExpressions;
 
 
-namespace laba1
+namespace Laba_1.Logic
 {
 	class Person
 	{
 		public string first_name;
 		public string second_name;
 		public int? age;
-		public genderType gender = (genderType)Enum.GetValues(typeof(genderType)).GetValue(0);
+		public GenderType gender = GenderType.unknown;
 
 
 		public Person GetRandomPerson()
@@ -21,11 +21,11 @@ namespace laba1
 			Random rand = new Random();
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
 			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
-			Array gendervalues = Enum.GetValues(typeof(genderType));
+			Array gendervalues = Enum.GetValues(typeof(GenderType));
 
 			int lenght = rand.Next(1, 3);
 			age = rand.Next(12, 101);
-			gender = (genderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
+			gender = (GenderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
 
 			int firstLetter = rand.Next(0, 100);
 			if (firstLetter > 50)
@@ -58,19 +58,19 @@ namespace laba1
 				i++;
 			}
 
-			if (gender == (genderType)Enum.GetValues(typeof(genderType)).GetValue(1))
+			if (gender == GenderType.male)
 			{
 				string[] LastNameEnd = { "ов", "ев", "ин" };
 				second_name += LastNameEnd[rand.Next(LastNameEnd.Length)];
 			}
 
-			if (gender == (genderType)Enum.GetValues(typeof(genderType)).GetValue(2))
+			if (gender == GenderType.female)
 			{
 				string[] LastNameEnd = { "ова", "ева", "ина" };
 				second_name += LastNameEnd[rand.Next(LastNameEnd.Length)];
 			}
 
-			if (gender == (genderType)Enum.GetValues(typeof(genderType)).GetValue(0))
+			if (gender == GenderType.unknown)
 			{
 				string[] LastNameEnd = { "о" };
 				second_name += LastNameEnd[rand.Next(LastNameEnd.Length)];
@@ -94,7 +94,7 @@ namespace laba1
 			first_name = "Неизвестно";
 			second_name = "Неизвестно";
 			age = null;
-			gender = (genderType)Enum.GetValues(typeof(genderType)).GetValue(0);
+			gender = GenderType.unknown;
 			string pattern = @"[^a-zа-я-]";
 			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
 
@@ -156,15 +156,15 @@ namespace laba1
 							string gen = Console.ReadLine();
 							if (gen == "М" || gen == "м")
 							{
-								gender = (genderType)Enum.GetValues(typeof(genderType)).GetValue(1);
+								gender = GenderType.male;
 							}
 							else if (gen == "Ж" || gen == "ж")
 							{
-								gender = (genderType)Enum.GetValues(typeof(genderType)).GetValue(2);
+								gender = GenderType.female;
 							}
 							else
 							{
-								gender = (genderType)Enum.GetValues(typeof(genderType)).GetValue(0);
+								gender = GenderType.unknown;
 							}
 						}
 					}
