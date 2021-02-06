@@ -12,76 +12,7 @@ namespace Laba_1.Logic
 		public GenderType gender = GenderType.unknown;
 
 
-		public Person GetRandomPerson()
-		{
-			Person returnPerson = new Person();
-			first_name = "";
-			second_name = "";
-			age = null;
-			Random rand = new Random();
-			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
-			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
-			Array gendervalues = Enum.GetValues(typeof(GenderType));
-
-			int lenght = rand.Next(1, 3);
-			age = rand.Next(12, 101);
-			gender = (GenderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
-
-			int firstLetter = rand.Next(0, 100);
-			if (firstLetter > 50)
-			{
-				first_name += consonants[rand.Next(consonants.Length)].ToUpper();
-				first_name += vowels[rand.Next(vowels.Length)];
-			}
-			if (firstLetter <= 50)
-			{
-				first_name += vowels[rand.Next(vowels.Length)].ToUpper();
-			}
-			firstLetter = rand.Next(0, 100);
-			if (firstLetter > 50)
-			{
-				second_name += consonants[rand.Next(consonants.Length)].ToUpper();
-				second_name += vowels[rand.Next(vowels.Length)];
-			}
-			if (firstLetter <= 50)
-			{
-				second_name += vowels[rand.Next(vowels.Length)].ToUpper();
-			}
-
-			int i = 0;
-			while (i < lenght)
-			{
-				first_name += consonants[rand.Next(consonants.Length)];
-				first_name += vowels[rand.Next(vowels.Length)];
-				second_name += consonants[rand.Next(consonants.Length)];
-				second_name += vowels[rand.Next(vowels.Length)];
-				i++;
-			}
-
-			if (gender == GenderType.male)
-			{
-				string[] LastNameEnd = { "ов", "ев", "ин" };
-				second_name += LastNameEnd[rand.Next(LastNameEnd.Length)];
-			}
-
-			if (gender == GenderType.female)
-			{
-				string[] LastNameEnd = { "ова", "ева", "ина" };
-				second_name += LastNameEnd[rand.Next(LastNameEnd.Length)];
-			}
-
-			if (gender == GenderType.unknown)
-			{
-				string[] LastNameEnd = { "о" };
-				second_name += LastNameEnd[rand.Next(LastNameEnd.Length)];
-			}
-			returnPerson.first_name = first_name;
-			returnPerson.second_name = second_name;
-			returnPerson.gender = gender;
-			returnPerson.age = age;
-			return returnPerson;
-
-		}
+		
 
 		public void GetInfo()
 		{

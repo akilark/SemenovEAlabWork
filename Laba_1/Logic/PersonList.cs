@@ -16,15 +16,16 @@ namespace Laba_1.Logic
 		public void CreateListofPerson(int quantity)
 		{
 			
-			Person personRnd = new Person();
+			RandomPerson personRnd = new RandomPerson();
 			Array.Resize(ref _localPersonArray, quantity);
 			
 			for (int i = 0; i < quantity; i++)
 			{
-				_localPersonArray[i] = personRnd.GetRandomPerson();
+				_localPersonArray[i] = personRnd.GetPerson();
 			}
 			
 		}
+
 
 		public void addElement(Person newelement)
 		{ 
