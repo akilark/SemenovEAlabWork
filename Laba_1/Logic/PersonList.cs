@@ -23,12 +23,14 @@ namespace Laba_1.Logic
 		}
 
 
-		public void Showmassive()
+		public string[] Showmassive()
 		{
+			string[] PersonInfoArray = new string[Count];
 			for (int i = 0; i < Count; i++)
 			{
-				_localPersonArray[i].GetInfo();
+				PersonInfoArray[i]=_localPersonArray[i].GetInfo();
 			}
+			return PersonInfoArray;
 		}
 
 		public void deleteElement(int index)

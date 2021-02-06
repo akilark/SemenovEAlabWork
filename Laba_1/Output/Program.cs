@@ -15,24 +15,25 @@ namespace Laba_1.Output
 			Person seelectedperson;
 			RandomPersonList ListRND = new RandomPersonList();
 			int index;
+			int ListSize = 3;
 			while (true)
 			{
 				Console.WriteLine("Cоздание массивов, для продолжение нажмите любую кнопку");
 				
 				
 				
-				ListOfPerson1 = ListRND.Create(3);
+				ListOfPerson1 = ListRND.Create(ListSize);
 				
-				ListOfPerson2 = ListRND.Create(3);
+				ListOfPerson2 = ListRND.Create(ListSize);
 
 				Console.ReadKey();
 
 				//b
 				Console.WriteLine("Первый массив:");
-				ListOfPerson1.Showmassive();
+				ShowInfo(ListOfPerson1.Showmassive());
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ListOfPerson2.Showmassive();
+				ShowInfo(ListOfPerson2.Showmassive());
 				Console.WriteLine();
 				Console.WriteLine("для продолжение нажмите любую кнопку");
 				Console.ReadKey();
@@ -43,7 +44,7 @@ namespace Laba_1.Output
 				ListOfPerson1.addElement(newPerson.addPerson());
 				Console.WriteLine();
 				Console.WriteLine("Расширенный массив:");
-				ListOfPerson1.Showmassive();
+				ShowInfo(ListOfPerson1.Showmassive());
 				Console.WriteLine();
 				Console.ReadKey();
 
@@ -53,10 +54,10 @@ namespace Laba_1.Output
 				seelectedperson = ListOfPerson1.FindByIndex(index);
 				ListOfPerson2.addElement(seelectedperson);
 				Console.WriteLine("Первый массив:");
-				ListOfPerson1.Showmassive();
+				ShowInfo(ListOfPerson1.Showmassive());
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ListOfPerson2.Showmassive();
+				ShowInfo(ListOfPerson2.Showmassive());
 				Console.WriteLine();
 				Console.ReadKey();
 
@@ -66,10 +67,10 @@ namespace Laba_1.Output
 				ListOfPerson1.deleteElement(index);
 				Console.WriteLine($"Удаление элемента с индексом {index}:");
 				Console.WriteLine("Первый массив:");
-				ListOfPerson1.Showmassive();
+				ShowInfo(ListOfPerson1.Showmassive());
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ListOfPerson2.Showmassive();
+				ShowInfo(ListOfPerson2.Showmassive());
 				Console.WriteLine();
 				Console.ReadKey();
 
@@ -88,6 +89,13 @@ namespace Laba_1.Output
 				
 			}
 		}
+
+		public static void ShowInfo(string[] PersonInfoArray)
+		{
+			for (int i = 0; i < PersonInfoArray.Length; i++)
+				Console.WriteLine(PersonInfoArray[i]);
+		}
+
 	}
 
 			

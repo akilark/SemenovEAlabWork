@@ -14,9 +14,9 @@ namespace Laba_1.Logic
 
 		
 
-		public void GetInfo()
+		public string GetInfo()
 		{
-			Console.WriteLine($"Имя: {first_name}; Фамилия: {second_name}; Возраст: {age}; Пол: {gender}");
+			return $"Имя: {first_name}; Фамилия: {second_name}; Возраст: {age}; Пол: {gender}";
 		}
 
 		public Person addPerson()
