@@ -13,6 +13,7 @@ namespace Laba_1.Output
 			PersonList ListOfPerson1 = new PersonList(); 
             PersonList ListOfPerson2 = new PersonList(); 
 			Person seelectedperson;
+			RandomPersonList ListRND = new RandomPersonList();
 			int index;
 			while (true)
 			{
@@ -20,10 +21,10 @@ namespace Laba_1.Output
 				
 				
 				
-				ListOfPerson1.CreateListofPerson(3);
+				ListOfPerson1 = ListRND.Create(3);
 				
-				ListOfPerson2.CreateListofPerson(3);
-				
+				ListOfPerson2 = ListRND.Create(3);
+
 				Console.ReadKey();
 
 				//b

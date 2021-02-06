@@ -13,19 +13,6 @@ namespace Laba_1.Logic
 
         public int Count => _localPersonArray.Length;
 
-		public void CreateListofPerson(int quantity)
-		{
-			
-			RandomPerson personRnd = new RandomPerson();
-			Array.Resize(ref _localPersonArray, quantity);
-			
-			for (int i = 0; i < quantity; i++)
-			{
-				_localPersonArray[i] = personRnd.GetPerson();
-			}
-			
-		}
-
 
 		public void addElement(Person newelement)
 		{ 
