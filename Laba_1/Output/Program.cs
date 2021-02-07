@@ -27,9 +27,8 @@ namespace Laba_1.Output
 			bool AgeMistakeFlag = true;
 			while (true)
 			{
-				Console.WriteLine("Cоздание массивов, для продолжение нажмите любую кнопку");
-				
-				
+				Console.WriteLine("Cоздание массивов, " +
+					"для продолжение нажмите любую кнопку");
 				
 				ListOfPerson1 = ListRND.Create(ListSize);
 				
@@ -85,7 +84,8 @@ namespace Laba_1.Output
 					{
 						if (Age < MinAge || Age > MaxAge )
 						{
-							Console.WriteLine($"Возраст должен быть в диапазоне [{MinAge}-{MaxAge}]");	
+							Console.WriteLine($"Возраст должен быть в диапазоне" +
+								$" [{MinAge}-{MaxAge}]");	
 						}
 						else
 						{
@@ -170,8 +170,8 @@ namespace Laba_1.Output
 
 		public static void ShowInfo(string[] PersonInfoArray)
 		{
-			for (int i = 0; i < PersonInfoArray.Length; i++)
-				Console.WriteLine(PersonInfoArray[i]);
+			for (int i = 0; i < PersonInfoArray.Length; i++)		
+			Console.WriteLine(GenderRussian(PersonInfoArray[i]));
 		}
 		
 		public static string CorrectName(string name)
@@ -184,7 +184,8 @@ namespace Laba_1.Output
 				for (int i = 0; i < SubTMP.Length; i++)
 				{
 					if (SubTMP.Length > 1)
-						NameTMP = SubTMP.Substring(0, 1).ToUpper() + SubTMP.Substring(1, SubTMP.Length - 1).ToLower();
+						NameTMP = SubTMP.Substring(0, 1).ToUpper() + 
+							SubTMP.Substring(1, SubTMP.Length - 1).ToLower();
 					else NameTMP = SubTMP.ToUpper();
 				}
 
@@ -210,6 +211,34 @@ namespace Laba_1.Output
 				Console.WriteLine("Имя и Фамилия могут содержать только буквы!!!");
 				}
 			return mat.Success;
+		}
+
+		public static string GenderRussian(string info)
+		{
+			string result="";
+			string patternGenderMale = @"\b(Male)\b";
+			string targetGenderMale = "Мужской";
+			Regex regexMale = new Regex(patternGenderMale);
+			if (regexMale.IsMatch(info))
+			{
+				result = regexMale.Replace(info, targetGenderMale);
+			}
+			string patternGenderFemale = @"\b(Female)\b";
+			string targetGenderFemale = "Женский";
+			Regex regexFemale = new Regex(patternGenderFemale);
+			if (regexFemale.IsMatch(info))
+			{
+				result = regexFemale.Replace(info, targetGenderFemale);
+			}
+			string patternGenderUnknown = @"\b(Unknown)\b";
+			string targetGenderUnknown = "Боевой вертолёт апачи";
+			Regex regexUnknown = new Regex(patternGenderUnknown);
+			if (regexUnknown.IsMatch(info))
+			{
+				result = regexUnknown.Replace(info, targetGenderUnknown);
+			}
+			return result;
+
 		}
 	}
 

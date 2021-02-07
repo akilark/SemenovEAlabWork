@@ -18,7 +18,8 @@ namespace Laba_1.Logic
 			_localSecondNameRandom = "";
 			Random rand = new Random();
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
-			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
+			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м",
+				"н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
 			Array gendervalues = Enum.GetValues(typeof(GenderType));
 
 			int lenght = rand.Next(1, 3);
@@ -70,7 +71,8 @@ namespace Laba_1.Logic
 		{
 			Random rand = new Random();
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
-			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
+			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м",
+				"н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
 			int IndexFirstLetter = rand.Next(0, 100);
 			string FirstLetter = "";
 			if (IndexFirstLetter > 50)

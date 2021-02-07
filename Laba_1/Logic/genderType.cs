@@ -9,4 +9,5 @@ namespace Laba_1.Logic
 		Male,
 		Female
 	}
+
 }

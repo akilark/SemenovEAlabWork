@@ -14,8 +14,10 @@ namespace Laba_1.Logic
 
 		public string GetInfo()
 		{
-			return $"Имя: {_localName}; Фамилия: {_localSecondName}; Возраст: {_localAge}; Пол: {_localGender}";
+			return $"Имя: {_localName}; Фамилия: {_localSecondName}; " +
+				$"Возраст: {_localAge}; Пол: {_localGender}";
 		}
+
 
 		public void AddName(string name)
 		{
