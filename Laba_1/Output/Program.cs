@@ -6,23 +6,25 @@ namespace Laba_1.Output
 {
 	class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			string exit;
 			Person PersonForAdd = new Person();
-			PersonList ListOfPerson1 = new PersonList(); 
-            PersonList ListOfPerson2 = new PersonList(); 
-			Person seelectedperson;
+			PersonList ListOfPerson1; 
+            PersonList ListOfPerson2; 
+			Person SelectedPerson;
 			RandomPersonList ListRND = new RandomPersonList();
 			int index;
 			int ListSize = 3;
-			string FirstName;
-			string SecondName;
+			string FirstName="";
+			string SecondName="";
 			int Age=-1;
+			int MinAge = 1;
+			int MaxAge = 114;
 			GenderType Gender;
-			bool NameFlag = false;
-			bool SecondNameFlag = false;
-			bool AgeFlag = false;
+			bool FirstNameMistakeFlag = true;
+			bool SecondNameMistakeFlag = true;
+			bool AgeMistakeFlag = true;
 			while (true)
 			{
 				Console.WriteLine("Cоздание массивов, для продолжение нажмите любую кнопку");
@@ -48,55 +50,26 @@ namespace Laba_1.Output
 				
 				//c
 				Console.WriteLine("Добавление человека в первый массив:");
-				string pattern = @"[^a-zа-я-]";
-				Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
-				while (NameFlag==false)
+				
+				while (FirstNameMistakeFlag==true)
 				{
 					Console.WriteLine("Введите имя:");
 					FirstName = Console.ReadLine();
-					Match mat = reg.Match(FirstName);
-					if (mat.Success)
-					{
-						Console.WriteLine("Имя может содержать только буквы");
-						
-					}
-					else
-					{
-						NameFlag = true;
-						for (int i = 0; i < FirstName.Length; i++)
-						{
-							if (FirstName.Length > 1)
-								FirstName = FirstName.Substring(0, 1).ToUpper() + FirstName.Substring(1, FirstName.Length - 1).ToLower();
-							else FirstName = FirstName.ToUpper();
-						}
-					PersonForAdd.AddName(FirstName);
-					}
+					FirstNameMistakeFlag=CheckName(FirstName);
 				}
+				FirstName = CorrectName(FirstName);
+				PersonForAdd.AddName(FirstName);
 
-				while (SecondNameFlag == false)
+				while (SecondNameMistakeFlag == true)
 				{
 					Console.WriteLine("Введите фамилию ");
 					SecondName = Console.ReadLine();
-					Match mat = reg.Match(SecondName);
-					if (mat.Success)
-					{
-						Console.WriteLine("Фамилия может содержать только буквы");
-
-					}
-					else
-					{
-						SecondNameFlag = true;
-						for (int i = 0; i < SecondName.Length; i++)
-						{
-							if (SecondName.Length > 1)
-								SecondName = SecondName.Substring(0, 1).ToUpper() + SecondName.Substring(1, SecondName.Length - 1).ToLower();
-							else SecondName = SecondName.ToUpper();
-						}
-						PersonForAdd.AddSecondName(SecondName);
-					}
+					SecondNameMistakeFlag=CheckName(SecondName);
 				}
+				SecondName = CorrectName(SecondName);
+				PersonForAdd.AddSecondName(SecondName);
 
-				while (AgeFlag == false)
+				while (AgeMistakeFlag == true)
 				{
 					try
 					{
@@ -110,14 +83,13 @@ namespace Laba_1.Output
 					}
 					finally
 					{
-						if (Age <= 0 )
+						if (Age < MinAge || Age > MaxAge )
 						{
-							Console.WriteLine("Возраст должен быть неотрицательным");
-							
+							Console.WriteLine($"Возраст должен быть в диапазоне [{MinAge}-{MaxAge}]");	
 						}
 						else
 						{
-							AgeFlag = true;
+							AgeMistakeFlag = false;
 							PersonForAdd.AddAge(Age);
 						}
 					}
@@ -125,17 +97,25 @@ namespace Laba_1.Output
 
 				Console.WriteLine("Введите пол (М/Ж)");
 				string gen = Console.ReadLine();
-				if (gen == "М" || gen == "м")
+				switch (gen)
 				{
-					Gender = GenderType.Male;
-				}
-				else if (gen == "Ж" || gen == "ж")
-				{
-					Gender = GenderType.Female;
-				}
-				else
-				{
-					Gender = GenderType.Unknown;
+					case "М":
+					case "м":
+						{
+							Gender = GenderType.Male;
+							break;
+						}
+					case "Ж":
+					case "ж":
+						{
+							Gender = GenderType.Female;
+							break;
+						}
+					default:
+						{
+							Gender = GenderType.Unknown;
+							break;
+						}
 				}
 				PersonForAdd.AddGender(Gender);
 				
@@ -149,8 +129,8 @@ namespace Laba_1.Output
 				//d
 				Console.WriteLine("Перенос человеа из первого массива во второй:");
 				index = 1;
-				seelectedperson = ListOfPerson1.FindByIndex(index);
-				ListOfPerson2.AddElement(seelectedperson);
+				SelectedPerson = ListOfPerson1.FindByIndex(index);
+				ListOfPerson2.AddElement(SelectedPerson);
 				Console.WriteLine("Первый массив:");
 				ShowInfo(ListOfPerson1.PersonsInfo());
 				Console.WriteLine();
@@ -193,15 +173,45 @@ namespace Laba_1.Output
 			for (int i = 0; i < PersonInfoArray.Length; i++)
 				Console.WriteLine(PersonInfoArray[i]);
 		}
+		
+		public static string CorrectName(string name)
+		{
+			string NameTMP="";
+			string OutputName="";
+			string[] SubString = name.Split('-', StringSplitOptions.RemoveEmptyEntries);
+			foreach (string SubTMP in SubString)
+			{
+				for (int i = 0; i < SubTMP.Length; i++)
+				{
+					if (SubTMP.Length > 1)
+						NameTMP = SubTMP.Substring(0, 1).ToUpper() + SubTMP.Substring(1, SubTMP.Length - 1).ToLower();
+					else NameTMP = SubTMP.ToUpper();
+				}
 
+				if (OutputName.Length == 0)
+				{
+					OutputName += NameTMP;
+				}
+				else
+				{
+					OutputName += "-" + NameTMP;
+				}
+			}
+			return OutputName;
+		}
+
+		public static bool CheckName(string name)
+		{
+			string pattern = @"[^a-zа-я-]";
+			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
+			Match mat = reg.Match(name);
+			if (mat.Success)
+				{
+				Console.WriteLine("Имя и Фамилия могут содержать только буквы!!!");
+				}
+			return mat.Success;
+		}
 	}
 
-			
-
-
-		
-
-
-	
 }
 
