@@ -10,7 +10,11 @@ namespace Laba_1.Logic
 		private string _localSecondNameRandom;
 		private int _localAgeRandom;
 		private GenderType _localGenderRandom = GenderType.Unknown;
-
+		
+		/// <summary>
+		/// Метод создающий случайную комбинацию полей класса Person
+		/// </summary>
+		/// <returns>Персону с уникальной комбинацией полей класса </returns>
 		public Person GetPerson()
 		{
 			Person returnPerson = new Person();
@@ -64,9 +68,13 @@ namespace Laba_1.Logic
 			returnPerson.AddAge(_localAgeRandom);
 			returnPerson.AddGender(_localGenderRandom);
 			return returnPerson;
-
+			
 		}
 
+		/// <summary>
+		/// Функций для генерации первой заглавной буквы имени
+		/// </summary>
+		/// <returns>Строку с первой гласной или парой согласная-гласная </returns>
 		public string FirstLetter()
 		{
 			Random rand = new Random();

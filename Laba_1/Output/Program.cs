@@ -168,12 +168,22 @@ namespace Laba_1.Output
 			}
 		}
 
+		/// <summary>
+		/// Функция с помощью которой выводится информация о персоне в консоль
+		/// </summary>
+		/// <param name="PersonInfoArray">Массив данных о персоне </param>
 		public static void ShowInfo(string[] PersonInfoArray)
 		{
 			for (int i = 0; i < PersonInfoArray.Length; i++)		
 			Console.WriteLine(GenderRussian(PersonInfoArray[i]));
 		}
-		
+
+		/// <summary>
+		/// Функция приводящая имена и фамилии к правильному виду
+		/// </summary>
+		/// <param name="name">Либо имя, либо фамилия</param>
+		/// <returns>Строка содержащая слово с первой заглавной буквой, 
+		/// если слова разделены через тире, оба слова начинаются с большой буквы </returns>
 		public static string CorrectName(string name)
 		{
 			string NameTMP="";
@@ -201,6 +211,12 @@ namespace Laba_1.Output
 			return OutputName;
 		}
 
+		/// <summary>
+		/// Функция проверяющая имена и фамилии на наличие запрещенных симоволов
+		/// </summary>
+		/// <param name="name">Либо имя, либо фамилия</param>
+		/// <returns>false- если запрещенных символов нет. 
+		/// true- если запрещенные символ есть </returns>
 		public static bool CheckName(string name)
 		{
 			string pattern = @"[^a-zа-я-]";
@@ -213,6 +229,11 @@ namespace Laba_1.Output
 			return mat.Success;
 		}
 
+		/// <summary>
+		/// Фукнция переводящая на русский язык информацию о гендере из строки с информацией о персоне
+		/// </summary>
+		/// <param name="info">Строка информации о персоне</param>
+		/// <returns> Русский перевод гендера конкретной персоны</returns>
 		public static string GenderRussian(string info)
 		{
 			string result="";
