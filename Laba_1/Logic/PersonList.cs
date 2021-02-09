@@ -11,7 +11,7 @@ namespace Laba_1.Logic
 
 		public Person[] Persons => _localPersonArray;
 
-        public int Count => _localPersonArray.Length;
+        private int Count => _localPersonArray.Length;
 
 		/// <summary>
 		/// Метод позволяющий добавить персону в конец PersonList
@@ -34,7 +34,7 @@ namespace Laba_1.Logic
 			string[] PersonInfoArray = new string[Count];
 			for (int i = 0; i < Count; i++)
 			{
-				PersonInfoArray[i]=_localPersonArray[i].GetInfo();
+				PersonInfoArray[i]=_localPersonArray[i].Info();
 			}
 			return PersonInfoArray;
 		}

@@ -57,7 +57,7 @@ namespace Laba_1.Output
 					FirstNameMistakeFlag=CheckName(FirstName);
 				}
 				FirstName = CorrectName(FirstName);
-				PersonForAdd.AddName(FirstName);
+				
 
 				while (SecondNameMistakeFlag == true)
 				{
@@ -66,7 +66,7 @@ namespace Laba_1.Output
 					SecondNameMistakeFlag=CheckName(SecondName);
 				}
 				SecondName = CorrectName(SecondName);
-				PersonForAdd.AddSecondName(SecondName);
+				
 
 				while (AgeMistakeFlag == true)
 				{
@@ -90,7 +90,6 @@ namespace Laba_1.Output
 						else
 						{
 							AgeMistakeFlag = false;
-							PersonForAdd.AddAge(Age);
 						}
 					}
 				}
@@ -117,8 +116,7 @@ namespace Laba_1.Output
 							break;
 						}
 				}
-				PersonForAdd.AddGender(Gender);
-				
+				PersonForAdd.AddInfo(FirstName,SecondName,Age,Gender);
 				ListOfPerson1.AddElement(PersonForAdd);
 				Console.WriteLine();
 				Console.WriteLine("Расширенный массив:");

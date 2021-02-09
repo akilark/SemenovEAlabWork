@@ -19,7 +19,7 @@ namespace Laba_1.Logic
 
 			for (int i = 0; i < quantity; i++)
 			{
-				PersonArray.AddElement(RandomPerson.GetPerson());
+				PersonArray.AddElement(RandomPerson.Create());
 			}
 			return PersonArray;
 		}

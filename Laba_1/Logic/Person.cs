@@ -15,46 +15,26 @@ namespace Laba_1.Logic
 		/// Метод позволяющий получить информацию о Персоне
 		/// </summary>
 		/// <returns>Строка типа "Имя: ; Фамилия: ; Возраст: ; Пол: "</returns>
-		public string GetInfo()
-		{
-			return $"Имя: {_localName}; Фамилия: {_localSecondName}; " +
-				$"Возраст: {_localAge}; Пол: {_localGender}";
-		}
+		public string Info()=> $"Имя: {_localName};" +
+							   $" Фамилия: {_localSecondName}; " +
+							   $"Возраст: {_localAge};" +
+							   $" Пол: {_localGender}";
+		
+
 
 		/// <summary>
-		/// Метод позволяющий добавить к созданному объекта класса Person информацию о поле класса "Name"
+		/// Метод позволяющий добавить к созданному объекта класса Person информацию о полях класса
 		/// </summary>
 		/// <param name="name">Имя персоны</param>
-		public void AddName(string name)
+		/// <param name="secondName">Фамилия персоны</param>
+		/// <param name="age">Возраст персоны</param>
+		/// <param name="gender">Пол персоны</param>
+		public void AddInfo(string name, string secondName, int age, GenderType gender)
 		{
 			_localName = name;
-		}
-
-		/// <summary>
-		/// Метод позволяющий добавить к созданному объекта класса Person информацию о поле класса "SecondName"
-		/// </summary>
-		/// <param name="secondName">Фамилия персоны</param>
-		public void AddSecondName(string secondName)
-		{
 			_localSecondName = secondName;
-		}
-
-		/// <summary>
-		/// Метод позволяющий добавить к созданному объекта класса Person информацию о поле класса "Age"
-		/// </summary>
-		/// <param name="age">Возраст персоны</param>
-		public void AddAge(int age)
-		{
 			_localAge = age;
-		}
-		/// <summary>
-		/// Метод позволяющий добавить к созданному объекта класса Person информацию о поле класса "Gender"
-		/// </summary>
-		/// <param name="gender">Пол персоны</param>
-		public void AddGender(GenderType gender)
-		{
 			_localGender = gender;
 		}
-		
 	}
 }

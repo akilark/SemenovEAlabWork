@@ -12,15 +12,15 @@ namespace Laba_1.Logic
 		/// Функция создающая случайную комбинацию полей класса Person
 		/// </summary>
 		/// <returns>Персону с уникальной комбинацией полей класса </returns>
-		public static Person GetPerson()
+		public static Person Create()
 		{
-			string _localNameRadom;
-			string _localSecondNameRandom;
-			int _localAgeRandom;
-			GenderType _localGenderRandom = GenderType.Unknown;
+			string NameRadom;
+			string SecondNameRandom;
+			int AgeRandom;
+			GenderType GenderRandom = GenderType.Unknown;
 			Person returnPerson = new Person();
-			_localNameRadom = "";
-			_localSecondNameRandom = "";
+			NameRadom = "";
+			SecondNameRandom = "";
 			Random rand = new Random();
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
 			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м",
@@ -28,46 +28,43 @@ namespace Laba_1.Logic
 			Array gendervalues = Enum.GetValues(typeof(GenderType));
 
 			int lenght = rand.Next(1, 3);
-			_localAgeRandom = rand.Next(12, 101);
-			_localGenderRandom = (GenderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
+			AgeRandom = rand.Next(12, 101);
+			GenderRandom = (GenderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
 
-			_localNameRadom += FirstLetter();
-			_localSecondNameRandom += FirstLetter();
+			NameRadom += FirstLetter();
+			SecondNameRandom += FirstLetter();
 			
 
 			for (int i = 0; i < lenght;i++)
 			{
-				_localNameRadom += consonants[rand.Next(consonants.Length)];
-				_localNameRadom += vowels[rand.Next(vowels.Length)];
-				_localSecondNameRandom += consonants[rand.Next(consonants.Length)];
-				_localSecondNameRandom += vowels[rand.Next(vowels.Length)];
+				NameRadom += consonants[rand.Next(consonants.Length)];
+				NameRadom += vowels[rand.Next(vowels.Length)];
+				SecondNameRandom += consonants[rand.Next(consonants.Length)];
+				SecondNameRandom += vowels[rand.Next(vowels.Length)];
 			}
 
-			switch(_localGenderRandom)
+			switch(GenderRandom)
 			{
 				case GenderType.Male:
 					{
 						string[] LastNameEnd = { "ов", "ев", "ин" };
-						_localSecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
+						SecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
 						break;
 					}
 				case GenderType.Female:
 					{
 						string[] LastNameEnd = { "ова", "ева", "ина" };
-						_localSecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
+						SecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
 						break;
 					}
 				case GenderType.Unknown:
 					{
 						string[] LastNameEnd = { "о" };
-						_localSecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
+						SecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
 						break;
 					}
 			}
-			returnPerson.AddName(_localNameRadom);
-			returnPerson.AddSecondName(_localSecondNameRandom);
-			returnPerson.AddAge(_localAgeRandom);
-			returnPerson.AddGender(_localGenderRandom);
+			returnPerson.AddInfo(NameRadom, SecondNameRandom, AgeRandom, GenderRandom);
 			return returnPerson;
 			
 		}
