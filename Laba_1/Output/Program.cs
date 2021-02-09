@@ -30,9 +30,9 @@ namespace Laba_1.Output
 				Console.WriteLine("Cоздание массивов, " +
 					"для продолжение нажмите любую кнопку");
 				
-				ListOfPerson1 = ListRND.Create(ListSize);
+				ListOfPerson1 = RandomPersonList.Create(ListSize);
 				
-				ListOfPerson2 = ListRND.Create(ListSize);
+				ListOfPerson2 = RandomPersonList.Create(ListSize);
 
 				Console.ReadKey();
 

@@ -6,17 +6,18 @@ namespace Laba_1.Logic
 {
 	class RandomPerson
 	{
-		private string _localNameRadom;
-		private string _localSecondNameRandom;
-		private int _localAgeRandom;
-		private GenderType _localGenderRandom = GenderType.Unknown;
+
 		
 		/// <summary>
-		/// Метод создающий случайную комбинацию полей класса Person
+		/// Функция создающая случайную комбинацию полей класса Person
 		/// </summary>
 		/// <returns>Персону с уникальной комбинацией полей класса </returns>
-		public Person GetPerson()
+		public static Person GetPerson()
 		{
+			string _localNameRadom;
+			string _localSecondNameRandom;
+			int _localAgeRandom;
+			GenderType _localGenderRandom = GenderType.Unknown;
 			Person returnPerson = new Person();
 			_localNameRadom = "";
 			_localSecondNameRandom = "";
@@ -75,7 +76,7 @@ namespace Laba_1.Logic
 		/// Функций для генерации первой заглавной буквы имени
 		/// </summary>
 		/// <returns>Строку с первой гласной или парой согласная-гласная </returns>
-		public string FirstLetter()
+		public static string FirstLetter()
 		{
 			Random rand = new Random();
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
