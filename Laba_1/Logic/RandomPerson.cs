@@ -72,7 +72,7 @@ namespace Laba_1.Logic
 		/// Функций для генерации первой заглавной буквы имени
 		/// </summary>
 		/// <returns>Строку с первой гласной или парой согласная-гласная </returns>
-		public static string FirstLetter()
+		private static string FirstLetter()
 		{
 			Random rand = new Random();
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные

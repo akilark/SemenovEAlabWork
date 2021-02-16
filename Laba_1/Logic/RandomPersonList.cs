@@ -11,6 +11,7 @@ namespace Laba_1.Logic
 		/// <returns>Массив персон </returns>
 		public static PersonList Create(int quantity)
 		{
+			//TODO: RSDN
 			PersonList PersonArray = new PersonList();
 			
 			

@@ -4,14 +4,15 @@ using System.Text.RegularExpressions;
 
 namespace Laba_1.UI
 {
+	//TODO: RSDN
 	class Program
 	{
 		public static void Main(string[] args)
 		{
 			string exit;
+			//TODO: RSDN
 			Person PersonForAdd = new Person();
-			PersonList ListOfPerson1; 
-            PersonList ListOfPerson2; 
+			
 			Person SelectedPerson;
 			int index;
 			int ListSize = 3;
@@ -34,9 +35,9 @@ namespace Laba_1.UI
 				Console.WriteLine("Cоздание массивов, " +
 					"для продолжение нажмите любую кнопку");
 				
-				ListOfPerson1 = RandomPersonList.Create(ListSize);
+				PersonList ListOfPerson1 = RandomPersonList.Create(ListSize);
 				
-				ListOfPerson2 = RandomPersonList.Create(ListSize);
+				PersonList ListOfPerson2 = RandomPersonList.Create(ListSize);
 
 				Console.ReadKey();
 
@@ -54,7 +55,8 @@ namespace Laba_1.UI
 				//c
 				Console.WriteLine("Добавление человека в первый массив:");
 				
-				while (FirstNameMistakeFlag==true)
+				//TODO: Дублирование
+				while (FirstNameMistakeFlag)
 				{
 					Console.WriteLine("Введите имя:");
 					FirstName = Console.ReadLine();
@@ -62,8 +64,8 @@ namespace Laba_1.UI
 				}
 				FirstName = CorrectName(FirstName);
 
-
-				while (SecondNameMistakeFlag == true)
+				//TODO: Дублирование
+				while (SecondNameMistakeFlag)
 				{
 					Console.WriteLine("Введите фамилию ");
 					SecondName = Console.ReadLine();
@@ -72,7 +74,7 @@ namespace Laba_1.UI
 				SecondName = CorrectName(SecondName);
 
 
-				while (AgeMistakeFlag == true)
+				while (AgeMistakeFlag)
 				{
 					try
 					{
@@ -155,8 +157,6 @@ namespace Laba_1.UI
 
 
 
-
-
 				Console.WriteLine("для выхода из программы нажмите 'q'");
 				exit = Console.ReadLine();
 				Console.WriteLine();
@@ -176,7 +176,9 @@ namespace Laba_1.UI
 		public static void ShowInfo(string[] PersonInfoArray)
 		{
 			for (int i = 0; i < PersonInfoArray.Length; i++)		
-			Console.WriteLine(GenderRussian(PersonInfoArray[i]));
+			{
+				Console.WriteLine(GenderRussian(PersonInfoArray[i]));
+			}
 		}
 
 		/// <summary>
@@ -187,6 +189,7 @@ namespace Laba_1.UI
 		/// если слова разделены через тире, оба слова начинаются с большой буквы </returns>
 		public static string CorrectName(string name)
 		{
+			//TODO: RSDN
 			string NameTMP="";
 			string OutputName="";
 			string[] SubString = name.Split('-', StringSplitOptions.RemoveEmptyEntries);
@@ -194,6 +197,7 @@ namespace Laba_1.UI
 			{
 				for (int i = 0; i < SubTMP.Length; i++)
 				{
+					//TODO: скобочки
 					if (SubTMP.Length > 1)
 						NameTMP = SubTMP.Substring(0, 1).ToUpper() + 
 							SubTMP.Substring(1, SubTMP.Length - 1).ToLower();
@@ -224,9 +228,9 @@ namespace Laba_1.UI
 			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
 			Match mat = reg.Match(name);
 			if (mat.Success)
-				{
+			{
 				Console.WriteLine("Имя и Фамилия могут содержать только буквы!!!");
-				}
+			}
 			return mat.Success;
 		}
 
@@ -237,30 +241,23 @@ namespace Laba_1.UI
 		/// <returns> Русский перевод гендера конкретной персоны</returns>
 		public static string GenderRussian(string info)
 		{
-			string result="";
-			string patternGenderMale = @"\b(Male)\b";
-			string targetGenderMale = "Мужской";
-			Regex regexMale = new Regex(patternGenderMale);
-			if (regexMale.IsMatch(info))
+			List<(string, string)> patterns = new List<(string, string)>()
 			{
-				result = regexMale.Replace(info, targetGenderMale);
+				(@"\b(Male)\b", "Мужской"),
+				(@"\b(Female)\b", "Женский")
+				(@"\b(Unknown)\b", "Боевой вертолёт апачи")
 			}
-			string patternGenderFemale = @"\b(Female)\b";
-			string targetGenderFemale = "Женский";
-			Regex regexFemale = new Regex(patternGenderFemale);
-			if (regexFemale.IsMatch(info))
-			{
-				result = regexFemale.Replace(info, targetGenderFemale);
-			}
-			string patternGenderUnknown = @"\b(Unknown)\b";
-			string targetGenderUnknown = "Боевой вертолёт апачи";
-			Regex regexUnknown = new Regex(patternGenderUnknown);
-			if (regexUnknown.IsMatch(info))
-			{
-				result = regexUnknown.Replace(info, targetGenderUnknown);
-			}
-			return result;
 
+			foreach(var pattern in patterns)
+			{
+				var regex = new Regex(pattern.Item1);
+				if (regexMale.IsMatch(info))
+				{
+					return regexMale.Replace(info, pattern.Item2);
+				}
+			}
+
+			throw new ArgumentException("");
 		}
 	}
 

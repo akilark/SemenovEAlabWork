@@ -4,6 +4,7 @@ namespace Laba_1.Logic
 {
 	class Person
 	{
+		
 		private string _localName;
 		private string _localSecondName;
 		private int _localAge;

@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Laba_1.Logic
+﻿namespace Laba_1.Logic
 {
 	enum GenderType
 	{
