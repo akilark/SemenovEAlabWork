@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject>Laba_1.Output.Program</StartupObject>
+    <StartupObject>Laba_1.UI.Program</StartupObject>
   </PropertyGroup>
 
 </Project>

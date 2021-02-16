@@ -2,7 +2,7 @@
 using Laba_1.Logic;
 using System.Text.RegularExpressions;
 
-namespace Laba_1.Output
+namespace Laba_1.UI
 {
 	class Program
 	{
@@ -17,16 +17,20 @@ namespace Laba_1.Output
 			int ListSize = 3;
 			string FirstName="";
 			string SecondName="";
-			int Age=-1;
+			int Age;
 			int MinAge = 1;
 			int MaxAge = 114;
 			GenderType Gender;
-			bool FirstNameMistakeFlag = true;
-			bool SecondNameMistakeFlag = true;
-			bool AgeMistakeFlag = true;
+			bool FirstNameMistakeFlag;
+			bool SecondNameMistakeFlag;
+			bool AgeMistakeFlag;
 
 			while (true)
 			{
+				Age = -1;
+				FirstNameMistakeFlag = true;
+				SecondNameMistakeFlag = true;
+				AgeMistakeFlag = true;
 				Console.WriteLine("Cоздание массивов, " +
 					"для продолжение нажмите любую кнопку");
 				
@@ -57,7 +61,7 @@ namespace Laba_1.Output
 					FirstNameMistakeFlag=CheckName(FirstName);
 				}
 				FirstName = CorrectName(FirstName);
-				
+
 
 				while (SecondNameMistakeFlag == true)
 				{
@@ -66,7 +70,7 @@ namespace Laba_1.Output
 					SecondNameMistakeFlag=CheckName(SecondName);
 				}
 				SecondName = CorrectName(SecondName);
-				
+
 
 				while (AgeMistakeFlag == true)
 				{
@@ -74,25 +78,24 @@ namespace Laba_1.Output
 					{
 						Console.WriteLine("Введите возраст ");
 						Age = Int32.Parse(Console.ReadLine());
-					}
-					catch (System.FormatException)
-					{
-						Console.WriteLine("Необходимо ввести число");
-						
-					}
-					finally
-					{
-						if (Age < MinAge || Age > MaxAge )
+						if (Age < MinAge || Age > MaxAge)
 						{
 							Console.WriteLine($"Возраст должен быть в диапазоне" +
-								$" [{MinAge}-{MaxAge}]");	
+								$" [{MinAge}-{MaxAge}]");
 						}
 						else
 						{
 							AgeMistakeFlag = false;
 						}
 					}
+					catch (System.FormatException)
+					{
+						Console.WriteLine("Необходимо ввести число");
+						
+					}
+
 				}
+
 
 				Console.WriteLine("Введите пол (М/Ж)");
 				string gen = Console.ReadLine();
