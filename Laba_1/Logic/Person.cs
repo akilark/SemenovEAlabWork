@@ -9,6 +9,14 @@ namespace Laba_1.Logic
 		private int _localAge;
 		private GenderType _localGender = GenderType.Unknown;
 
+		public string Name => _localName;
+
+		public string SecondName => _localSecondName;
+		
+		public int Age => _localAge;
+		
+		public GenderType Gender => _localGender;
+
 
 
 		/// <summary>

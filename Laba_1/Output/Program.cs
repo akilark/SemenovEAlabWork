@@ -13,7 +13,6 @@ namespace Laba_1.Output
 			PersonList ListOfPerson1; 
             PersonList ListOfPerson2; 
 			Person SelectedPerson;
-			RandomPersonList ListRND = new RandomPersonList();
 			int index;
 			int ListSize = 3;
 			string FirstName="";
@@ -25,6 +24,7 @@ namespace Laba_1.Output
 			bool FirstNameMistakeFlag = true;
 			bool SecondNameMistakeFlag = true;
 			bool AgeMistakeFlag = true;
+
 			while (true)
 			{
 				Console.WriteLine("Cоздание массивов, " +
