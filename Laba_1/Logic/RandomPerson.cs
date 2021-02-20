@@ -11,86 +11,94 @@ namespace Laba_1.Logic
 		/// Функция создающая случайную комбинацию полей класса Person
 		/// </summary>
 		/// <returns>Персону с уникальной комбинацией полей класса </returns>
-		public static Person Create()
+		public static Person CreatePerson()
 		{
-			string NameRadom;
-			string SecondNameRandom;
-			int AgeRandom;
-			GenderType GenderRandom = GenderType.Unknown;
-			Person returnPerson = new Person();
-			NameRadom = "";
-			SecondNameRandom = "";
+			int minAge = 1;
+			int maxAge = 114;
 			Random rand = new Random();
-			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
-			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м",
-				"н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
+
 			Array gendervalues = Enum.GetValues(typeof(GenderType));
-
-			int lenght = rand.Next(1, 3);
-			AgeRandom = rand.Next(12, 101);
-			GenderRandom = (GenderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
-
-			NameRadom += FirstLetter();
-			SecondNameRandom += FirstLetter();
 			
+			int AgeRandom = rand.Next(minAge, maxAge);
 
-			for (int i = 0; i < lenght;i++)
-			{
-				NameRadom += consonants[rand.Next(consonants.Length)];
-				NameRadom += vowels[rand.Next(vowels.Length)];
-				SecondNameRandom += consonants[rand.Next(consonants.Length)];
-				SecondNameRandom += vowels[rand.Next(vowels.Length)];
-			}
+			GenderType genderRandom = (GenderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
 
-			switch(GenderRandom)
-			{
-				case GenderType.Male:
-					{
-						string[] LastNameEnd = { "ов", "ев", "ин" };
-						SecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
-						break;
-					}
-				case GenderType.Female:
-					{
-						string[] LastNameEnd = { "ова", "ева", "ина" };
-						SecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
-						break;
-					}
-				case GenderType.Unknown:
-					{
-						string[] LastNameEnd = { "о" };
-						SecondNameRandom += LastNameEnd[rand.Next(LastNameEnd.Length)];
-						break;
-					}
-			}
-			returnPerson.AddInfo(NameRadom, SecondNameRandom, AgeRandom, GenderRandom);
+			string firstNameRadom = RandomName();
+
+			string secondNameRandom = RandomName();
+
+			secondNameRandom += EndOfSecondName(genderRandom);
+
+			firstNameRadom = Person.CorrectName(firstNameRadom);
+			secondNameRandom = Person.CorrectName(secondNameRandom);
+
+			Person returnPerson = new Person();
+			returnPerson.AddInfo(firstNameRadom, secondNameRandom, AgeRandom, genderRandom);
 			return returnPerson;
 			
 		}
 
-		/// <summary>
-		/// Функций для генерации первой заглавной буквы имени
-		/// </summary>
-		/// <returns>Строку с первой гласной или парой согласная-гласная </returns>
-		private static string FirstLetter()
+		private static string RandomName()
 		{
 			Random rand = new Random();
+			int lenght = rand.Next(1, 4);
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
 			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м",
 				"н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
-			int IndexFirstLetter = rand.Next(0, 100);
-			string FirstLetter = "";
-			if (IndexFirstLetter > 50)
+			string nameTmp = "";
+			for (int i = 0; i < lenght; i++)
 			{
-				FirstLetter += consonants[rand.Next(consonants.Length)].ToUpper();
-				FirstLetter += vowels[rand.Next(vowels.Length)];
+				nameTmp += consonants[rand.Next(consonants.Length)];
+				nameTmp += vowels[rand.Next(vowels.Length)];
 			}
-			if (IndexFirstLetter <= 50)
+			return nameTmp;
+		}
+		private static string EndOfSecondName(GenderType gender)
+		{
+			Random rand = new Random();
+			string[] lastNameEnd= new string[3];
+			switch (gender)
 			{
-				FirstLetter += vowels[rand.Next(vowels.Length)].ToUpper();
+				case GenderType.Male:
+					{
+						lastNameEnd[0] = "ов";
+						lastNameEnd[1] = "ев";
+						lastNameEnd[2] = "ин";
+						break;
+					}
+				case GenderType.Female:
+					{
+						lastNameEnd[0] = "ова";
+						lastNameEnd[1] = "ева";
+						lastNameEnd[2] = "ина";
+						break;
+					}
+				case GenderType.Unknown:
+					{
+						Array.Resize(ref lastNameEnd, 1);
+						lastNameEnd[0] =  "о" ;
+						break;
+					}
 			}
-			
-			return FirstLetter;
+			return lastNameEnd[rand.Next(lastNameEnd.Length)];
+		}
+
+
+		/// <summary>
+		/// Функция формирующая массив заданной размерности из случайных персон 
+		/// </summary>
+		/// <param name="quantity">Размер массива персон</param>
+		/// <returns>Массив персон </returns>
+		public static PersonList CreatePersonList(int quantity)
+		{
+			//TODO: RSDN
+			PersonList PersonArray = new PersonList();
+
+			for (int i = 0; i < quantity; i++)
+			{
+				PersonArray.AddElement(CreatePerson());
+			}
+			return PersonArray;
 		}
 
 	}

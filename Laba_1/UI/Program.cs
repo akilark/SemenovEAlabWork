@@ -1,13 +1,14 @@
 ﻿using System;
 using Laba_1.Logic;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Laba_1.UI
 {
 	//TODO: RSDN
 	class Program
 	{
-		public static void Main(string[] args)
+		public static void Main()
 		{
 			string exit;
 			//TODO: RSDN
@@ -18,35 +19,28 @@ namespace Laba_1.UI
 			int ListSize = 3;
 			string FirstName="";
 			string SecondName="";
-			int Age;
 			int MinAge = 1;
 			int MaxAge = 114;
 			GenderType Gender;
-			bool FirstNameMistakeFlag;
-			bool SecondNameMistakeFlag;
-			bool AgeMistakeFlag;
+
 
 			while (true)
 			{
-				Age = -1;
-				FirstNameMistakeFlag = true;
-				SecondNameMistakeFlag = true;
-				AgeMistakeFlag = true;
 				Console.WriteLine("Cоздание массивов, " +
 					"для продолжение нажмите любую кнопку");
 				
-				PersonList ListOfPerson1 = RandomPersonList.Create(ListSize);
+				PersonList ListOfPerson1 = RandomPerson.CreatePersonList(ListSize);
 				
-				PersonList ListOfPerson2 = RandomPersonList.Create(ListSize);
+				PersonList ListOfPerson2 = RandomPerson.CreatePersonList(ListSize);
 
 				Console.ReadKey();
 
 				//b
 				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1.PersonsInfo());
+				ShowInfo(ListOfPerson1);
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2.PersonsInfo());
+				ShowInfo(ListOfPerson2);
 				Console.WriteLine();
 				Console.WriteLine("для продолжение нажмите любую кнопку");
 				Console.ReadKey();
@@ -54,26 +48,29 @@ namespace Laba_1.UI
 				
 				//c
 				Console.WriteLine("Добавление человека в первый массив:");
-				
+
 				//TODO: Дублирование
+				bool FirstNameMistakeFlag = true;
 				while (FirstNameMistakeFlag)
 				{
 					Console.WriteLine("Введите имя:");
 					FirstName = Console.ReadLine();
-					FirstNameMistakeFlag=CheckName(FirstName);
+					FirstNameMistakeFlag=Person.CheckName(FirstName);
+				
 				}
-				FirstName = CorrectName(FirstName);
+				FirstName = Person.CorrectName(FirstName);
 
-				//TODO: Дублирование
+				bool SecondNameMistakeFlag = true;
 				while (SecondNameMistakeFlag)
 				{
 					Console.WriteLine("Введите фамилию ");
 					SecondName = Console.ReadLine();
-					SecondNameMistakeFlag=CheckName(SecondName);
+					SecondNameMistakeFlag=Person.CheckName(SecondName);
 				}
-				SecondName = CorrectName(SecondName);
-
-
+				SecondName = Person.CorrectName(SecondName);
+				
+				int Age = -1;
+				bool AgeMistakeFlag = true;
 				while (AgeMistakeFlag)
 				{
 					try
@@ -125,7 +122,7 @@ namespace Laba_1.UI
 				ListOfPerson1.AddElement(PersonForAdd);
 				Console.WriteLine();
 				Console.WriteLine("Расширенный массив:");
-				ShowInfo(ListOfPerson1.PersonsInfo());
+				ShowInfo(ListOfPerson1);
 				Console.WriteLine();
 				Console.ReadKey();
 				
@@ -135,10 +132,10 @@ namespace Laba_1.UI
 				SelectedPerson = ListOfPerson1.FindByIndex(index);
 				ListOfPerson2.AddElement(SelectedPerson);
 				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1.PersonsInfo());
+				ShowInfo(ListOfPerson1);
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2.PersonsInfo());
+				ShowInfo(ListOfPerson2);
 				Console.WriteLine();
 				Console.ReadKey();
 
@@ -148,10 +145,10 @@ namespace Laba_1.UI
 				ListOfPerson1.DeleteElement(index);
 				Console.WriteLine($"Удаление элемента с индексом {index}:");
 				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1.PersonsInfo());
+				ShowInfo(ListOfPerson1);
 				Console.WriteLine();
 				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2.PersonsInfo());
+				ShowInfo(ListOfPerson2);
 				Console.WriteLine();
 				Console.ReadKey();
 
@@ -172,67 +169,17 @@ namespace Laba_1.UI
 		/// <summary>
 		/// Функция с помощью которой выводится информация о персоне в консоль
 		/// </summary>
-		/// <param name="PersonInfoArray">Массив данных о персоне </param>
-		public static void ShowInfo(string[] PersonInfoArray)
+		/// <param name="personArray">Массив данных о персоне </param>
+		public static void ShowInfo(PersonList personArray)
 		{
-			for (int i = 0; i < PersonInfoArray.Length; i++)		
+			foreach (string personInfo in personArray.PersonsInfo())
 			{
-				Console.WriteLine(GenderRussian(PersonInfoArray[i]));
+				Console.WriteLine(GenderRussian(personInfo));
 			}
+
 		}
 
-		/// <summary>
-		/// Функция приводящая имена и фамилии к правильному виду
-		/// </summary>
-		/// <param name="name">Либо имя, либо фамилия</param>
-		/// <returns>Строка содержащая слово с первой заглавной буквой, 
-		/// если слова разделены через тире, оба слова начинаются с большой буквы </returns>
-		public static string CorrectName(string name)
-		{
-			//TODO: RSDN
-			string NameTMP="";
-			string OutputName="";
-			string[] SubString = name.Split('-', StringSplitOptions.RemoveEmptyEntries);
-			foreach (string SubTMP in SubString)
-			{
-				for (int i = 0; i < SubTMP.Length; i++)
-				{
-					//TODO: скобочки
-					if (SubTMP.Length > 1)
-						NameTMP = SubTMP.Substring(0, 1).ToUpper() + 
-							SubTMP.Substring(1, SubTMP.Length - 1).ToLower();
-					else NameTMP = SubTMP.ToUpper();
-				}
 
-				if (OutputName.Length == 0)
-				{
-					OutputName += NameTMP;
-				}
-				else
-				{
-					OutputName += "-" + NameTMP;
-				}
-			}
-			return OutputName;
-		}
-
-		/// <summary>
-		/// Функция проверяющая имена и фамилии на наличие запрещенных симоволов
-		/// </summary>
-		/// <param name="name">Либо имя, либо фамилия</param>
-		/// <returns>false- если запрещенных символов нет. 
-		/// true- если запрещенные символ есть </returns>
-		public static bool CheckName(string name)
-		{
-			string pattern = @"[^a-zа-я-]";
-			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
-			Match mat = reg.Match(name);
-			if (mat.Success)
-			{
-				Console.WriteLine("Имя и Фамилия могут содержать только буквы!!!");
-			}
-			return mat.Success;
-		}
 
 		/// <summary>
 		/// Фукнция переводящая на русский язык информацию о гендере из строки с информацией о персоне
@@ -244,16 +191,17 @@ namespace Laba_1.UI
 			List<(string, string)> patterns = new List<(string, string)>()
 			{
 				(@"\b(Male)\b", "Мужской"),
-				(@"\b(Female)\b", "Женский")
+				(@"\b(Female)\b", "Женский"),
 				(@"\b(Unknown)\b", "Боевой вертолёт апачи")
-			}
+			};
+
 
 			foreach(var pattern in patterns)
 			{
 				var regex = new Regex(pattern.Item1);
-				if (regexMale.IsMatch(info))
+				if (regex.IsMatch(info))
 				{
-					return regexMale.Replace(info, pattern.Item2);
+					return regex.Replace(info, pattern.Item2);
 				}
 			}
 
