@@ -5,8 +5,6 @@ namespace Laba_1.Logic
 {
 	class RandomPerson
 	{
-
-		
 		/// <summary>
 		/// Функция создающая случайную комбинацию полей класса Person
 		/// </summary>
@@ -16,12 +14,15 @@ namespace Laba_1.Logic
 			int minAge = 1;
 			int maxAge = 114;
 			Random rand = new Random();
+			Person returnPerson = new Person();
+
 
 			Array gendervalues = Enum.GetValues(typeof(GenderType));
 			
-			int AgeRandom = rand.Next(minAge, maxAge);
+			int ageRandom = rand.Next(minAge, maxAge);
 
-			GenderType genderRandom = (GenderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
+			GenderType genderRandom = 
+				(GenderType)gendervalues.GetValue(rand.Next(gendervalues.Length));
 
 			string firstNameRadom = RandomName();
 
@@ -30,29 +31,43 @@ namespace Laba_1.Logic
 			secondNameRandom += EndOfSecondName(genderRandom);
 
 			firstNameRadom = Person.CorrectName(firstNameRadom);
+
 			secondNameRandom = Person.CorrectName(secondNameRandom);
 
-			Person returnPerson = new Person();
-			returnPerson.AddInfo(firstNameRadom, secondNameRandom, AgeRandom, genderRandom);
+			returnPerson.AddInfo(firstNameRadom, 
+				secondNameRandom, ageRandom, genderRandom);
+
 			return returnPerson;
-			
 		}
 
+		/// <summary>
+		/// Функция создающая случайное имя или фамилию
+		/// </summary>
+		/// <returns>Имя или фамилию(без характерного окончания) </returns>
 		private static string RandomName()
 		{
+			int lengthMin = 1;
+			int lengthMax = 4;
 			Random rand = new Random();
-			int lenght = rand.Next(1, 4);
-			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" }; //гласные
+			int length = rand.Next(lengthMin, lengthMax);
+			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" };
 			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м",
-				"н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" }; //согласные
+				"н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ" };
 			string nameTmp = "";
-			for (int i = 0; i < lenght; i++)
+			for (int i = 0; i < length; i++)
 			{
 				nameTmp += consonants[rand.Next(consonants.Length)];
 				nameTmp += vowels[rand.Next(vowels.Length)];
 			}
 			return nameTmp;
 		}
+
+		/// <summary>
+		/// Функция выдающая правильное оканчание фамилии 
+		/// в зависимости от пола персоны
+		/// </summary>
+		/// <param name="gender">Гендер персоны</param>
+		/// <returns>Характерное окончание фамилии</returns>
 		private static string EndOfSecondName(GenderType gender)
 		{
 			Random rand = new Random();
@@ -91,15 +106,13 @@ namespace Laba_1.Logic
 		/// <returns>Массив персон </returns>
 		public static PersonList CreatePersonList(int quantity)
 		{
-			//TODO: RSDN
-			PersonList PersonArray = new PersonList();
+			PersonList personArray = new PersonList();
 
 			for (int i = 0; i < quantity; i++)
 			{
-				PersonArray.AddElement(CreatePerson());
+				personArray.AddElement(CreatePerson());
 			}
-			return PersonArray;
+			return personArray;
 		}
-
 	}
 }

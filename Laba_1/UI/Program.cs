@@ -5,189 +5,124 @@ using System.Collections.Generic;
 
 namespace Laba_1.UI
 {
-	//TODO: RSDN
-	class Program
+	
+	public class Program
 	{
 		public static void Main()
 		{
-			string exit;
-			//TODO: RSDN
-			Person PersonForAdd = new Person();
-			
-			Person SelectedPerson;
-			int index;
-			int ListSize = 3;
-			string FirstName="";
-			string SecondName="";
-			int MinAge = 1;
-			int MaxAge = 114;
-			GenderType Gender;
-
-
 			while (true)
 			{
-				Console.WriteLine("Cоздание массивов, " +
-					"для продолжение нажмите любую кнопку");
+				string exit;
+				Person personForAdd = new Person();
+				int listSize = 3;
+
+
+				GreenConsole("Cоздание массивов");
+
+				RedConsole("для продолжение нажмите любую кнопку");
 				
-				PersonList ListOfPerson1 = RandomPerson.CreatePersonList(ListSize);
+				PersonList ListOfPerson1 = RandomPerson.CreatePersonList(listSize);
 				
-				PersonList ListOfPerson2 = RandomPerson.CreatePersonList(ListSize);
+				PersonList ListOfPerson2 = RandomPerson.CreatePersonList(listSize);
 
 				Console.ReadKey();
 
 				//b
-				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1);
-				Console.WriteLine();
-				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2);
-				Console.WriteLine();
-				Console.WriteLine("для продолжение нажмите любую кнопку");
+				ShowInfo("Первый массив:", ListOfPerson1);
+
+				ShowInfo( "Второй массив:", ListOfPerson2);
+
+				RedConsole("для продолжение нажмите любую кнопку"+"\n");
+
 				Console.ReadKey();
 
-				
+
 				//c
-				Console.WriteLine("Добавление человека в первый массив:");
+				GreenConsole("Добавление человека в первый массив:");
 
-				//TODO: Дублирование
-				bool FirstNameMistakeFlag = true;
-				while (FirstNameMistakeFlag)
-				{
-					Console.WriteLine("Введите имя:");
-					FirstName = Console.ReadLine();
-					FirstNameMistakeFlag=Person.CheckName(FirstName);
+				string FirstName = InputName("Введите имя:");
+
+				string SecondName = InputName("Введите фамилию:");
 				
-				}
-				FirstName = Person.CorrectName(FirstName);
+				int Age = InputAge();
 
-				bool SecondNameMistakeFlag = true;
-				while (SecondNameMistakeFlag)
-				{
-					Console.WriteLine("Введите фамилию ");
-					SecondName = Console.ReadLine();
-					SecondNameMistakeFlag=Person.CheckName(SecondName);
-				}
-				SecondName = Person.CorrectName(SecondName);
-				
-				int Age = -1;
-				bool AgeMistakeFlag = true;
-				while (AgeMistakeFlag)
-				{
-					try
-					{
-						Console.WriteLine("Введите возраст ");
-						Age = Int32.Parse(Console.ReadLine());
-						if (Age < MinAge || Age > MaxAge)
-						{
-							Console.WriteLine($"Возраст должен быть в диапазоне" +
-								$" [{MinAge}-{MaxAge}]");
-						}
-						else
-						{
-							AgeMistakeFlag = false;
-						}
-					}
-					catch (System.FormatException)
-					{
-						Console.WriteLine("Необходимо ввести число");
-						
-					}
+				GenderType Gender = InputGender();
 
-				}
+				personForAdd.AddInfo(FirstName,SecondName,Age,Gender);
 
+				ListOfPerson1.AddElement(personForAdd);
 
-				Console.WriteLine("Введите пол (М/Ж)");
-				string gen = Console.ReadLine();
-				switch (gen)
-				{
-					case "М":
-					case "м":
-						{
-							Gender = GenderType.Male;
-							break;
-						}
-					case "Ж":
-					case "ж":
-						{
-							Gender = GenderType.Female;
-							break;
-						}
-					default:
-						{
-							Gender = GenderType.Unknown;
-							break;
-						}
-				}
-				PersonForAdd.AddInfo(FirstName,SecondName,Age,Gender);
-				ListOfPerson1.AddElement(PersonForAdd);
-				Console.WriteLine();
-				Console.WriteLine("Расширенный массив:");
-				ShowInfo(ListOfPerson1);
-				Console.WriteLine();
+				ShowInfo("Расширенный массив:", ListOfPerson1);
+
 				Console.ReadKey();
 				
+
 				//d
-				Console.WriteLine("Перенос человеа из первого массива во второй:");
-				index = 1;
-				SelectedPerson = ListOfPerson1.FindByIndex(index);
+				GreenConsole("Перенос человеа из первого массива во второй:");
+
+				int index = 1;
+
+				Person SelectedPerson = ListOfPerson1.FindByIndex(index);
+
 				ListOfPerson2.AddElement(SelectedPerson);
-				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1);
-				Console.WriteLine();
-				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2);
-				Console.WriteLine();
+
+				ShowInfo("Первый массив:", ListOfPerson1);
+
+				ShowInfo("Второй массив:", ListOfPerson2);
+
 				Console.ReadKey();
+
 
 				//e
-				
-				
 				ListOfPerson1.DeleteElement(index);
-				Console.WriteLine($"Удаление элемента с индексом {index}:");
-				Console.WriteLine("Первый массив:");
-				ShowInfo(ListOfPerson1);
-				Console.WriteLine();
-				Console.WriteLine("Второй массив:");
-				ShowInfo(ListOfPerson2);
-				Console.WriteLine();
+
+				GreenConsole($"Удаление элемента с индексом {index}:");
+
+				ShowInfo("Первый массив:", ListOfPerson1);
+
+				ShowInfo("Второй массив:", ListOfPerson2);
+
 				Console.ReadKey();
 
 
-
-				Console.WriteLine("для выхода из программы нажмите 'q'");
+				GreenConsole("для выхода из программы нажмите 'q'");
 				exit = Console.ReadLine();
 				Console.WriteLine();
 				if (exit == "q" || exit == "Q" || exit == "й" || exit == "Й")
 				{
 					break;
-				}
-
-				
+				}	
 			}
 		}
+
 
 		/// <summary>
 		/// Функция с помощью которой выводится информация о персоне в консоль
 		/// </summary>
 		/// <param name="personArray">Массив данных о персоне </param>
-		public static void ShowInfo(PersonList personArray)
+		private static void ShowInfo(string message,PersonList personArray)
 		{
+			Console.WriteLine("\n" + message);
+
 			foreach (string personInfo in personArray.PersonsInfo())
 			{
 				Console.WriteLine(GenderRussian(personInfo));
 			}
 
+			Console.WriteLine();
 		}
 
 
-
 		/// <summary>
-		/// Фукнция переводящая на русский язык информацию о гендере из строки с информацией о персоне
+		/// Фукнция переводящая на русский язык информацию о гендере 
+		/// из строки с информацией о персоне
 		/// </summary>
 		/// <param name="info">Строка информации о персоне</param>
 		/// <returns> Русский перевод гендера конкретной персоны</returns>
-		public static string GenderRussian(string info)
+		private static string GenderRussian(string info)
 		{
+			string infoRussian="";
+
 			List<(string, string)> patterns = new List<(string, string)>()
 			{
 				(@"\b(Male)\b", "Мужской"),
@@ -195,19 +130,151 @@ namespace Laba_1.UI
 				(@"\b(Unknown)\b", "Боевой вертолёт апачи")
 			};
 
-
 			foreach(var pattern in patterns)
 			{
 				var regex = new Regex(pattern.Item1);
 				if (regex.IsMatch(info))
 				{
-					return regex.Replace(info, pattern.Item2);
+					 infoRussian = regex.Replace(info, pattern.Item2);
 				}
 			}
 
-			throw new ArgumentException("");
+			return infoRussian;
+		}
+
+
+		/// <summary>
+		/// Функция с помощью которой выводится информация в консоль красным цветом
+		/// </summary>
+		/// <param name="outputInfo">Строка которую необходимо вывести </param>
+		private static void RedConsole(string outputInfo)
+		{
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine(outputInfo);
+			Console.ResetColor();
+		}
+
+
+		/// <summary>
+		/// Функция с помощью которой выводится информация в консоль зеленым цветом
+		/// </summary>
+		/// <param name="outputInfo">Строка которую необходимо вывести </param>
+		private static void GreenConsole(string outputInfo)
+		{
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine(outputInfo);
+			Console.ResetColor();
+		}
+
+
+		/// <summary>
+		/// Функция с помощью которой происходит проверка и обработка
+		/// введенных имени и фамилии
+		/// </summary>
+		/// <param name="infoForUser">Строка которую увидет пользователь, 
+		/// нужна для того чтобы попросить имя или фамилию персоны </param>
+		/// <returns>Обработанное имя или фамилию</returns>
+		private static string InputName(string infoForUser)
+		{
+			bool nameMistakeFlag = true;
+			string nameTmp = "";
+			
+
+			while (nameMistakeFlag)
+			{
+				Console.WriteLine("\n" + infoForUser);
+				nameTmp = Console.ReadLine();
+
+				Tuple<bool, string> checkResult = Person.CheckName(nameTmp);
+
+				nameMistakeFlag = checkResult.Item1;
+
+				if (nameMistakeFlag)
+				{
+					string mistakeInfo = checkResult.Item2;
+
+					string[] subString = 
+						mistakeInfo.Split('!', StringSplitOptions.RemoveEmptyEntries);
+
+					foreach(string subst in subString)
+					{
+						RedConsole(subst + "!");
+					}
+					
+				}
+			}
+
+			nameTmp = Person.CorrectName(nameTmp);
+
+			return nameTmp;
+		}
+
+
+		/// <summary>
+		/// Функция с помощью которой происходит проверка возраста на соответствие
+		/// Если введено не правильное число выводит информацию об этом
+		/// </summary>
+		/// /// <returns>Проверенный возраст</returns>
+		private static int InputAge()
+		{
+			int ageTmp = -1;
+			bool AgeMistakeFlag = true;
+
+			while (AgeMistakeFlag)
+			{
+				try
+				{
+					Console.WriteLine("\n" + "Введите возраст ");
+					ageTmp = Int32.Parse(Console.ReadLine());
+					AgeMistakeFlag = Person.CheckAge(ageTmp).Item1;
+
+					if (AgeMistakeFlag)
+					{
+						RedConsole(Person.CheckAge(ageTmp).Item2);
+					}
+				}
+				catch (System.FormatException)
+				{
+					RedConsole("Необходимо ввести целое число");
+				}
+			}
+			return ageTmp;
+		}
+
+
+		/// <summary>
+		/// Функция в которой есть четкое соответсвие 
+		/// введенной информации с клавиатуры и соответсвующему гендеру персоны
+		/// </summary>
+		/// /// <returns>Проверенный гендер</returns>
+		private static GenderType InputGender()
+		{
+			GenderType gender;
+			Console.WriteLine("\n" + "Введите пол (М/Ж)");
+
+			string gen = Console.ReadLine();
+			switch (gen)
+			{
+				case "М":
+				case "м":
+					{
+						gender = GenderType.Male;
+						break;
+					}
+				case "Ж":
+				case "ж":
+					{
+						gender = GenderType.Female;
+						break;
+					}
+				default:
+					{
+						gender = GenderType.Unknown;
+						break;
+					}
+			}
+			return gender;
 		}
 	}
-
 }
 

@@ -1,6 +1,6 @@
 ﻿namespace Laba_1.Logic
 {
-	enum GenderType
+	public enum GenderType
 	{
 		Unknown,
 		Male,
