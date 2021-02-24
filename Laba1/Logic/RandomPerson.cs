@@ -3,7 +3,7 @@
 
 namespace Laba1.Logic
 {
-	class RandomPerson
+	public class RandomPerson
 	{
 		private static Random _rand = new Random();
 
@@ -14,6 +14,7 @@ namespace Laba1.Logic
 		/// <returns>Персону с уникальной комбинацией полей класса </returns>
 		public static Person CreatePerson()
 		{
+			//TODO: Дубль
 			int minAge = 1;
 			int maxAge = 114;
 			
@@ -78,25 +79,25 @@ namespace Laba1.Logic
 			switch (gender)
 			{
 				case GenderType.Male:
-					{
-						lastNameEnd[0] = "ов";
-						lastNameEnd[1] = "ев";
-						lastNameEnd[2] = "ин";
-						break;
-					}
+				{
+					lastNameEnd[0] = "ов";
+					lastNameEnd[1] = "ев";
+					lastNameEnd[2] = "ин";
+					break;
+				}
 				case GenderType.Female:
-					{
-						lastNameEnd[0] = "ова";
-						lastNameEnd[1] = "ева";
-						lastNameEnd[2] = "ина";
-						break;
-					}
+				{
+					lastNameEnd[0] = "ова";
+					lastNameEnd[1] = "ева";
+					lastNameEnd[2] = "ина";
+					break;
+				}
 				case GenderType.Unknown:
-					{
-						Array.Resize(ref lastNameEnd, 1);
-						lastNameEnd[0] = "о";
-						break;
-					}
+				{
+					Array.Resize(ref lastNameEnd, 1);
+					lastNameEnd[0] = "о";
+					break;
+				}
 			}
 			return lastNameEnd[_rand.Next(lastNameEnd.Length)];
 		}
@@ -117,8 +118,5 @@ namespace Laba1.Logic
 			}
 			return personArray;
 		}
-
-
-
 	}
 }

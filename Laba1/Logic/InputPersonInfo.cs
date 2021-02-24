@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Laba1.Logic
 {
-	class InputPersonInfo
+	public class InputPersonInfo
 	{
 		/// <summary>
 		/// Функция приводящая имена и фамилии к правильному виду
@@ -64,20 +64,23 @@ namespace Laba1.Logic
 			string mistakeInfo = "";
 			bool outputFlag = false;
 
-			Tuple<bool, string> doubleName = CheckQuantityName(name);
-			Tuple<bool, string> nameLength = CheckNamelength(name);
-			Tuple<bool, string> namePattern = CheckNamePattern(name);
-
-			if (doubleName.Item1 || nameLength.Item1 || namePattern.Item1)
+			var errorInfos = new List<Tuple<bool, string>>
 			{
-				outputFlag = true;
-				mistakeInfo = namePattern.Item2 + nameLength.Item2 + doubleName.Item2;
+				CheckQuantityName(name),
+				CheckNamelength(name),
+				CheckNamePattern(name)
+			};
+
+			foreach(var errorInfo in errorInfos)
+			{
+				if (errorInfo.Item1)
+				{
+					outputFlag = true;
+					mistakeInfo += errorInfo.Item2;
+				}
 			}
 
-
-			Tuple<bool, string> outputTuple = Tuple.Create(outputFlag, mistakeInfo);
-
-			return outputTuple;
+			return Tuple.Create(outputFlag, mistakeInfo);
 		}
 
 
@@ -108,6 +111,7 @@ namespace Laba1.Logic
 					"составных частей имени или фамилии!";
 			}
 
+			//TODO:
 			Tuple<bool, string> outputTuple = Tuple.Create(flagTmp, mistakeInfoTmp);
 
 			return outputTuple;
@@ -139,6 +143,7 @@ namespace Laba1.Logic
 				mistakeInfoTmp = "Недопустимый размер имени или фамилии!";
 			}
 
+			//TODO:
 			Tuple<bool, string> outputTuple = Tuple.Create(flagTmp, mistakeInfoTmp);
 
 			return outputTuple;
@@ -171,6 +176,7 @@ namespace Laba1.Logic
 				flagTmp = false;
 			}
 
+			//TODO:
 			Tuple<bool, string> outputTuple = Tuple.Create(flagTmp, mistakeInfoTmp);
 
 			return outputTuple;
@@ -191,6 +197,7 @@ namespace Laba1.Logic
 		{
 			bool ageMistakeFlag;
 			string mistakeInfo = "";
+			//TODO: Дубль
 			int ageMin = 1;
 			int ageMax = 114;
 
@@ -205,6 +212,7 @@ namespace Laba1.Logic
 				ageMistakeFlag = false;
 			}
 
+			//TODO:
 			Tuple<bool, string> outputTuple =
 				Tuple.Create(ageMistakeFlag, mistakeInfo);
 

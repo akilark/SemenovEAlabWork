@@ -3,6 +3,7 @@
 
 namespace Laba1.Logic
 {
+	//TODO:XML
 	public class Person
 	{
 		private string _localName;
@@ -42,6 +43,7 @@ namespace Laba1.Logic
 							   $" Пол: {_localGender}";
 
 
+		//TODO: Почему не конструктор?
 		/// <summary>
 		/// Метод позволяющий добавить к созданному объекта класса Person 
 		/// информацию о полях класса
@@ -53,13 +55,11 @@ namespace Laba1.Logic
 		public void AddInfo(string name, string secondName,
 			int age, GenderType gender)
 		{
+			//TODO: проверки
 			_localName = name;
 			_localSecondName = secondName;
 			_localAge = age;
 			_localGender = gender;
 		}
-
-
-
 	}
 }

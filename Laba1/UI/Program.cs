@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace Laba1.UI
 {
 
+	//TODO: XML
 	public class Program
 	{
 		public static void Main()
@@ -16,32 +17,22 @@ namespace Laba1.UI
 				Person personForAdd = new Person();
 				int listSize = 3;
 				
-
 				GreenConsole("Cоздание массивов");
-
 				RedConsole("для продолжение нажмите любую кнопку");
-
+				//TODO: RSDN
 				PersonList ListOfPerson1 = RandomPerson.CreatePersonList(listSize);
-
 				PersonList ListOfPerson2 = RandomPerson.CreatePersonList(listSize);
-
 				Console.ReadKey();
 
 				//b
 				ShowInfo("Первый массив:", ListOfPerson1);
-
 				ShowInfo("Второй массив:", ListOfPerson2);
-
 				RedConsole("для продолжение нажмите любую кнопку" + "\n");
-
 				Console.ReadKey();
-
 
 				//c
 				GreenConsole("Добавление человека в первый массив:");
-
 				string FirstName = InputName("Введите имя:");
-
 				string SecondName = InputName("Введите фамилию:");
 
 				int Age = InputAge();
@@ -206,6 +197,7 @@ namespace Laba1.UI
 				}
 			}
 
+			//TODO: 
 			nameTmp = InputPersonInfo.CorrectName(nameTmp);
 
 			return nameTmp;

@@ -5,6 +5,7 @@
 namespace Laba1.Logic
 {
 
+	//TODO: XML
 	public class PersonList
 	{
 		private Person[] _localPersonArray = new Person[0];
@@ -65,11 +66,7 @@ namespace Laba1.Logic
 			{
 				for (int i = index; i + 1 < elementCount; i++)
 				{
-					Person personTMP = _localPersonArray[i];
-
 					_localPersonArray[i] = _localPersonArray[i + 1];
-
-					_localPersonArray[i + 1] = personTMP;
 				}
 				Array.Resize(ref _localPersonArray, elementCount - 1);
 			}
