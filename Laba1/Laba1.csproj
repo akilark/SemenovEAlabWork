@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\InputPersonInfo.cs" />
     <Compile Include="Logic\RandomPerson.cs" />
     <Compile Include="Logic\PersonList.cs" />
     <Compile Include="Logic\Person.cs" />

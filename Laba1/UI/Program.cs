@@ -6,7 +6,10 @@ using System.Collections.Generic;
 namespace Laba1.UI
 {
 
-	//TODO: XML
+	//TODO: XML(v)
+	/// <summary>
+	/// Класс для демонстрации работы классов из папки logic
+	/// </summary>
 	public class Program
 	{
 		public static void Main()
@@ -14,67 +17,68 @@ namespace Laba1.UI
 			while (true)
 			{
 				string exit;
-				Person personForAdd = new Person();
 				int listSize = 3;
-				
+				Person personForAdd = new Person();
 				GreenConsole("Cоздание массивов");
 				RedConsole("для продолжение нажмите любую кнопку");
-				//TODO: RSDN
-				PersonList ListOfPerson1 = RandomPerson.CreatePersonList(listSize);
-				PersonList ListOfPerson2 = RandomPerson.CreatePersonList(listSize);
+				//TODO: RSDN (v)
+				PersonList listOfPerson1 = RandomPerson.CreatePersonList(listSize);
+				PersonList listOfPerson2 = RandomPerson.CreatePersonList(listSize);
 				Console.ReadKey();
 
 				//b
-				ShowInfo("Первый массив:", ListOfPerson1);
-				ShowInfo("Второй массив:", ListOfPerson2);
+				ShowInfo("Первый массив:", listOfPerson1);
+				ShowInfo("Второй массив:", listOfPerson2);
 				RedConsole("для продолжение нажмите любую кнопку" + "\n");
 				Console.ReadKey();
 
 				//c
 				GreenConsole("Добавление человека в первый массив:");
-				string FirstName = InputName("Введите имя:");
-				string SecondName = InputName("Введите фамилию:");
-
-				int Age = InputAge();
-
-				GenderType Gender = InputGender();
-
-				personForAdd.AddInfo(FirstName, SecondName, Age, Gender);
-
-				ListOfPerson1.AddElement(personForAdd);
-
-				ShowInfo("Расширенный массив:", ListOfPerson1);
-
+				bool flagName = true;
+				bool flagSecondName = true;
+				while (true)
+				{
+					try
+					{
+						if(flagName)
+						{
+							personForAdd.Name = InputName("Введите имя:");
+							flagName = false;
+						}
+						if(flagSecondName)
+						{
+							personForAdd.SecondName = InputName("Введите фамилию:");
+							flagSecondName = false;
+						}
+						personForAdd.Age = InputAge();
+						personForAdd.Gender = InputGender();
+						break;
+					}
+					catch (Exception e)
+					{
+						RedConsole($"{e.Message}");
+					}
+				}
+				listOfPerson1.AddElement(personForAdd);
+				ShowInfo("Расширенный массив:", listOfPerson1);
 				Console.ReadKey();
-
 
 				//d
 				GreenConsole("Перенос человеа из первого массива во второй:");
-
 				int index = 1;
-
-				Person SelectedPerson = ListOfPerson1.FindByIndex(index);
-
-				ListOfPerson2.AddElement(SelectedPerson);
-
-				ShowInfo("Первый массив:", ListOfPerson1);
-
-				ShowInfo("Второй массив:", ListOfPerson2);
-
+				Person selectedPerson = listOfPerson1.FindByIndex(index);
+				listOfPerson2.AddElement(selectedPerson);
+				ShowInfo("Первый массив:", listOfPerson1);
+				ShowInfo("Второй массив:", listOfPerson2);
 				Console.ReadKey();
 
 
 				//e
-				ListOfPerson1.DeleteElement(index);
-
+				listOfPerson1.DeleteElement(index);
 				GreenConsole($"Удаление элемента с индексом {index}:");
-
-				ShowInfo("Первый массив:", ListOfPerson1);
-
-				ShowInfo("Второй массив:", ListOfPerson2);
-
+				ShowInfo("Первый массив:", listOfPerson1);
+				ShowInfo("Второй массив:", listOfPerson2);
 				Console.ReadKey();
-
 
 				GreenConsole("для выхода из программы нажмите 'q'");
 				exit = Console.ReadLine();
@@ -167,40 +171,9 @@ namespace Laba1.UI
 		/// <returns>Обработанное имя или фамилию</returns>
 		private static string InputName(string infoForUser)
 		{
-			bool nameMistakeFlag = true;
-			string nameTmp = "";
-
-
-			while (nameMistakeFlag)
-			{
-				Console.WriteLine("\n" + infoForUser);
-
-				nameTmp = Console.ReadLine();
-
-				Tuple<bool, string> checkResult = InputPersonInfo.CheckName(nameTmp);
-
-				nameMistakeFlag = checkResult.Item1;
-
-				if (nameMistakeFlag)
-				{
-					string mistakeInfo = checkResult.Item2;
-
-					string[] subString =
-						mistakeInfo.Split(new char[] { '!' }, 
-						StringSplitOptions.RemoveEmptyEntries);
-
-					foreach (string subst in subString)
-					{
-						RedConsole(subst + "!");
-					}
-
-				}
-			}
-
-			//TODO: 
-			nameTmp = InputPersonInfo.CorrectName(nameTmp);
-
-			return nameTmp;
+			Console.WriteLine("\n" + infoForUser);
+			//TODO: (v)
+			return Console.ReadLine();		
 		}
 
 
@@ -211,30 +184,22 @@ namespace Laba1.UI
 		/// /// <returns>Проверенный возраст</returns>
 		private static int InputAge()
 		{
-			int ageTmp = -1;
-			bool AgeMistakeFlag = true;
 
-			while (AgeMistakeFlag)
+
+			while (true)
 			{
 				try
 				{
 					Console.WriteLine("\n" + "Введите возраст ");
-
-					ageTmp = Int32.Parse(Console.ReadLine());
-
-					AgeMistakeFlag = InputPersonInfo.CheckAge(ageTmp).Item1;
-
-					if (AgeMistakeFlag)
-					{
-						RedConsole(InputPersonInfo.CheckAge(ageTmp).Item2);
-					}
+					//TODO: (v)
+					return Int32.Parse(Console.ReadLine());
 				}
 				catch (System.FormatException)
 				{
 					RedConsole("Необходимо ввести целое число");
 				}
 			}
-			return ageTmp;
+			
 		}
 
 
@@ -245,9 +210,8 @@ namespace Laba1.UI
 		/// /// <returns>Проверенный гендер</returns>
 		private static GenderType InputGender()
 		{
-			GenderType gender;
 			Console.WriteLine("\n" + "Введите пол (М/Ж)");
-
+			GenderType gender;
 			string gen = Console.ReadLine();
 			switch (gen)
 			{
@@ -271,6 +235,9 @@ namespace Laba1.UI
 			}
 			return gender;
 		}
+
+
+		
 	}
 }
 

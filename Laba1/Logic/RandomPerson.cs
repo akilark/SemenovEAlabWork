@@ -3,8 +3,14 @@
 
 namespace Laba1.Logic
 {
+	/// <summary>
+	/// Класс позволяющий создавать уникальных персон и уникальные списки персон
+	/// </summary>
 	public class RandomPerson
 	{
+		/// <summary>
+		/// Объект класса Random
+		/// </summary>
 		private static Random _rand = new Random();
 
 
@@ -14,16 +20,10 @@ namespace Laba1.Logic
 		/// <returns>Персону с уникальной комбинацией полей класса </returns>
 		public static Person CreatePerson()
 		{
-			//TODO: Дубль
-			int minAge = 1;
-			int maxAge = 114;
-			
-			Person returnPerson = new Person();
-
-
+			//TODO: Дубль(убран)
 			Array gendervalues = Enum.GetValues(typeof(GenderType));
 
-			int ageRandom = _rand.Next(minAge, maxAge);
+			int ageRandom = _rand.Next(Person.MinAge, Person.MaxAge);
 
 			GenderType genderRandom =
 				(GenderType)gendervalues.GetValue(_rand.Next(gendervalues.Length));
@@ -34,14 +34,9 @@ namespace Laba1.Logic
 
 			secondNameRandom += EndOfSecondName(genderRandom);
 
-			firstNameRadom = InputPersonInfo.CorrectName(firstNameRadom);
 
-			secondNameRandom = InputPersonInfo.CorrectName(secondNameRandom);
-
-			returnPerson.AddInfo(firstNameRadom,
+			return new Person(firstNameRadom,
 				secondNameRandom, ageRandom, genderRandom);
-
-			return returnPerson;
 		}
 
 		/// <summary>
@@ -74,7 +69,6 @@ namespace Laba1.Logic
 		/// <returns>Характерное окончание фамилии</returns>
 		private static string EndOfSecondName(GenderType gender)
 		{
-			
 			string[] lastNameEnd = new string[3];
 			switch (gender)
 			{

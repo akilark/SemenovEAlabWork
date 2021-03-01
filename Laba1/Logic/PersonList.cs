@@ -5,9 +5,16 @@
 namespace Laba1.Logic
 {
 
-	//TODO: XML
+	//TODO: XML(v)
+	/// <summary>
+	/// Класс позволяющий хранить информацию о списке персон, добавлять персон,
+	/// находить и удалять их по индексу
+	/// </summary>
 	public class PersonList
 	{
+		/// <summary>
+		/// список персон
+		/// </summary>
 		private Person[] _localPersonArray = new Person[0];
 
 
