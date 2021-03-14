@@ -14,6 +14,7 @@ namespace Laba2.Logic
 		private FamilyStatus _localFamilyStatus;
 		private Person _localPartner;
 		private string _localJob;
+		private int _localMinAge = 19;
 
 		public string PasportSeries
 		{
@@ -74,7 +75,17 @@ namespace Laba2.Logic
 
 			}
 		}
-	}
 
-	
+		public Adult() 
+		{ 
+			MinAge = _localMinAge;
+		}
+
+		public Adult(string name, string secondName,
+			int age, GenderType gender) : base(name, secondName, age, gender)
+		{
+			MinAge = _localMinAge;
+
+		}
+	}
 }

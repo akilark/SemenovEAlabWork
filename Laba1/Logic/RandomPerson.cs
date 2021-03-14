@@ -20,10 +20,11 @@ namespace Laba1.Logic
 		/// <returns>Персону с уникальной комбинацией полей класса </returns>
 		public static Person CreatePerson()
 		{
+			Person personAgeRange= new Person();
 			//TODO: Дубль(убран)
 			Array gendervalues = Enum.GetValues(typeof(GenderType));
 
-			int ageRandom = _rand.Next(Person.MinAge, Person.MaxAge);
+			int ageRandom = _rand.Next(personAgeRange.MinAge, personAgeRange.MaxAge);
 
 			GenderType genderRandom =
 				(GenderType)gendervalues.GetValue(_rand.Next(gendervalues.Length));

@@ -13,7 +13,8 @@ namespace Laba2.UI
 		{
 			var pers1 = new Person("Евгений","Семенов",23,GenderType.Male);
 			Adult adult1 = new Adult();
-
+			adult1.Age = 17;
+			Adult adult2 = new Adult("Евгений", "Семенов", 23, GenderType.Male);
 			
 			while (true)
 			{

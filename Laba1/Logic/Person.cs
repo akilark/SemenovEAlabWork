@@ -17,6 +17,17 @@ namespace Laba1.Logic
 
 
 		/// <summary>
+		/// Минимальный возраст персоны 
+		/// </summary>
+		private int _localMinAge = 0;
+
+
+		/// <summary>
+		/// Максимальный возраст персоны 
+		/// </summary>
+		private int _localMaxAge = 114;
+
+		/// <summary>
 		/// Фамилия персоны
 		/// </summary>
 		private string _localSecondName;
@@ -43,13 +54,33 @@ namespace Laba1.Logic
 		/// <summary>
 		/// Метод возвращающий минимально возможный возраст персоны 
 		/// </summary>
-		public static int MinAge => 0;
+		public int MinAge
+		{
+			get
+			{
+				return _localMinAge;
+			}
+			protected set
+			{
+				_localMinAge = value;
+			}
+		}
 
 
 		/// <summary>
 		/// Метод возвращающий максимально возможный возраст персоны 
 		/// </summary>
-		public static int MaxAge => 114;
+		public int MaxAge
+		{
+			get
+			{
+				return _localMaxAge;
+			}
+			protected set
+			{
+				_localMaxAge = value;
+			}
+		}
 
 
 		/// <summary>
@@ -302,13 +333,13 @@ namespace Laba1.Logic
 		/// <param name="age">Возраст</param>
 		/// <exception cref="Возраст должен быть в диапазоне [MinAge-MaxAge]">
 		/// </exception>
-		public static void CheckAge(int age)
+		public void CheckAge(int age)
 		{
 			//TODO: Дубль (убран)
-			if (age < MinAge || age > MaxAge)
+			if (age < _localMinAge || age > _localMaxAge)
 			{
 				string mistakeInfoTmp = $"Возраст должен быть в диапазоне" +
-					$" [{MinAge}-{MaxAge}]";
+					$" [{_localMinAge}-{_localMaxAge}]";
 				throw new FormatException(mistakeInfoTmp);
 			}
 		}
