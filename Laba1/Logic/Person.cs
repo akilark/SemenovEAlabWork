@@ -31,19 +31,19 @@ namespace Laba1.Logic
 		/// <summary>
 		/// Пол персоны
 		/// </summary>
-		private GenderType _localGender = GenderType.Unknown;
+		private GenderType _localGender;
 
 
 		/// <summary>
-		/// Конструктор для создания объекта типа Person без данных
+		/// Конструктор для создания объекта типа Person с дефолтными полями
 		/// </summary>
-		public Person(){}
+		public Person() : this("Неизвестно", "Неизвестно", 0, GenderType.Unknown) { }
 
 
 		/// <summary>
 		/// Метод возвращающий минимально возможный возраст персоны 
 		/// </summary>
-		public static int MinAge => 1;
+		public static int MinAge => 0;
 
 
 		/// <summary>
@@ -129,10 +129,14 @@ namespace Laba1.Logic
 							_localGender = GenderType.Female;
 							break;
 						}
-					default:
+					case GenderType.Unknown:
 						{
 							_localGender = GenderType.Unknown;
 							break;
+						}
+					default:
+						{
+							throw new Exception("Такого гендера не существует");
 						}
 				}
 			}
@@ -241,8 +245,8 @@ namespace Laba1.Logic
 
 			if (subString.Length > allowQuantity)
 			{
-				string mistakeInfoTmp = $"Недопустимо использование более {allowQuantity} " +
-					"составных частей имени или фамилии!";
+				string mistakeInfoTmp = $"Недопустимо использование " +
+					$"более {allowQuantity} составных частей имени или фамилии!";
 				throw new FormatException(mistakeInfoTmp);
 			}
 			

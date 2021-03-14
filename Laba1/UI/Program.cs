@@ -8,7 +8,7 @@ namespace Laba1.UI
 
 	//TODO: XML(v)
 	/// <summary>
-	/// Класс для демонстрации работы классов из папки logic
+	/// Класс инициирующий работу программы
 	/// </summary>
 	public class Program
 	{
@@ -18,7 +18,6 @@ namespace Laba1.UI
 			{
 				string exit;
 				int listSize = 3;
-				Person personForAdd = new Person();
 				GreenConsole("Cоздание массивов");
 				RedConsole("для продолжение нажмите любую кнопку");
 				//TODO: RSDN (v)
@@ -26,16 +25,19 @@ namespace Laba1.UI
 				PersonList listOfPerson2 = RandomPerson.CreatePersonList(listSize);
 				Console.ReadKey();
 
+
 				//b
 				ShowInfo("Первый массив:", listOfPerson1);
 				ShowInfo("Второй массив:", listOfPerson2);
 				RedConsole("для продолжение нажмите любую кнопку" + "\n");
 				Console.ReadKey();
 
+
 				//c
 				GreenConsole("Добавление человека в первый массив:");
 				bool flagName = true;
 				bool flagSecondName = true;
+				Person personForAdd = new Person();
 				while (true)
 				{
 					try
@@ -62,6 +64,7 @@ namespace Laba1.UI
 				listOfPerson1.AddElement(personForAdd);
 				ShowInfo("Расширенный массив:", listOfPerson1);
 				Console.ReadKey();
+
 
 				//d
 				GreenConsole("Перенос человеа из первого массива во второй:");
@@ -95,7 +98,7 @@ namespace Laba1.UI
 		/// Функция с помощью которой выводится информация о персоне в консоль
 		/// </summary>
 		/// <param name="personArray">Массив данных о персоне </param>
-		private static void ShowInfo(string message, PersonList personArray)
+		public static void ShowInfo(string message, PersonList personArray)
 		{
 			Console.WriteLine("\n" + message);
 
@@ -114,7 +117,7 @@ namespace Laba1.UI
 		/// </summary>
 		/// <param name="info">Строка информации о персоне</param>
 		/// <returns> Русский перевод гендера конкретной персоны</returns>
-		private static string GenderRussian(string info)
+		public static string GenderRussian(string info)
 		{
 			string infoRussian = "";
 
@@ -142,7 +145,7 @@ namespace Laba1.UI
 		/// Функция с помощью которой выводится информация в консоль красным цветом
 		/// </summary>
 		/// <param name="outputInfo">Строка которую необходимо вывести </param>
-		private static void RedConsole(string outputInfo)
+		public static void RedConsole(string outputInfo)
 		{
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.WriteLine(outputInfo);
@@ -154,7 +157,7 @@ namespace Laba1.UI
 		/// Функция с помощью которой выводится информация в консоль зеленым цветом
 		/// </summary>
 		/// <param name="outputInfo">Строка которую необходимо вывести </param>
-		private static void GreenConsole(string outputInfo)
+		public static void GreenConsole(string outputInfo)
 		{
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine(outputInfo);
@@ -169,7 +172,7 @@ namespace Laba1.UI
 		/// <param name="infoForUser">Строка которую увидет пользователь, 
 		/// нужна для того чтобы попросить имя или фамилию персоны </param>
 		/// <returns>Обработанное имя или фамилию</returns>
-		private static string InputName(string infoForUser)
+		public static string InputName(string infoForUser)
 		{
 			Console.WriteLine("\n" + infoForUser);
 			//TODO: (v)
@@ -182,10 +185,8 @@ namespace Laba1.UI
 		/// Если введено не правильное число выводит информацию об этом
 		/// </summary>
 		/// /// <returns>Проверенный возраст</returns>
-		private static int InputAge()
+		public static int InputAge()
 		{
-
-
 			while (true)
 			{
 				try
@@ -208,7 +209,7 @@ namespace Laba1.UI
 		/// введенной информации с клавиатуры и соответсвующему гендеру персоны
 		/// </summary>
 		/// /// <returns>Проверенный гендер</returns>
-		private static GenderType InputGender()
+		public static GenderType InputGender()
 		{
 			Console.WriteLine("\n" + "Введите пол (М/Ж)");
 			GenderType gender;
