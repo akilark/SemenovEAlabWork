@@ -11,11 +11,24 @@ namespace Laba2.UI
 	{
 		static void Main(string[] args)
 		{
-			var pers1 = new Person("Евгений","Семенов",23,GenderType.Male);
-			Adult adult1 = new Adult();
-			adult1.Age = 17;
-			Adult adult2 = new Adult("Евгений", "Семенов", 23, GenderType.Male);
 			
+			Adult adult1 = new Adult("Человек", "Женщинский", 23, GenderType.Female,"1234","123456",null,null);
+
+			Adult adult2 = new Adult("Человек", "Мужиковский", 23, GenderType.Male, "1234", "123456", adult1, null);
+
+			Adult adult3 = new Adult("Человек", "Средняковский", 23, GenderType.Unknown, "1234", "123456", null, null);
+
+			adult1.AddPartner(adult2);
+
+			adult1.AddPartner(adult3);
+			
+			adult2.DelitePartner();
+
+			adult3.DelitePartner();
+
+			Console.ReadKey();
+
+			/*
 			while (true)
 			{
 				string exit;
@@ -38,6 +51,7 @@ namespace Laba2.UI
 					break;
 				}
 			}
+			*/
 		}
 	}
 }
