@@ -149,7 +149,7 @@ namespace Laba1.Logic
 		/// Метод позволяющий получить информацию о Персоне
 		/// </summary>
 		/// <returns>Строка типа "Имя: ; Фамилия: ; Возраст: ; Пол: "</returns>
-		public string Info() => $"Имя: {_localName};" +
+		public virtual string Info() => $"Имя: {_localName};" +
 							   $" Фамилия: {_localSecondName}; " +
 							   $"Возраст: {_localAge};" +
 							   $" Пол: {_localGender}";

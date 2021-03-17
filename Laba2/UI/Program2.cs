@@ -16,15 +16,15 @@ namespace Laba2.UI
 
 			Adult adult2 = new Adult("Человек", "Мужиковский", 23, GenderType.Male, "1234", "123456", adult1, null);
 
-			Adult adult3 = new Adult("Человек", "Средняковский", 23, GenderType.Unknown, "1234", "123456", null, null);
+			Adult adult3 = new Adult();
 
-			adult1.AddPartner(adult2);
+			PersonList perslist= new PersonList();
 
-			adult1.AddPartner(adult3);
-			
-			adult2.DelitePartner();
+			perslist.AddElement(adult1);
+			perslist.AddElement(adult2);
+			perslist.AddElement(adult3);
 
-			adult3.DelitePartner();
+			Program.ShowInfo("Вывод в консоль эдалтов",perslist);
 
 			Console.ReadKey();
 

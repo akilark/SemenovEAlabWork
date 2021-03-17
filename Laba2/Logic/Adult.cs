@@ -89,10 +89,14 @@ namespace Laba2.Logic
 			}
 		}
 
+
+		//TODO: XML комментарий
 		public Adult() : this("Неизвестно", "Неизвестно", 19, GenderType.Unknown,
-			"0000", "000000", null,"Неизвестно") { }
+			"0000", "000000", null, null) { }
 
 
+
+		//TODO: XML комментарий
 		public Adult(string name, string secondName,
 			int age, GenderType gender, string pasportSeries, string pasportNumber,
 			Adult partner, string job) : base(name, secondName, age, gender)
@@ -104,6 +108,7 @@ namespace Laba2.Logic
 		}
 
 
+		//TODO: XML комментарий
 		public void AddPartner(Adult partner)
 		{
 			if (partner != null)
@@ -127,6 +132,7 @@ namespace Laba2.Logic
 		}
 
 
+		//TODO: XML комментарий
 		public void DelitePartner()
 		{
 			if (_localPartner != null)
@@ -136,6 +142,51 @@ namespace Laba2.Logic
 
 				_localPartner = null;
 				_localFamilyStatus = FamilyStatus.NotMarried;
+			}
+		}
+
+		public override string Info()
+		{
+			return $"Имя: {Name};" +
+					$" Фамилия: {SecondName}; " +
+					$" Возраст: {Age};" +
+					$" Пол: {Gender};" + "\n" +
+					$" Данные паспорта: {_localPasportSeries}" +
+					$" {_localPasportNumber};" + CheckMarried() + CheckJob();
+		}
+
+
+		//TODO: XML комментарий
+		private string CheckMarried()
+		{
+			switch (FamilyStatus)
+			{
+				case FamilyStatus.Married:
+					{
+						return $" В браке с {Partner.Name} {Partner.SecondName};";
+					}
+				case FamilyStatus.NotMarried:
+					{
+						return 	$" В браке не состоит;";
+					}
+				default:
+					{
+						throw new Exception("Семейное положение должно быть задано");
+					}
+			}
+		}
+
+
+		//TODO: XML комментарий
+		private string CheckJob()
+		{
+			if(_localJob != null)
+			{
+				return $" Работает: {Job};";
+			}
+			else
+			{
+				return $" Безработный;";
 			}
 		}
 	}
