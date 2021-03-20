@@ -1,7 +1,7 @@
 ﻿
 namespace Laba2.Logic
 {
-	public enum StudyPlace
+	public enum StudyPlaceType
 	{
 		School,
 		Kindergarten,

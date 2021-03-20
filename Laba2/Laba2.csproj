@@ -49,7 +49,7 @@
     <Compile Include="Logic\Adult.cs" />
     <Compile Include="Logic\Child.cs" />
     <Compile Include="Logic\FamilyStatus.cs" />
-    <Compile Include="Logic\StudyPlace.cs" />
+    <Compile Include="Logic\StudyPlaceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Program2.cs" />
   </ItemGroup>

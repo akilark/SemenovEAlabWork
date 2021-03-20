@@ -12,17 +12,17 @@ namespace Laba2.UI
 		static void Main(string[] args)
 		{
 			
-			Adult adult1 = new Adult("Человек", "Женщинский", 23, GenderType.Female,"1234","123456",null,null);
+			Adult adult1 = new Adult("Человек", "Женщинский", 23, GenderType.Female,"1234","123456", null);
 
-			Adult adult2 = new Adult("Человек", "Мужиковский", 23, GenderType.Male, "1234", "123456", adult1, null);
+			Adult adult2 = new Adult("Человек", "Мужиковский", 23, GenderType.Male, "1234", "123456", null);
 
-			Adult adult3 = new Adult();
+			Child child1 = new Child("Ребёнок", "Женщинский", 5 , GenderType.Female, adult1, adult2, StudyPlaceType.School, null);
 
 			PersonList perslist= new PersonList();
 
 			perslist.AddElement(adult1);
 			perslist.AddElement(adult2);
-			perslist.AddElement(adult3);
+			perslist.AddElement(child1);
 
 			Program.ShowInfo("Вывод в консоль эдалтов",perslist);
 

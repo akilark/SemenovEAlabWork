@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Laba1.Logic;
 
@@ -16,11 +16,11 @@ namespace Laba2.Logic
 		private string _localJob;
 
 
-		public override int MinAge => 19;
+		public override int MinAge => 18;
 		public override int MaxAge => 114;
 
 
-		//TODO: проверка введенного значения и XML комментарий
+		//TODO:  XML комментарий
 		public string PasportSeries
 		{
 			get
@@ -29,12 +29,16 @@ namespace Laba2.Logic
 			}
 			set
 			{
+				int passportSeriesLenght = 4;
+
+				CheckPassportDataPattern(value);
+				CheckPassportDataLength(value, passportSeriesLenght);
 				_localPasportSeries = value;
 			}
 		}
 
 
-		//TODO: проверка введенного значения и XML комментарий
+		//TODO: XML комментарий
 		public string PasportNumber
 		{
 			get
@@ -43,6 +47,10 @@ namespace Laba2.Logic
 			}
 			set
 			{
+				int passportNumberLenght = 6;
+
+				CheckPassportDataPattern(value);
+				CheckPassportDataLength(value, passportNumberLenght);
 				_localPasportNumber = value;
 			}
 		}
@@ -92,18 +100,17 @@ namespace Laba2.Logic
 
 		//TODO: XML комментарий
 		public Adult() : this("Неизвестно", "Неизвестно", 19, GenderType.Unknown,
-			"0000", "000000", null, null) { }
+			"0000", "000000", null) { }
 
 
 
 		//TODO: XML комментарий
 		public Adult(string name, string secondName,
 			int age, GenderType gender, string pasportSeries, string pasportNumber,
-			Adult partner, string job) : base(name, secondName, age, gender)
+			string job) : base(name, secondName, age, gender)
 		{
 			PasportSeries = pasportSeries;
 			PasportNumber = pasportNumber;
-			AddPartner(partner);
 			Job = job;
 		}
 
@@ -131,9 +138,20 @@ namespace Laba2.Logic
 			}
 		}
 
+		//TODO: XML комментарий
+		public override string Info()
+		{
+			return $"Имя: {Name};" +
+					$" Фамилия: {SecondName}; " +
+					$" Возраст: {Age};" +
+					$" Пол: {Gender};" + "\n" +
+					$" Данные паспорта: {_localPasportSeries}" +
+					$" {_localPasportNumber};" + CheckMarried() + CheckJob();
+		}
+
 
 		//TODO: XML комментарий
-		public void DelitePartner()
+		private void DelitePartner()
 		{
 			if (_localPartner != null)
 			{
@@ -143,16 +161,6 @@ namespace Laba2.Logic
 				_localPartner = null;
 				_localFamilyStatus = FamilyStatus.NotMarried;
 			}
-		}
-
-		public override string Info()
-		{
-			return $"Имя: {Name};" +
-					$" Фамилия: {SecondName}; " +
-					$" Возраст: {Age};" +
-					$" Пол: {Gender};" + "\n" +
-					$" Данные паспорта: {_localPasportSeries}" +
-					$" {_localPasportNumber};" + CheckMarried() + CheckJob();
 		}
 
 
@@ -187,6 +195,31 @@ namespace Laba2.Logic
 			else
 			{
 				return $" Безработный;";
+			}
+		}
+
+		private static void CheckPassportDataLength(string data, int maxLength)
+		{
+			if (data.Length != maxLength )
+			{
+				string mistakeInfoTmp = "Недопустимый размер данных паспорта !";
+				throw new FormatException(mistakeInfoTmp);
+			}
+		}
+
+
+
+		private static void CheckPassportDataPattern(string data)
+		{
+			string pattern = @"\D";
+			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
+			Match mat = reg.Match(data);
+
+			if (mat.Success)
+			{
+				string mistakeInfoTmp = "Серия и номер паспорта могут " +
+					"содержать только цифры!";
+				throw new FormatException(mistakeInfoTmp);
 			}
 		}
 	}
