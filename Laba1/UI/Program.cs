@@ -105,6 +105,7 @@ namespace Laba1.UI
 			foreach (string personInfo in personArray.PersonsInfo())
 			{
 				Console.WriteLine(GenderRussian(personInfo));
+				Console.WriteLine();
 			}
 
 			Console.WriteLine();

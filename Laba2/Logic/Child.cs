@@ -22,9 +22,8 @@ namespace Laba2.Logic
 			{
 				return _localMother;
 			}
-			private set
+			set
 			{
-				CheckParentsName(value);
 				_localMother = value;
 			}
 		}
@@ -36,9 +35,8 @@ namespace Laba2.Logic
 			{
 				return _localFather;
 			}
-			private set
+			set
 			{
-				CheckParentsName(value);
 				_localFather = value;
 			}
 		}
@@ -50,7 +48,7 @@ namespace Laba2.Logic
 			{
 				return _localStudyPlaceType;
 			}
-			private set
+			set
 			{
 				_localStudyPlaceType = value;
 			}
@@ -63,7 +61,7 @@ namespace Laba2.Logic
 			{
 				return _localStudyPlaceName;
 			}
-			private set
+			set
 			{
 				_localStudyPlaceName = value;
 			}
@@ -132,24 +130,16 @@ namespace Laba2.Logic
 			{
 				case StudyPlaceType.Kindergarten:
 					{
-						return $"Обучается в детском саду {_localStudyPlaceName}";
+						return $" Обучается в детском саду {_localStudyPlaceName}";
 					}
 				case StudyPlaceType.School:
 					{
-						return $"Обучается в школе {_localStudyPlaceName}";
+						return $" Обучается в школе {_localStudyPlaceName}";
 					}
 				default:
 					{
-						return $"Сведений об обучении нет";
+						return $" Сведений об обучении нет";
 					}
-			}
-		}
-
-		private void CheckParentsName(Adult parent)
-		{
-			if (parent.Name == "Неизвестно" || parent.SecondName == "Неизвестно")
-			{
-				throw new FormatException("Данные родителя должны быть известны!");
 			}
 		}
 	}
