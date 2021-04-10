@@ -1,12 +1,16 @@
 ﻿using System;
-using Laba1.Logic;
 
 namespace Laba2.Logic
 {
+	//TODO:  XML комментарий
 	public class RandomPersonAtributes
 	{
+
+		//TODO:  XML комментарий
 		private static Random _rand = new Random();
 
+
+		//TODO:  XML комментарий
 		public static void ForAdult(Adult adultTmp)
 		{
 			adultTmp.PasportSeries = _rand.Next(1000, 9999).ToString();
@@ -27,9 +31,10 @@ namespace Laba2.Logic
 			};
 
 			adultTmp.Job = jobs[_rand.Next(jobs.Length)];
-		}		
-		
+		}
 
+
+		//TODO:  XML комментарий
 		public static void Partner(Adult adultTmp)
 		{
 
@@ -49,6 +54,7 @@ namespace Laba2.Logic
 		}
 
 
+		//TODO:  XML комментарий
 		public static Adult CreateAdult()
 		{
 			Adult partnerAdult = new Adult();
@@ -58,6 +64,8 @@ namespace Laba2.Logic
 		}
 
 
+
+		//TODO:  XML комментарий
 		public static void ChangePersonDataForAdult(Adult adultTmp)
 		{
 			Person personTmp = RandomPerson.CreatePerson();
@@ -66,6 +74,8 @@ namespace Laba2.Logic
 		}
 
 
+
+		//TODO:  XML комментарий
 		public static void ForChild(Child childTmp)
 		{
 			if(childTmp.Age > 7)
@@ -83,6 +93,7 @@ namespace Laba2.Logic
 		}
 
 
+		//TODO:  XML комментарий
 		public static void Parents(Child childTmp)
 		{
 			switch (_rand.Next(1, 5))
@@ -113,7 +124,7 @@ namespace Laba2.Logic
 		}
 
 
-
+		//TODO:  XML комментарий
 		public static Adult CreateParentValidGender(GenderType gender)
 		{
 			Adult adultTmp = CreateAdult();

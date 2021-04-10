@@ -48,6 +48,10 @@
   <ItemGroup>
     <Compile Include="Logic\Adult.cs" />
     <Compile Include="Logic\Child.cs" />
+    <Compile Include="Logic\PersonList.cs" />
+    <Compile Include="Logic\RandomPerson.cs" />
+    <Compile Include="Logic\GenderType.cs" />
+    <Compile Include="Logic\Person.cs" />
     <Compile Include="Logic\RandomListAdultChild.cs" />
     <Compile Include="Logic\FamilyStatus.cs" />
     <Compile Include="Logic\RandomPersonAtributes.cs" />

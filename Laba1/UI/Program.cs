@@ -5,22 +5,21 @@ using System.Collections.Generic;
 
 namespace Laba1.UI
 {
-
-	//TODO: XML(v)
 	/// <summary>
 	/// Класс инициирующий работу программы
 	/// </summary>
 	public class Program
 	{
+		/// <summary>
+		/// Метод вызываемый при старте программы
+		/// </summary>
 		public static void Main()
 		{
 			while (true)
 			{
-				string exit;
-				int listSize = 3;
-				GreenConsole("Cоздание массивов");
-				RedConsole("для продолжение нажмите любую кнопку");
-				//TODO: RSDN (v)
+				SetConsoleColor("Cоздание массивов", ConsoleColor.Green);
+				SetConsoleColor("для продолжение нажмите любую кнопку", ConsoleColor.Red);
+				const int listSize = 3;
 				PersonList listOfPerson1 = RandomPerson.CreatePersonList(listSize);
 				PersonList listOfPerson2 = RandomPerson.CreatePersonList(listSize);
 				Console.ReadKey();
@@ -29,12 +28,12 @@ namespace Laba1.UI
 				//b
 				ShowInfo("Первый массив:", listOfPerson1);
 				ShowInfo("Второй массив:", listOfPerson2);
-				RedConsole("для продолжение нажмите любую кнопку" + "\n");
+				SetConsoleColor("для продолжение нажмите любую кнопку" + "\n", ConsoleColor.Red);
 				Console.ReadKey();
 
 
 				//c
-				GreenConsole("Добавление человека в первый массив:");
+				SetConsoleColor("Добавление человека в первый массив:", ConsoleColor.Green);
 				bool flagName = true;
 				bool flagSecondName = true;
 				Person personForAdd = new Person();
@@ -58,7 +57,7 @@ namespace Laba1.UI
 					}
 					catch (Exception e)
 					{
-						RedConsole($"{e.Message}");
+						SetConsoleColor($"{e.Message}", ConsoleColor.Red);
 					}
 				}
 				listOfPerson1.AddElement(personForAdd);
@@ -67,7 +66,7 @@ namespace Laba1.UI
 
 
 				//d
-				GreenConsole("Перенос человеа из первого массива во второй:");
+				SetConsoleColor("Перенос человеа из первого массива во второй:", ConsoleColor.Green);
 				int index = 1;
 				Person selectedPerson = listOfPerson1.FindByIndex(index);
 				listOfPerson2.AddElement(selectedPerson);
@@ -78,13 +77,13 @@ namespace Laba1.UI
 
 				//e
 				listOfPerson1.DeleteElement(index);
-				GreenConsole($"Удаление элемента с индексом {index}:");
+				SetConsoleColor($"Удаление элемента с индексом {index}:", ConsoleColor.Green);
 				ShowInfo("Первый массив:", listOfPerson1);
 				ShowInfo("Второй массив:", listOfPerson2);
 				Console.ReadKey();
 
-				GreenConsole("для выхода из программы нажмите 'q'");
-				exit = Console.ReadLine();
+				SetConsoleColor("для выхода из программы нажмите 'q'", ConsoleColor.Green);
+				string exit = Console.ReadLine();
 				Console.WriteLine();
 				if (exit == "q" || exit == "Q" || exit == "й" || exit == "Й")
 				{
@@ -120,7 +119,6 @@ namespace Laba1.UI
 		/// <returns> Русский перевод гендера конкретной персоны</returns>
 		public static string GenderRussian(string info)
 		{
-			string infoRussian = "";
 
 			List<(string, string)> patterns = new List<(string, string)>()
 			{
@@ -134,33 +132,22 @@ namespace Laba1.UI
 				var regex = new Regex(pattern.Item1);
 				if (regex.IsMatch(info))
 				{
-					infoRussian = regex.Replace(info, pattern.Item2);
+					return regex.Replace(info, pattern.Item2);
 				}
 			}
 
-			return infoRussian;
+			throw new Exception("Гендер задан не правильно");
 		}
 
 
 		/// <summary>
-		/// Функция с помощью которой выводится информация в консоль красным цветом
+		/// Функция с помощью которой выводится информация в консоль заданным
 		/// </summary>
 		/// <param name="outputInfo">Строка которую необходимо вывести </param>
-		public static void RedConsole(string outputInfo)
+		/// <param name="consoleColor"> Цвет надписи в консоли </param>
+		public static void SetConsoleColor(string outputInfo, ConsoleColor consoleColor)
 		{
-			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine(outputInfo);
-			Console.ResetColor();
-		}
-
-
-		/// <summary>
-		/// Функция с помощью которой выводится информация в консоль зеленым цветом
-		/// </summary>
-		/// <param name="outputInfo">Строка которую необходимо вывести </param>
-		public static void GreenConsole(string outputInfo)
-		{
-			Console.ForegroundColor = ConsoleColor.Green;
+			Console.ForegroundColor = consoleColor;
 			Console.WriteLine(outputInfo);
 			Console.ResetColor();
 		}
@@ -176,7 +163,6 @@ namespace Laba1.UI
 		public static string InputName(string infoForUser)
 		{
 			Console.WriteLine("\n" + infoForUser);
-			//TODO: (v)
 			return Console.ReadLine();		
 		}
 
@@ -193,12 +179,11 @@ namespace Laba1.UI
 				try
 				{
 					Console.WriteLine("\n" + "Введите возраст ");
-					//TODO: (v)
 					return Int32.Parse(Console.ReadLine());
 				}
 				catch (System.FormatException)
 				{
-					RedConsole("Необходимо ввести целое число");
+					SetConsoleColor("Необходимо ввести целое число", ConsoleColor.Red);
 				}
 			}
 			
@@ -236,11 +221,6 @@ namespace Laba1.UI
 					}
 			}
 			return gender;
-		}
-
-
-		
+		}		
 	}
 }
-
-

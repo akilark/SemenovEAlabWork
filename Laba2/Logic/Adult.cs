@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Laba1.Logic;
+
 
 namespace Laba2.Logic
 {
+	//TODO:  XML комментарий
 	public class Adult : Person
 	{
 		private string _localPasportSeries;
@@ -16,7 +17,11 @@ namespace Laba2.Logic
 		private string _localJob;
 
 
+		//TODO:  XML комментарий
 		public override int MinAge => 18;
+
+
+		//TODO:  XML комментарий
 		public override int MaxAge => 114;
 
 
@@ -29,8 +34,8 @@ namespace Laba2.Logic
 			}
 			set
 			{
+				//TODO: Дубль
 				int passportSeriesLenght = 4;
-
 				CheckPassportDataPattern(value);
 				CheckPassportDataLength(value, passportSeriesLenght);
 				_localPasportSeries = value;
@@ -47,8 +52,8 @@ namespace Laba2.Logic
 			}
 			set
 			{
+				//TODO: Дубль
 				int passportNumberLenght = 6;
-
 				CheckPassportDataPattern(value);
 				CheckPassportDataLength(value, passportNumberLenght);
 				_localPasportNumber = value;
@@ -59,6 +64,7 @@ namespace Laba2.Logic
 		//TODO: XML комментарий
 		public FamilyStatus FamilyStatus
 		{
+			//TODO: автосвойство
 			get
 			{
 				return _localFamilyStatus;
@@ -73,6 +79,7 @@ namespace Laba2.Logic
 		//TODO: XML комментарий
 		public Adult Partner
 		{
+			//TODO: автосвойство
 			get
 			{
 				return _localPartner;
@@ -87,6 +94,7 @@ namespace Laba2.Logic
 		//TODO: XML комментарий
 		public string Job
 		{
+			//TODO: автосвойство
 			get
 			{
 				return _localJob;
@@ -150,6 +158,7 @@ namespace Laba2.Logic
 		}
 
 
+		//TODO: опечатка
 		//TODO: XML комментарий
 		private void DelitePartner()
 		{
@@ -188,7 +197,7 @@ namespace Laba2.Logic
 		//TODO: XML комментарий
 		private string CheckJob()
 		{
-			if(_localJob != null)
+			if (_localJob != null)
 			{
 				return $" Работает: {Job};";
 			}
@@ -198,6 +207,8 @@ namespace Laba2.Logic
 			}
 		}
 
+
+		//TODO:  XML комментарий
 		private static void CheckPassportDataLength(string data, int maxLength)
 		{
 			if (data.Length != maxLength )
@@ -208,11 +219,12 @@ namespace Laba2.Logic
 		}
 
 
-
+		//TODO:  XML комментарий
 		private static void CheckPassportDataPattern(string data)
 		{
 			string pattern = @"\D";
 			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
+			//TODO: RSDn
 			Match mat = reg.Match(data);
 
 			if (mat.Success)

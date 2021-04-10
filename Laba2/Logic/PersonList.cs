@@ -2,7 +2,7 @@
 
 
 
-namespace Laba1.Logic
+namespace Laba2.Logic
 {
 	/// <summary>
 	/// Класс позволяющий хранить информацию о списке персон, добавлять персон,

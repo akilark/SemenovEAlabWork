@@ -1,10 +1,13 @@
 ﻿using System;
-using Laba1.Logic;
 
 namespace Laba2.Logic
 {
+	//TODO: RSDN
+	//TODO:  XML комментарий
 	class RandomListAdultChild
 	{
+
+		//TODO:  XML комментарий
 		public static PersonList CreatePersonList(int quantity)
 		{
 			PersonList personArray = new PersonList();
@@ -18,6 +21,7 @@ namespace Laba2.Logic
 		}
 
 
+		//TODO:  XML комментарий
 		private static Person DeterminateAdultOrChild(Person personTmp)
 		{
 			Adult adultTmp = new Adult();
@@ -46,6 +50,7 @@ namespace Laba2.Logic
 		}
 
 
+		//TODO:  XML комментарий
 		public static void TransferPersonData(Person personOutput, Person personInput)
 		{
 			personInput.Name = personOutput.Name;

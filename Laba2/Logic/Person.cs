@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace Laba1.Logic
+namespace Laba2.Logic
 {
 	/// <summary>
 	/// Класс позволяющий хранить информацию о персоне, выводить эту информацию
@@ -36,8 +40,9 @@ namespace Laba1.Logic
 		/// <summary>
 		/// Конструктор для создания объекта типа Person с дефолтными полями
 		/// </summary>
-		public Person() : this("Неизвестно", "Неизвестно", 0, 
-			GenderType.Unknown) { }
+		public Person() : this("Неизвестно", "Неизвестно", 0,
+			GenderType.Unknown)
+		{ }
 
 
 		/// <summary>

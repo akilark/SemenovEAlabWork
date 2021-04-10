@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Laba1.Logic
+namespace Laba2.Logic
 {
 	/// <summary>
 	/// Класс позволяющий создавать уникальных персон и уникальные списки персон
@@ -46,7 +46,7 @@ namespace Laba1.Logic
 		{
 			int lengthMin = 1;
 			int lengthMax = 4;
-			
+
 			int length = _rand.Next(lengthMin, lengthMax);
 			string[] vowels = { "а", "у", "о", "ы", "и", "э", "ю", "е", "ё", "я" };
 			string[] consonants = { "б", "в", "г", "д", "ж", "з", "й", "к", "л", "м",
@@ -72,25 +72,25 @@ namespace Laba1.Logic
 			switch (gender)
 			{
 				case GenderType.Male:
-				{
-					lastNameEnd[0] = "ов";
-					lastNameEnd[1] = "ев";
-					lastNameEnd[2] = "ин";
-					break;
-				}
+					{
+						lastNameEnd[0] = "ов";
+						lastNameEnd[1] = "ев";
+						lastNameEnd[2] = "ин";
+						break;
+					}
 				case GenderType.Female:
-				{
-					lastNameEnd[0] = "ова";
-					lastNameEnd[1] = "ева";
-					lastNameEnd[2] = "ина";
-					break;
-				}
+					{
+						lastNameEnd[0] = "ова";
+						lastNameEnd[1] = "ева";
+						lastNameEnd[2] = "ина";
+						break;
+					}
 				case GenderType.Unknown:
-				{
-					Array.Resize(ref lastNameEnd, 1);
-					lastNameEnd[0] = "о";
-					break;
-				}
+					{
+						Array.Resize(ref lastNameEnd, 1);
+						lastNameEnd[0] = "о";
+						break;
+					}
 			}
 			return lastNameEnd[_rand.Next(lastNameEnd.Length)];
 		}
