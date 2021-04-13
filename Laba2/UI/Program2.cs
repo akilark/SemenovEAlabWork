@@ -5,58 +5,58 @@ using System.Text.RegularExpressions;
 
 namespace Laba2.UI
 {
-	//TODO: RSDN
-	//TODO:  XML комментарий
-	class Program2
+	//TODO: RSDN(v)
+	/// <summary>
+	/// Класс инициирующий работу программы
+	/// </summary>
+	public class Program2
 	{
-		//TODO:  XML комментарий
+		/// <summary>
+		/// Метод вызываемый при старте программы
+		/// </summary>
 		static void Main(string[] args)
 		{
-			
 			int peopleNumber = 3;
-			PersonList persList = RandomListAdultChild.CreatePersonList(7);
+			PersonList persList = RandomPerson.CreatePersonList(7);
 			ShowInfo("Список персон",persList);
-
 			SetConsoleColor($"{peopleNumber + 1}" +
-				$" человек в списке принадлежит классу:",ConsoleColor.Red);
-			Person[] personArray= persList.Persons;
-			SetConsoleColor(personArray[peopleNumber].GetType().ToString(),
-				ConsoleColor.Green);
-
-			SetConsoleColor("Вызовем метод для объекта данного класса", 
-				ConsoleColor.Red);
-
-			List<(string, string)> personType = new List<(string, string)>()
+				$" человек в списке это:",ConsoleColor.Red);
+			PersonBase[] personArray= persList.Persons;	
+			//TODO: Сделать приведение к конкретному типу и вызвать соответтсвующий типу метод.(V)
+			switch(personArray[peopleNumber])
 			{
-				("Laba2.Logic.Adult", "Информация о персоне которой больше 18ти:"),
-				("Laba2.Logic.Child", "Информация о персоне которой меньше 18ти:")
-			};
-
-			foreach (var type in personType)
-			{
-				//TODO: Сделать приведение к конкретному типу и вызвать соответтсвующий типу метод.
-				if (personArray[peopleNumber] is Adult)
-				{
-					SetConsoleColor(type.Item2, ConsoleColor.Green);
-					Console.WriteLine(personArray[peopleNumber].Info());
-				}
+				case Adult adult:
+					{
+						SetConsoleColor("Взрослый", ConsoleColor.Green);
+						SetConsoleColor(adult.InteractionWithJob(DayOfWeek.Monday), 
+							ConsoleColor.Green);
+						break;
+					}
+				case Child child:
+					{
+						SetConsoleColor("Ребенок", ConsoleColor.Green);
+						SetConsoleColor(child.Graduate(), ConsoleColor.Green);
+						break;
+					}
 			}
  			Console.ReadKey();
 		}
+
+
 		/// <summary>
 		/// Функция с помощью которой выводится информация о персоне в консоль
 		/// </summary>
 		/// <param name="personArray">Массив данных о персоне </param>
+		/// <param name="message">Строка, которая должна выводится 
+		/// перед выводом массива</param>
 		public static void ShowInfo(string message, PersonList personArray)
 		{
 			Console.WriteLine("\n" + message);
-
 			foreach (string personInfo in personArray.PersonsInfo())
 			{
 				Console.WriteLine(GenderRussian(personInfo));
 				Console.WriteLine();
 			}
-
 			Console.WriteLine();
 		}
 
@@ -69,14 +69,12 @@ namespace Laba2.UI
 		/// <returns> Русский перевод гендера конкретной персоны</returns>
 		public static string GenderRussian(string info)
 		{
-
 			List<(string, string)> patterns = new List<(string, string)>()
 			{
 				(@"\b(Male)\b", "Мужской"),
 				(@"\b(Female)\b", "Женский"),
 				(@"\b(Unknown)\b", "Боевой вертолёт Апачи")
 			};
-
 			foreach (var pattern in patterns)
 			{
 				var regex = new Regex(pattern.Item1);
@@ -85,7 +83,6 @@ namespace Laba2.UI
 					return regex.Replace(info, pattern.Item2);
 				}
 			}
-
 			throw new Exception("Гендер задан не правильно");
 		}
 
@@ -95,7 +92,8 @@ namespace Laba2.UI
 		/// </summary>
 		/// <param name="outputInfo">Строка которую необходимо вывести </param>
 		/// <param name="consoleColor"> Цвет надписи в консоли </param>
-		public static void SetConsoleColor(string outputInfo, ConsoleColor consoleColor)
+		public static void SetConsoleColor(string outputInfo, 
+			ConsoleColor consoleColor)
 		{
 			Console.ForegroundColor = consoleColor;
 			Console.WriteLine(outputInfo);
@@ -136,7 +134,6 @@ namespace Laba2.UI
 					SetConsoleColor("Необходимо ввести целое число", ConsoleColor.Red);
 				}
 			}
-
 		}
 
 
@@ -173,5 +170,4 @@ namespace Laba2.UI
 			return gender;
 		}
 	}
-
 }

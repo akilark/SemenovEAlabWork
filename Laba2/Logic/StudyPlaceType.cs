@@ -1,7 +1,9 @@
 ﻿
 namespace Laba2.Logic
 {
-	//TODO:  XML комментарий
+	/// <summary>
+	/// Перечисление доступных вариантов мест обучения ребенка
+	/// </summary>
 	public enum StudyPlaceType
 	{
 		School,

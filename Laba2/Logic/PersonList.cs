@@ -13,13 +13,13 @@ namespace Laba2.Logic
 		/// <summary>
 		/// список персон
 		/// </summary>
-		private Person[] _localPersonArray = new Person[0];
+		private PersonBase[] _localPersonArray = new PersonBase[0];
 
 
 		/// <summary>
 		/// Метод возвращающий лист персон
 		/// </summary>
-		public Person[] Persons => _localPersonArray;
+		public PersonBase[] Persons => _localPersonArray;
 
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace Laba2.Logic
 		/// Метод позволяющий добавить персону в конец PersonList
 		/// </summary>
 		/// <param name="newElement">Персона подлежащая добавлению</param>
-		public void AddElement(Person newElement)
+		public void AddElement(PersonBase newElement)
 		{
 			int elementCount = Count;
 
@@ -86,7 +86,7 @@ namespace Laba2.Logic
 		/// (нумерация начинается с нуля)</param>
 		/// <returns> Персона с необходимым индексом, если запращиваемый индекс
 		/// больше размерности PersonList, возвращает последний элемент </returns>
-		public Person FindByIndex(int index)
+		public PersonBase FindByIndex(int index)
 		{
 			if (index < Count - 1)
 			{

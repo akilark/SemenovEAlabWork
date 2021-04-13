@@ -2,7 +2,9 @@
 
 namespace Laba2.Logic
 {
-	//TODO:  XML комментарий
+	/// <summary>
+	/// Перечисление вариантов семейного положения
+	/// </summary>
 	public enum FamilyStatus
 	{
 		Married,

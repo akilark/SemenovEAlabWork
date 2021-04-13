@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace Laba2.Logic
@@ -11,7 +7,7 @@ namespace Laba2.Logic
 	/// Класс позволяющий хранить информацию о персоне, выводить эту информацию
 	/// и проверять ее на наличие ошибок при введении.
 	/// </summary>
-	public class Person
+	public abstract class PersonBase
 	{
 		/// <summary>
 		/// Имя персоны
@@ -40,7 +36,7 @@ namespace Laba2.Logic
 		/// <summary>
 		/// Конструктор для создания объекта типа Person с дефолтными полями
 		/// </summary>
-		public Person() : this("Неизвестно", "Неизвестно", 0,
+		public PersonBase() : this("Неизвестно", "Неизвестно", 0,
 			GenderType.Unknown)
 		{ }
 
@@ -149,13 +145,10 @@ namespace Laba2.Logic
 
 
 		/// <summary>
-		/// Метод позволяющий получить информацию о Персоне
+		/// Абстрактный метод позволяющий получить информацию о Персоне
 		/// </summary>
-		/// <returns>Строка типа "Имя: ; Фамилия: ; Возраст: ; Пол: "</returns>
-		public virtual string Info() => $"Имя: {_localName};" +
-							   $" Фамилия: {_localSecondName}; " +
-							   $"Возраст: {_localAge};" +
-							   $" Пол: {_localGender}";
+		public abstract string Info();
+
 
 		/// <summary>
 		/// Конструктор для создания объекта типа Person 
@@ -165,7 +158,7 @@ namespace Laba2.Logic
 		/// <param name="secondName">Фамилия персоны</param>
 		/// <param name="age">Возраст персоны</param>
 		/// <param name="gender">Пол персоны</param>
-		public Person(string name, string secondName,
+		public PersonBase(string name, string secondName,
 			int age, GenderType gender)
 		{
 			Name = name;
