@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32A8EBEC-39F6-4E71-A40C-8E00125F768C}</ProjectGuid>
+    <ProjectGuid>{2B97E526-DA45-44A1-B896-99B7787A6CE8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Laba2</RootNamespace>
-    <AssemblyName>Laba2</AssemblyName>
+    <RootNamespace>Laba3</RootNamespace>
+    <AssemblyName>Laba3</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Laba1">
-      <HintPath>..\Laba1\bin\Debug\Laba1.exe</HintPath>
+    <Reference Include="Laba2">
+      <HintPath>..\Laba2\bin\Debug\Laba2.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,21 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\Adult.cs" />
-    <Compile Include="Logic\Child.cs" />
-    <Compile Include="Logic\PersonList.cs" />
-    <Compile Include="Logic\RandomPerson.cs" />
-    <Compile Include="Logic\GenderType.cs" />
-    <Compile Include="Logic\PersonBase.cs" />
-    <Compile Include="Logic\FamilyStatus.cs" />
-    <Compile Include="Logic\StudyPlaceType.cs" />
+    <Compile Include="Logic\HorlyPayment.cs" />
+    <Compile Include="Logic\Salary.cs" />
+    <Compile Include="Logic\WageRate.cs" />
+    <Compile Include="Logic\IWage.cs" />
+    <Compile Include="Logic\Worker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

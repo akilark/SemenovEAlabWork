@@ -11,49 +11,36 @@
 		/// </summary>
 		public override int MinAge => 0;
 
-
 		/// <summary>
 		/// Метод возвращающий максимально возможный возраст персоны 
 		/// </summary>
 		public override int MaxAge => 17;
 
-
 		/// <summary>
 		/// Метод возвращающий и принимающий мать персоны  
 		/// </summary>
 		public Adult Mother { get; set; }
-		//TODO: автосвойство(v)
-
 
 		/// <summary>
 		/// Метод возвращающий и принимающий отца персоны  
 		/// </summary>
 		public Adult Father { get; set; }
-		//TODO: автосвойство(v)
-
 
 		/// <summary>
 		/// Метод возвращающий и принимающий место обучения персоны  
 		/// </summary>
 		public StudyPlaceType StudyPlace { get; set; }
-		//TODO: автосвойство(v)
-
 
 		/// <summary>
 		/// Метод возвращающий и принимающий название места обучения персоны
 		/// </summary>
 		public string StudyPlaceName { get; set; }
-		//TODO: автосвойство(v)
 
-
-		//TODO: null не безопасно(V)
 		/// <summary>
 		/// Конструктор для создания объекта типа Child с дефолтными полями
 		/// </summary>
-		public Child() : this("Неизвестно", "Неизвестно", 0, GenderType.Unknown,
-			null, null, StudyPlaceType.Kindergarten, "Неизвестно") { }
-
-
+		public Child() : this(defaultString, defaultString, 0, GenderType.Unknown,
+			null, null, StudyPlaceType.Kindergarten, defaultString) { }
 
 		/// <summary>
 		/// Конструктор для создания объекта типа Child
@@ -108,7 +95,6 @@
 		{
 			return $"Выпускной в школе через {18-Age}";
 		}
-
 
 		/// <summary>
 		/// Метод проверки информации о родителях

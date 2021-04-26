@@ -10,6 +10,11 @@ namespace Laba2.Logic
 	public abstract class PersonBase
 	{
 		/// <summary>
+		/// Стандартная строка
+		/// </summary>
+		internal static string defaultString = "Неизвестно";
+
+		/// <summary>
 		/// Имя персоны
 		/// </summary>
 		private string _localName;
@@ -36,7 +41,7 @@ namespace Laba2.Logic
 		/// <summary>
 		/// Конструктор для создания объекта типа Person с дефолтными полями
 		/// </summary>
-		public PersonBase() : this("Неизвестно", "Неизвестно", 0,
+		public PersonBase() : this(defaultString, defaultString, 0,
 			GenderType.Unknown)
 		{ }
 

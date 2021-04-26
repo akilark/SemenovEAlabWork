@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace Laba2.UI
 {
-	//TODO: RSDN(v)
 	/// <summary>
 	/// Класс инициирующий работу программы
 	/// </summary>
@@ -18,17 +17,16 @@ namespace Laba2.UI
 		{
 			int peopleNumber = 3;
 			PersonList persList = RandomPerson.CreatePersonList(7);
-			ShowInfo("Список персон",persList);
+			ShowInfo("Список персон", persList);
 			SetConsoleColor($"{peopleNumber + 1}" +
-				$" человек в списке это:",ConsoleColor.Red);
-			PersonBase[] personArray= persList.Persons;	
-			//TODO: Сделать приведение к конкретному типу и вызвать соответтсвующий типу метод.(V)
-			switch(personArray[peopleNumber])
+				$" человек в списке это:", ConsoleColor.Red);
+			PersonBase[] personArray = persList.Persons;
+			switch (personArray[peopleNumber])
 			{
 				case Adult adult:
 					{
 						SetConsoleColor("Взрослый", ConsoleColor.Green);
-						SetConsoleColor(adult.InteractionWithJob(DayOfWeek.Monday), 
+						SetConsoleColor(adult.InteractionWithJob(DayOfWeek.Monday),
 							ConsoleColor.Green);
 						break;
 					}
@@ -39,7 +37,7 @@ namespace Laba2.UI
 						break;
 					}
 			}
- 			Console.ReadKey();
+			Console.ReadKey();
 		}
 
 
@@ -92,7 +90,7 @@ namespace Laba2.UI
 		/// </summary>
 		/// <param name="outputInfo">Строка которую необходимо вывести </param>
 		/// <param name="consoleColor"> Цвет надписи в консоли </param>
-		public static void SetConsoleColor(string outputInfo, 
+		public static void SetConsoleColor(string outputInfo,
 			ConsoleColor consoleColor)
 		{
 			Console.ForegroundColor = consoleColor;
@@ -171,3 +169,4 @@ namespace Laba2.UI
 		}
 	}
 }
+

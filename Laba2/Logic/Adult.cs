@@ -15,24 +15,20 @@ namespace Laba2.Logic
 		/// </summary>
 		private string _localPasportSeries;
 
-
 		/// <summary>
 		/// Номер паспорта
 		/// </summary>
 		private string _localPasportNumber;
-
 
 		/// <summary>
 		/// Метод возвращающий минимально возможный возраст персоны 
 		/// </summary>
 		public override int MinAge => 18;
 
-
 		/// <summary>
 		/// Метод возвращающий максимально возможный возраст персоны 
 		/// </summary>
 		public override int MaxAge => 114;
-
 
 		/// <summary>
 		/// Метод возвращающий серию паспорта персоны и принимающий 
@@ -46,7 +42,6 @@ namespace Laba2.Logic
 			}
 			set
 			{
-				//TODO: Дубль(V)
 				int passportSeriesLenght = 4;
 				CheckPassportData(value, passportSeriesLenght);
 				_localPasportSeries = value;
@@ -66,7 +61,6 @@ namespace Laba2.Logic
 			}
 			set
 			{
-				//TODO: Дубль(v)
 				int passportNumberLenght = 6;
 				CheckPassportData(value, passportNumberLenght);
 				_localPasportNumber = value;
@@ -78,30 +72,23 @@ namespace Laba2.Logic
 		/// Метод возвращающий и принимающий семейный статус персоны  
 		/// </summary>
 		public FamilyStatus FamilyStatus { get; set; }
-		//TODO: автосвойство(v)
-
-
 
 		/// <summary>
 		/// Метод возвращающий и принимающий партнера персоны  
 		/// </summary>
 		public Adult Partner { get; set; }
-		//TODO: автосвойство(v)
-
 
 		/// <summary>
 		/// Метод возвращающий и принимающий работу персоны  
 		/// </summary>
 		public string Job { get; set; }
-		//TODO: автосвойство(v)
 
-
-
+//TODO: вынести Неизвестно в локальную константу
 		/// <summary>
 		/// Конструктор для создания объекта типа Adult с дефолтными полями
 		/// </summary>
-		public Adult() : this("Неизвестно", "Неизвестно", 19, GenderType.Unknown,
-			"0000", "000000", "Неизвестно") { }
+		public Adult() : this(defaultString, defaultString, 19, GenderType.Unknown,
+			"0000", "000000", defaultString) { }
 
 
 
@@ -200,8 +187,6 @@ namespace Laba2.Logic
 			}
 		}
 
-
-		//TODO: опечатка(V)
 		/// <summary>
 		/// Метод позволяющий удалить партнера с контролем удаления
 		/// у партнера
@@ -295,7 +280,7 @@ namespace Laba2.Logic
 		{
 			string pattern = @"\D";
 			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
-			//TODO: RSDn(V)
+
 			Match match = reg.Match(data);
 
 			if (match.Success)

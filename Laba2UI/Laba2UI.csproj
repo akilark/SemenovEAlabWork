@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32A8EBEC-39F6-4E71-A40C-8E00125F768C}</ProjectGuid>
+    <ProjectGuid>{1EE947AA-F453-4D0A-BA0B-FE1FD5FA12E7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Laba2</RootNamespace>
-    <AssemblyName>Laba2</AssemblyName>
+    <RootNamespace>Laba2UI</RootNamespace>
+    <AssemblyName>Laba2UI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Laba1">
-      <HintPath>..\Laba1\bin\Debug\Laba1.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,21 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\Adult.cs" />
-    <Compile Include="Logic\Child.cs" />
-    <Compile Include="Logic\PersonList.cs" />
-    <Compile Include="Logic\RandomPerson.cs" />
-    <Compile Include="Logic\GenderType.cs" />
-    <Compile Include="Logic\PersonBase.cs" />
-    <Compile Include="Logic\FamilyStatus.cs" />
-    <Compile Include="Logic\StudyPlaceType.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <ProjectReference Include="..\Laba2\Laba2.csproj">
+      <Project>{32a8ebec-39f6-4e71-a40c-8e00125f768c}</Project>
+      <Name>Laba2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
