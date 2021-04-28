@@ -98,7 +98,7 @@ namespace Laba2.Logic
 		/// </summary>
 		/// <param name="personAdd">Персона в которую добавляем случайную 
 		/// комбинацию полей </param>
-		private static void CreateAtributes(PersonBase personAdd)
+		public static void CreateAtributes(PersonBase personAdd)
 		{
 			Array gendervalues = Enum.GetValues(typeof(GenderType));
 			personAdd.Age = _rand.Next(personAdd.MinAge, personAdd.MaxAge);

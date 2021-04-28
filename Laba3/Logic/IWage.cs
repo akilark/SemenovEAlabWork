@@ -8,13 +8,22 @@ namespace Laba3.Logic
 {
 	public interface IWage
 	{
+		//TODO: Money
 
-		int Amountmoney();
+		int AmountMoney { get;}
 
-		string NameOFTypeWageCounter { get; set; }
+		string NameOFTypeWageCounter { get; }
 		
 		int PriceOfWork{ get; set; }
 
-		
+		DateTime Date { get; set; }
+
+		int WorkDaysInMonth { get; }
+
+		int WorkHours { get; set; }
+
+		void CalculateAmountMoney();
+
+		int AllowToWorkHoursInDay { get; set; }
 	}
 }

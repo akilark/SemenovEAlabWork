@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2B97E526-DA45-44A1-B896-99B7787A6CE8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Laba3</RootNamespace>
     <AssemblyName>Laba3</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -32,9 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Laba2">
-      <HintPath>..\Laba2\bin\Debug\Laba2.exe</HintPath>
+    <Reference Include="Laba2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Laba2\bin\Debug\Laba2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,11 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\HorlyPayment.cs" />
-    <Compile Include="Logic\Salary.cs" />
-    <Compile Include="Logic\WageRate.cs" />
-    <Compile Include="Logic\IWage.cs" />
+    <Compile Include="Logic\Validator.cs" />
     <Compile Include="Logic\Worker.cs" />
+    <Compile Include="Logic\RandomName.cs" />
+    <Compile Include="Logic\HorlyPayment.cs" />
+    <Compile Include="Logic\IWage.cs" />
+    <Compile Include="Logic\Salary.cs" />
+    <Compile Include="Logic\WorkersArray.cs" />
+    <Compile Include="Logic\WageRate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

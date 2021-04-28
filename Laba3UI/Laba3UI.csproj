@@ -32,7 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Laba3UI.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Laba2">
+      <HintPath>..\Laba2\bin\Debug\Laba2.exe</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
