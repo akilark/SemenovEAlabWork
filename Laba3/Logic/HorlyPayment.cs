@@ -2,46 +2,29 @@
 
 namespace Laba3.Logic
 {
-	public class HorlyPayment : IWage
+	public class HorlyPayment : WageBase
 	{
-		private int minTime = 1;
 		private int minMoneyPerHour = 10;
-		private int _amountMoney;
 		private int _workHours;
 		private int _priceOfWork;
-		private DateTime _dateTime;
-		private int _allowToWorkDaysInMonth;
-		private int _allowToWorkHours;
 
-		public HorlyPayment() { }
 
-		public HorlyPayment(int allowToWorkHoursInDay)
+		public HorlyPayment():base() { }
+
+		public HorlyPayment(int allowToWorkHoursInDay) : base(allowToWorkHoursInDay) { }
+
+
+		public HorlyPayment(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours): base(date,allowToWorkHoursInDay)
 		{
-			AllowToWorkHoursInDay = allowToWorkHoursInDay;
-		}
-
-		public HorlyPayment(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours)
-		{
-			Date = date;
 			PriceOfWork = priceOfWork;
-			AllowToWorkHoursInDay = allowToWorkHoursInDay;
 			WorkHours = workHours;
 		}
 
-		public int AmountMoney
-		{
-			get
-			{
-				CalculateAmountMoney();
-				return _amountMoney;
-			}
-		}
-
+	
 		
-		
-		public string NameOFTypeWageCounter => "Почасовая оплата";
+		public override string NameOFTypeWageCounter => "Почасовая оплата";
 
-		public int PriceOfWork
+		public override int PriceOfWork
 		{
 			get
 			{
@@ -61,25 +44,8 @@ namespace Laba3.Logic
 		}
 
 
-		public DateTime Date
-		{
-			get
-			{
-				return _dateTime;
-			}
-			set
-			{
-				Validator.DateValidate(value);
-				_allowToWorkDaysInMonth = Validator.AllowToWorkDaysInMonth(value);
-				_dateTime = value;
-			}
-		}
 
-
-		public int WorkDaysInMonth => _allowToWorkDaysInMonth;
-
-
-		public int WorkHours
+		public override int WorkHours
 		{
 			get
 			{
@@ -102,39 +68,12 @@ namespace Laba3.Logic
 			}
 		}
 
-		public int AllowToWorkHoursInDay
-		{
-			get
-			{
-				return _allowToWorkHours;
-			}
-			set
-			{
-				if (value >= minTime)
-				{
-					_allowToWorkHours = value;
-				}
-			}
-		}
 
-		public void CalculateAmountMoney()
+		public override void CalculateAmountMoney()
 		{
-			Validator.CheckInformationAboutWorkDaysInMounth(this);
-			_amountMoney = _priceOfWork * _workHours;
+			CheckInformationAboutWorkDaysInMounth();
+			amountMoney = _priceOfWork * _workHours;
 
-		}
-
-		private void CheckInputInformationForWorkHours()
-		{
-			if (_allowToWorkDaysInMonth == 0)
-			{
-				throw new Exception($"Сначала необходимо задать дату");
-			}
-			if(AllowToWorkHoursInDay == 0)
-			{
-				throw new Exception($"Сначала необходимо задать допустимое " +
-					$"количество часов работы в день");
-			}
 		}
 	}
 

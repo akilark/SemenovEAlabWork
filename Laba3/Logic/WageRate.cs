@@ -3,53 +3,33 @@
 
 namespace Laba3.Logic
 {
-	class WageRate : IWage
+	public class WageRate : WageBase
 	{
-		private int minDay = 1;
 		private int minMoneyPerDay = 200;
-		private int minTime = 1;
-		private int minSalary = 13000;
-		private int _amountMoney;
 		private int _workHours;
 		private int _priceOfWork;
-		private DateTime _dateTime;
-		private int _allowToWorkDaysInMonth;
-		private int _allowToWorkHours;
 		private int _daysOfWork;
 
 
-		public WageRate() { }
+		public WageRate():base() { }
 
 
-		public WageRate(int allowToWorkHoursInDay)
+		public WageRate(int allowToWorkHoursInDay) : base(allowToWorkHoursInDay) { }
+
+
+
+		public WageRate(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours) : base(date, allowToWorkHoursInDay)
 		{
-			AllowToWorkHoursInDay = allowToWorkHoursInDay;
-		}
-
-
-		public WageRate(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours)
-		{
-			Date = date;
 			PriceOfWork = priceOfWork;
-			AllowToWorkHoursInDay = allowToWorkHoursInDay;
 			WorkHours = workHours;
 		}
 
 
-		public int AmountMoney
-		{
-			get
-			{
-				CalculateAmountMoney();
-				return _amountMoney;
-			}
-		}
+
+		public override string NameOFTypeWageCounter => "Работник получает фиксированную ставку";
 
 
-		public string NameOFTypeWageCounter => "Работник получает фиксированную ставку";
-
-
-		public int PriceOfWork
+		public override int PriceOfWork
 		{
 			get
 			{
@@ -67,23 +47,6 @@ namespace Laba3.Logic
 				}
 			}
 		}
-
-
-		public DateTime Date
-		{
-			get
-			{
-				return _dateTime;
-			}
-			set
-			{
-				Validator.DateValidate(value);
-				_allowToWorkDaysInMonth = Validator.AllowToWorkDaysInMonth(value);
-			}
-		}
-
-
-		public int WorkDaysInMonth => _allowToWorkDaysInMonth;
 
 
 		public int DayOfWork
@@ -107,7 +70,7 @@ namespace Laba3.Logic
 		}
 
 
-		public int WorkHours
+		public override int WorkHours
 		{
 			get
 			{
@@ -117,46 +80,20 @@ namespace Laba3.Logic
 			{
 				CheckInputInformationForWorkHours();
 				_workHours = value;
-				_daysOfWork = _workHours / AllowToWorkHoursInDay;
+				DayOfWork = _workHours / AllowToWorkHoursInDay;
 			}
 		}
 
 
-		public int AllowToWorkHoursInDay
+
+
+
+		public override void CalculateAmountMoney()
 		{
-			get
-			{
-				return _allowToWorkHours;
-			}
-			set
-			{
-				if (value >= minTime)
-				{
-					_allowToWorkHours = value;
-				}
-			}
+			CheckInformationAboutWorkDaysInMounth();
+			amountMoney = _priceOfWork * _daysOfWork;
 		}
 
-
-		public void CalculateAmountMoney()
-		{
-			Validator.CheckInformationAboutWorkDaysInMounth(this);
-			_amountMoney = _priceOfWork * _daysOfWork;
-		}
-
-
-		private void CheckInputInformationForWorkHours()
-		{
-			if (_allowToWorkDaysInMonth == 0)
-			{
-				throw new Exception($"Сначала необходимо задать дату");
-			}
-			if (AllowToWorkHoursInDay == 0)
-			{
-				throw new Exception($"Сначала необходимо задать допустимое " +
-					$"количество часов работы в день");
-			}
-		}
 	}
 }
 

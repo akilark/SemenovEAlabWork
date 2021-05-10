@@ -6,51 +6,31 @@ using System.Threading.Tasks;
 
 namespace Laba3.Logic
 {
-	public class Salary : IWage
+	public class Salary : WageBase
 	{
-		private int minTime = 1;
-		private int minSalary = 13000;
-		private int _amountMoney;
+		private int _minSalary = 13000;
 		private int _workHours;
 		private int _priceOfWork;
-		private DateTime _dateTime;
-		private int _allowToWorkDaysInMonth;
-		private int _allowToWorkHours;
 		private int _daysOfWork;
 
 
-		public Salary() { }
+		public Salary(): base() { }
 
 
-		public Salary(int allowToWorkHoursInDay) 
+		public Salary(int allowToWorkHoursInDay) : base(allowToWorkHoursInDay) { }
+
+
+		public Salary(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours): base(date, allowToWorkHoursInDay) 
 		{
-			AllowToWorkHoursInDay = allowToWorkHoursInDay;
-		}
-
-
-		public Salary(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours)
-		{
-			Date = date;
 			PriceOfWork = priceOfWork;
-			AllowToWorkHoursInDay = allowToWorkHoursInDay;
 			WorkHours = workHours;
 		}
 
 
-		public int AmountMoney
-		{
-			get
-			{
-				CalculateAmountMoney();
-				return _amountMoney;
-			}
-		}
+		public override string NameOFTypeWageCounter => "Работник получает оклад";
 
 
-		public string NameOFTypeWageCounter => "Работник получает оклад";
-
-
-		public int PriceOfWork
+		public override int PriceOfWork
 		{
 			get
 			{
@@ -58,32 +38,16 @@ namespace Laba3.Logic
 			}
 			set
 			{
-				if (value > minSalary)
+				if (value > _minSalary)
 				{
 					_priceOfWork = value;
 				}
 				else
 				{
-					throw new Exception($"В месяц оклад работника должен составлять не менее {minSalary} рублей");
+					throw new Exception($"В месяц оклад работника должен составлять не менее {_minSalary} рублей");
 				}
 			}
 		}
-
-
-		public DateTime Date
-		{
-			get
-			{
-				return _dateTime;
-			}
-			set
-			{
-				Validator.DateValidate(value);
-				_allowToWorkDaysInMonth = Validator.AllowToWorkDaysInMonth(value);
-			}
-		}
-
-		public int WorkDaysInMonth => _allowToWorkDaysInMonth;
 
 
 		public int DayOfWork
@@ -107,7 +71,7 @@ namespace Laba3.Logic
 		}
 
 
-		public int WorkHours
+		public override int WorkHours
 		{
 			get
 			{
@@ -117,45 +81,16 @@ namespace Laba3.Logic
 			{
 				CheckInputInformationForWorkHours();
 				_workHours = value;
-				_daysOfWork = _workHours / AllowToWorkHoursInDay;
+				DayOfWork = _workHours / AllowToWorkHoursInDay;
 			}
 		}
 
 
-		public int AllowToWorkHoursInDay
+		public override void CalculateAmountMoney()
 		{
-			get
-			{
-				return _allowToWorkHours;
-			}
-			set
-			{
-				if (value >= minTime)
-				{
-					_allowToWorkHours = value;
-				}
-			}
+			CheckInformationAboutWorkDaysInMounth();
+			amountMoney = _priceOfWork * _daysOfWork / WorkDaysInMonth;
 		}
 
-
-		public void CalculateAmountMoney()
-		{
-			Validator.CheckInformationAboutWorkDaysInMounth(this);
-			_amountMoney = _priceOfWork * _daysOfWork / WorkDaysInMonth;
-		}
-
-
-		private void CheckInputInformationForWorkHours()
-		{
-			if (_allowToWorkDaysInMonth == 0)
-			{
-				throw new Exception($"Сначала необходимо задать дату");
-			}
-			if (AllowToWorkHoursInDay == 0)
-			{
-				throw new Exception($"Сначала необходимо задать допустимое " +
-					$"количество часов работы в день");
-			}
-		}
 	}
 }

@@ -10,17 +10,16 @@ namespace Laba3.Logic
 	{
 		private string _name;
 		private string _secondName;
-		private IWage wage;
-		private int allowWorkHoursInDay =8 ;
-
-
-
+		public WageBase wage;
+		private int _allowWorkHoursInDay;
+		public int amountTypesWage = 3;
 		public string FirstName => _name;
 		public string SecondName => _secondName;
 
 
-		public Worker()
+		public Worker(int allowWorkHoursInDay)
 		{
+			_allowWorkHoursInDay = allowWorkHoursInDay;
 			_name = RandomName.RandomFirstName();
 			_secondName = RandomName.RandomSecondName();
 		}
@@ -55,17 +54,17 @@ namespace Laba3.Logic
 			{
 				case 1:
 					{
-						wage = new Salary(allowWorkHoursInDay);
+						wage = new Salary(_allowWorkHoursInDay);
 						break;
 					}
 				case 2:
 					{
-						wage = new WageRate(allowWorkHoursInDay);
+						wage = new WageRate(_allowWorkHoursInDay);
 						break;
 					}
 				default:
 					{
-						wage = new HorlyPayment(allowWorkHoursInDay);
+						wage = new HorlyPayment(_allowWorkHoursInDay);
 						break;
 					}
 			}

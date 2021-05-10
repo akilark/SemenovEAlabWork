@@ -6,12 +6,22 @@ using System.Threading.Tasks;
 
 namespace Laba3.Logic
 {
-	public class WorkersArray
+	public class WorkersArray 
 	{
+		public Worker this[int index]
+		{
+			get
+			{
+				return _localWorkerArray[index];
+			}
+		}
+
+
 		/// <summary>
 		/// список персон
 		/// </summary>
 		private Worker[] _localWorkerArray = new Worker[0];
+
 
 
 		/// <summary>
@@ -55,15 +65,16 @@ namespace Laba3.Logic
 			return workerInfoArray;
 		}
 		
-		public static WorkersArray Create(int quantity)
+		public static WorkersArray Create(int quantity, int allowWorkHoursInDay)
 		{
 			WorkersArray workersArray = new WorkersArray();
 
 			for (int i = 0; i < quantity; i++)
 			{
-				workersArray.AddElement(new Worker());
+				workersArray.AddElement(new Worker(allowWorkHoursInDay));
 			}
 			return workersArray;
 		}
+		
 	}
 }
