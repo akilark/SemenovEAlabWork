@@ -1,22 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Laba3.Logic
 {
+	/// <summary>
+	/// Класс работник
+	/// </summary>
 	public class Worker
 	{
+		/// <summary>
+		/// Поле класса храниящее имя работника
+		/// </summary>
 		private string _name;
+
+		/// <summary>
+		/// Поле класса хранящее фамилию работника
+		/// </summary>
 		private string _secondName;
-		public WageBase wage;
+
+		/// <summary>
+		/// Поле класса с типом зарплаты
+		/// </summary>
+		public WageBase Wage;
+
+		/// <summary>
+		/// Поле класса хранящее количество рабочих часов в дне
+		/// </summary>
 		private int _allowWorkHoursInDay;
+
+		/// <summary>
+		/// Поле класса хранящее количество типов начисления зарплат
+		/// </summary>
 		public int amountTypesWage = 3;
+
+
+		/// <summary>
+		/// Свойство возвращающее имя работника
+		/// </summary>
 		public string FirstName => _name;
+		
+		/// <summary>
+		/// Свойство возвращающее фамилию работника
+		/// </summary>
 		public string SecondName => _secondName;
 
 
+		/// <summary>
+		/// Конструктор класса с 1 параметром
+		/// </summary>
+		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
+		/// один день</param>
 		public Worker(int allowWorkHoursInDay)
 		{
 			_allowWorkHoursInDay = allowWorkHoursInDay;
@@ -25,25 +58,45 @@ namespace Laba3.Logic
 		}
 
 
+		/// <summary>
+		/// Метод возвращяющий строку информации о работнике
+		/// </summary>
+		/// <returns>Строка информации о работнике</returns>
 		public string Info()
 		{
 			return $"Сведения о работнике: \n{FirstName} {SecondName}," +
-				$" {wage.NameOFTypeWageCounter}.\nРаботник заработал {wage.AmountMoney} " +
-				$"рублей в {wage.Date.Month}.{wage.Date.Year}";
+				$" {Wage.NameOfWageType}.\nРаботник заработал {Wage.AmountMoney} " +
+				$"рублей в {Wage.Date.Month}.{Wage.Date.Year}";
 		}
 
+		/// <summary>
+		/// Метод предварительного занесения рассматриваемой даты
+		/// </summary>
+		/// <param name="date">Дата для расчета ЗП за конкретный месяц</param>
 		public void DesiredDate(DateTime date)
 		{
-			wage.Date = date;
+			Wage.Date = date;
 		}
 
+		/// <summary>
+		/// Метод принимающий цену работы и количество часов работы и 
+		/// возвращающий количество заработанных денег за определенный месяц
+		/// </summary>
+		/// <param name="priceOfWork">Количество денег за работу 
+		/// в единицу времени</param>
+		/// <param name="workHours">количество часов работы</param>
+		/// <returns></returns>
 		public int MoneyEarnedInMonth(int priceOfWork, int workHours)
 		{
-			wage.PriceOfWork = priceOfWork;
-			wage.WorkHours = workHours;
-			return wage.AmountMoney;
+			Wage.PriceOfWork = priceOfWork;
+			Wage.WorkHours = workHours;
+			return Wage.AmountMoney;
 		}
 
+		/// <summary>
+		/// Метод обрабатывающий вводимый тип зарплаты
+		/// </summary>
+		/// <param name="type">номер типа зарплаты</param>
 		public void WageType(int type)
 		{
 			if (type > 3 || type <= 0)
@@ -54,21 +107,20 @@ namespace Laba3.Logic
 			{
 				case 1:
 					{
-						wage = new Salary(_allowWorkHoursInDay);
+						Wage = new Salary(_allowWorkHoursInDay);
 						break;
 					}
 				case 2:
 					{
-						wage = new WageRate(_allowWorkHoursInDay);
+						Wage = new WageRate(_allowWorkHoursInDay);
 						break;
 					}
 				default:
 					{
-						wage = new HorlyPayment(_allowWorkHoursInDay);
+						Wage = new HorlyPayment(_allowWorkHoursInDay);
 						break;
 					}
 			}
 		}
-
 	}
 }

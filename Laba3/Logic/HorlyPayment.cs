@@ -2,28 +2,68 @@
 
 namespace Laba3.Logic
 {
+	/// <summary>
+	/// Класс- наследник от WageBase, определяет методы, поля и свойства 
+	/// для типа зарплаты - почасовая оплата
+	/// </summary>
 	public class HorlyPayment : WageBase
 	{
-		private int minMoneyPerHour = 10;
+		/// <summary>
+		/// Поле класса определяющее минимально допустимую ставку за час
+		/// </summary>
+		private int _minMoneyPerHour = 10;
+
+		/// <summary>
+		/// Поле класса хранящее количество отработанных часов 
+		/// за определенный месяц
+		/// </summary>
 		private int _workHours;
+
+		/// <summary>
+		/// Поле класса хранящее значение стоимости часа работ
+		/// </summary>
 		private int _priceOfWork;
 
 
+		/// <summary>
+		/// Конструктор класса без параметров
+		/// </summary>
 		public HorlyPayment():base() { }
 
+		/// <summary>
+		/// Конструктор класса с 1 параметром
+		/// </summary>
+		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
+		/// один день</param>
 		public HorlyPayment(int allowToWorkHoursInDay) : base(allowToWorkHoursInDay) { }
 
-
-		public HorlyPayment(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours): base(date,allowToWorkHoursInDay)
+		/// <summary>
+		/// Конструкор класса с 4 параметрами
+		/// </summary>
+		/// <param name="date">Дата для расчета ЗП за конкретный месяц</param>
+		/// <param name="priceOfWork">Стоимость часа работ</param>
+		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
+		/// один день</param>
+		/// <param name="workHours">Количество часов отработанных за выбранный месяц</param>
+		public HorlyPayment(
+			DateTime date, 
+			int priceOfWork, 
+			int allowToWorkHoursInDay, 
+			int workHours): base(date,allowToWorkHoursInDay)
 		{
 			PriceOfWork = priceOfWork;
 			WorkHours = workHours;
 		}
 
 	
-		
-		public override string NameOFTypeWageCounter => "Почасовая оплата";
+		/// <summary>
+		/// Свойство возвращающее строку с типом зарплаты
+		/// </summary>
+		public override string NameOfWageType => "Почасовая оплата";
 
+		/// <summary>
+		/// Свойство принимающее с проверкой и возвращающее стоимость часа работ
+		/// </summary>
 		public override int PriceOfWork
 		{
 			get
@@ -32,19 +72,22 @@ namespace Laba3.Logic
 			}
 			set
 			{
-				if (value > minMoneyPerHour)
+				if (value > _minMoneyPerHour)
 				{
 					_priceOfWork = value;
 				}
 				else
 				{
-					throw new Exception($"Цена за час должна быть больше {minMoneyPerHour}");
+					throw new Exception($"Цена за час должна быть больше" +
+						$" {_minMoneyPerHour}");
 				}
 			}
 		}
 
-
-
+		/// <summary>
+		/// Свойство принимающее с проверкой и возвращающее 
+		/// количество отработанных часов
+		/// </summary>
 		public override int WorkHours
 		{
 			get
@@ -68,7 +111,9 @@ namespace Laba3.Logic
 			}
 		}
 
-
+		/// <summary>
+		/// Метод расчета ЗП за конкретный месяц
+		/// </summary>
 		public override void CalculateAmountMoney()
 		{
 			CheckInformationAboutWorkDaysInMounth();

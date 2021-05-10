@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные с этой сборкой.
-[assembly: AssemblyTitle("Laba3UI")]
+[assembly: AssemblyTitle("Laba3U")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Laba3UI")]
+[assembly: AssemblyProduct("Laba3U")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID представляет идентификатор typelib, если этот проект доступен из модели COM
-[assembly: Guid("95f69f7e-db7e-4ef9-a403-686fbc3e6209")]
+[assembly: Guid("34f75efb-5de6-486a-8046-76f1ca314257")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

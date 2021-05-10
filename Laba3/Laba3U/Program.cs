@@ -27,7 +27,7 @@ namespace Laba3UI
 					{
 						try
 						{
-							switch(timer)
+							switch (timer)
 							{
 								case 0:
 									{
@@ -92,7 +92,7 @@ namespace Laba3UI
 		/// <param name="workersArray">Список работников</param>
 		public static void ShowInfo(WorkersArray workersArray)
 		{
-			
+
 			foreach (string workerInfo in workersArray.WorkerInfo())
 			{
 				Console.WriteLine(workerInfo);
@@ -116,8 +116,8 @@ namespace Laba3UI
 		{
 			int WageNumber;
 			Console.WriteLine($"У работника {worker.FirstName} {worker.SecondName}" +
-				$" тип зарплаты: {worker.wage.NameOFTypeWageCounter}");
-			switch(worker.wage)
+				$" тип зарплаты: {worker.Wage.NameOfWageType}");
+			switch (worker.Wage)
 			{
 				case HorlyPayment horlyPayment:
 					{
@@ -150,16 +150,16 @@ namespace Laba3UI
 		/// <param name="allowWorkHoursInDay">Сколько часов в день разрешается 
 		/// работать</param>
 		/// <returns></returns>
-		private static (int,int) СommunicateWithUser(int wageNumber, 
+		private static (int, int) СommunicateWithUser(int wageNumber,
 			int allowWorkHoursInDay)
 		{
 			List<(string, string)> stringInfo = new List<(string, string)>()
 			{
-			("Введите сколько денег зарабатывает работник за месяц", 
+			("Введите сколько денег зарабатывает работник за месяц",
 			"Введите количество отработанных дней"),
-			("Введите сколько денег зарабатывает работник за день", 
+			("Введите сколько денег зарабатывает работник за день",
 			"Введите количество отработанных дней"),
-			("Введите сколько денег зарабатывает работник за час", 
+			("Введите сколько денег зарабатывает работник за час",
 			"Введите количество отработанных часов")
 			};
 			Console.WriteLine(stringInfo[wageNumber].Item1);
@@ -172,9 +172,9 @@ namespace Laba3UI
 			}
 			else
 			{
-				workHours = Int32.Parse(Console.ReadLine())* allowWorkHoursInDay;
+				workHours = Int32.Parse(Console.ReadLine()) * allowWorkHoursInDay;
 			}
-			return (workMoney, workHours);		
+			return (workMoney, workHours);
 		}
 	}
 }

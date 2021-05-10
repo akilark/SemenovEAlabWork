@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95F69F7E-DB7E-4EF9-A403-686FBC3E6209}</ProjectGuid>
+    <ProjectGuid>{34F75EFB-5DE6-486A-8046-76F1CA314257}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Laba3UI</RootNamespace>
-    <AssemblyName>Laba3UI</AssemblyName>
+    <RootNamespace>Laba3U</RootNamespace>
+    <AssemblyName>Laba3U</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,13 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>Laba3UI.Program</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Laba2">
-      <HintPath>..\Laba2\bin\Debug\Laba2.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,7 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Laba3\Laba3.csproj">
+    <ProjectReference Include="..\Laba3.csproj">
       <Project>{2b97e526-da45-44a1-b896-99b7787a6ce8}</Project>
       <Name>Laba3</Name>
     </ProjectReference>

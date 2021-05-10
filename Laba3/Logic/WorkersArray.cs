@@ -1,13 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Laba3.Logic
 {
+	/// <summary>
+	/// Класс определяющий массив работников
+	/// </summary>
 	public class WorkersArray 
 	{
+		/// <summary>
+		/// Объявление индексатора
+		/// </summary>
+		/// <param name="index">индекс</param>
+		/// <returns>работника</returns>
 		public Worker this[int index]
 		{
 			get
@@ -16,28 +21,25 @@ namespace Laba3.Logic
 			}
 		}
 
-
 		/// <summary>
-		/// список персон
+		/// список работников
 		/// </summary>
 		private Worker[] _localWorkerArray = new Worker[0];
 
-
-
 		/// <summary>
-		/// 
+		/// свойство возвращающее список работников
 		/// </summary>
 		public Worker[] Workers => _localWorkerArray;
 
 
 		/// <summary>
-		/// 
+		/// Свойсвто возвращающее размерность списка работников
 		/// </summary>
 		public int Count => _localWorkerArray.Length;
 
 
 		/// <summary>
-		/// 
+		/// Мотод позволяющий добавить нового работника в список работников
 		/// </summary>
 		/// <param name="newElement">Персона подлежащая добавлению</param>
 		public void AddElement(Worker newElement)
@@ -51,9 +53,9 @@ namespace Laba3.Logic
 
 
 		/// <summary>
-		/// 
+		/// Метод возврщающий массив информации о работниках
 		/// </summary>
-		/// <returns> Массив содержащий информацию про каждую персону </returns>
+		/// <returns> Массив содержащий информацию про каждого работника </returns>
 		public string[] WorkerInfo()
 		{
 			string[] workerInfoArray = new string[Count];
@@ -65,6 +67,12 @@ namespace Laba3.Logic
 			return workerInfoArray;
 		}
 		
+		/// <summary>
+		/// Статический метод создания нового массива работников
+		/// </summary>
+		/// <param name="quantity"></param>
+		/// <param name="allowWorkHoursInDay"></param>
+		/// <returns></returns>
 		public static WorkersArray Create(int quantity, int allowWorkHoursInDay)
 		{
 			WorkersArray workersArray = new WorkersArray();
