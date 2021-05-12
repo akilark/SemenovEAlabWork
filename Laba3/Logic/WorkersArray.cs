@@ -66,7 +66,48 @@ namespace Laba3.Logic
 			}
 			return workerInfoArray;
 		}
-		
+
+		/// <summary>
+		/// Метод позволяющий удалить работника из массива по индексу
+		/// </summary>
+		/// <param name="index">Номер удаляемого работника из массива 
+		/// (нумерация начинается с нуля)</param>
+		public void DeleteElement(int index)
+		{
+			int elementCount = Count;
+
+			if (index < Count - 1)
+			{
+				for (int i = index; i + 1 < elementCount; i++)
+				{
+					_localWorkerArray[i] = _localWorkerArray[i + 1];
+				}
+				Array.Resize(ref _localWorkerArray, elementCount - 1);
+			}
+		}
+
+		/// <summary>
+		/// Метод позволяющий получить работника 
+		/// из Pмассива работников по индексу
+		/// </summary>
+		/// <param name="index">Номер искомого работника из массива
+		/// (нумерация начинается с нуля)</param>
+		/// <returns> Персона с необходимым индексом, если запращиваемый индекс
+		/// больше размерности массива, возвращает последний элемент </returns>
+		public Worker FindByIndex(int index)
+		{
+			if (index < Count - 1)
+			{
+				return _localWorkerArray[index];
+			}
+			else
+			{
+				index = Count - 1;
+
+				return _localWorkerArray[index];
+			}
+		}
+
 		/// <summary>
 		/// Статический метод создания нового массива работников
 		/// </summary>
@@ -83,6 +124,5 @@ namespace Laba3.Logic
 			}
 			return workersArray;
 		}
-		
 	}
 }
