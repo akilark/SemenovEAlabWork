@@ -109,18 +109,42 @@ namespace Laba3.Logic
 		}
 
 		/// <summary>
-		/// Статический метод создания нового массива работников
+		/// Статический метод создания нового массива 
+		/// случайных работников без информации о ЗП
 		/// </summary>
-		/// <param name="quantity"></param>
-		/// <param name="allowWorkHoursInDay"></param>
-		/// <returns></returns>
+		/// <param name="quantity">Размерность массива</param>
+		/// <param name="allowWorkHoursInDay">Сколько часов в день разрешается 
+		/// работать</param>
+		/// <returns>Массив работников</returns>
 		public static WorkersArray Create(int quantity, int allowWorkHoursInDay)
 		{
 			WorkersArray workersArray = new WorkersArray();
 
 			for (int i = 0; i < quantity; i++)
 			{
-				workersArray.AddElement(new Worker(allowWorkHoursInDay));
+				workersArray.AddElement(
+					RandomWorker.WorkerWithoutWageInformation(allowWorkHoursInDay));
+			}
+			return workersArray;
+		}
+
+
+		/// <summary>
+		/// Статический метод создания нового массива случайных 
+		/// работников с полной информацией
+		/// </summary>
+		/// <param name="quantity">Размерность массива</param>
+		/// <param name="allowWorkHoursInDay">Сколько часов в день разрешается 
+		/// работать</param>
+		/// <returns>Массив работников</returns>
+		public static WorkersArray CreateFullInfo(int quantity, int allowWorkHoursInDay)
+		{
+			WorkersArray workersArray = new WorkersArray();
+
+			for (int i = 0; i < quantity; i++)
+			{
+				workersArray.AddElement(
+					RandomWorker.WorkerWithoutWageInformation(allowWorkHoursInDay));
 			}
 			return workersArray;
 		}

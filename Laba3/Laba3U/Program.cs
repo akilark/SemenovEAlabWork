@@ -149,7 +149,8 @@ namespace Laba3UI
 		/// <param name="wageNumber">Номер типа заработной платы в листе</param>
 		/// <param name="allowWorkHoursInDay">Сколько часов в день разрешается 
 		/// работать</param>
-		/// <returns></returns>
+		/// <returns>item1 - сколько работник получает за свою работу
+		/// item2 - сколько часов в месяц он работал</returns>
 		private static (int, int) СommunicateWithUser(int wageNumber,
 			int allowWorkHoursInDay)
 		{

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Text.RegularExpressions;
 
 namespace Laba3.Logic
 {
@@ -35,14 +35,36 @@ namespace Laba3.Logic
 
 
 		/// <summary>
-		/// Свойство возвращающее имя работника
+		/// Свойство возвращающее и принимающее с проверкой имя работника
 		/// </summary>
-		public string FirstName => _name;
-		
+		public string FirstName
+		{
+			get
+			{
+				return _name;
+			}
+			set 
+			{
+				CheckName(value);
+				_name = CorrectName(value);
+			}
+		}
+
 		/// <summary>
-		/// Свойство возвращающее фамилию работника
+		/// Свойство возвращающее и принимающее с проверкой фамилию работника
 		/// </summary>
-		public string SecondName => _secondName;
+		public string SecondName
+		{
+			get
+			{
+				return _secondName;
+			}
+			set
+			{
+				CheckName(value);
+				_secondName = CorrectName(value);
+			}
+		}
 
 
 		/// <summary>
@@ -53,8 +75,6 @@ namespace Laba3.Logic
 		public Worker(int allowWorkHoursInDay)
 		{
 			_allowWorkHoursInDay = allowWorkHoursInDay;
-			_name = RandomName.RandomFirstName();
-			_secondName = RandomName.RandomSecondName();
 		}
 
 
@@ -120,6 +140,121 @@ namespace Laba3.Logic
 						Wage = new HorlyPayment(_allowWorkHoursInDay);
 						break;
 					}
+			}
+		}
+
+
+		/// <summary>
+		/// Функция приводящая имена и фамилии к правильному виду
+		/// </summary>
+		/// <param name="name">Либо имя, либо фамилия</param>
+		/// <returns>Строка содержащая слово с первой заглавной буквой, 
+		/// если слова разделены через тире, 
+		/// все слова начинаются с большой буквы </returns>
+		public static string CorrectName(string name)
+		{
+			string nameTmp = "";
+			string outputName = "";
+			string[] subString =
+				name.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (string subTmp in subString)
+			{
+				for (int i = 0; i < subTmp.Length; i++)
+				{
+					if (subTmp.Length > 1)
+					{
+						nameTmp = subTmp.Substring(0, 1).ToUpper() +
+							subTmp.Substring(1, subTmp.Length - 1).ToLower();
+					}
+					else
+					{
+						nameTmp = subTmp.ToUpper();
+					}
+				}
+
+				if (outputName.Length == 0)
+				{
+					outputName += nameTmp;
+				}
+				else
+				{
+					outputName += "-" + nameTmp;
+				}
+			}
+			return outputName;
+		}
+
+
+		/// <summary>
+		/// Функция проверяющая имена и фамилии на наличиие ошибок, 
+		/// если ошибка возникает, выдает соответствующее исключение
+		/// </summary>
+		/// <param name="name">Либо имя, либо фамилия</param>
+		/// <returns>false- если ошибок нет. </returns>
+		public static void CheckName(string name)
+		{
+			CheckNamelength(name);
+			CheckNamePattern(name);
+			CheckQuantityName(name);
+		}
+
+
+		/// <summary>
+		/// Функция проверяющая имена и фамилии на наличие запрещенного количества
+		/// составных частей
+		/// </summary>
+		/// <param name="name">Либо имя, либо фамилия</param>
+		/// <exception cref="Недопустимо использование более {allowQuantity}
+		/// составных частей имени или фамилии!"></exception>
+		private static void CheckQuantityName(string name)
+		{
+			string[] subString = name.Split('-');
+			int allowQuantity = 2;
+
+			if (subString.Length > allowQuantity)
+			{
+				string mistakeInfoTmp = $"Недопустимо использование " +
+					$"более {allowQuantity} составных частей имени или фамилии!";
+				throw new FormatException(mistakeInfoTmp);
+			}
+		}
+
+
+		/// <summary>
+		/// Функция проверяющая имена и фамилии на выход за допустымые размеры
+		/// </summary>
+		/// <param name="name">Либо имя, либо фамилия</param>
+		/// <exception cref="Недопустимый размер имени или фамилии!"></exception>
+		private static void CheckNamelength(string name)
+		{
+			int nameMin = 2;
+			int nameMax = 30;
+
+			if (name.Length < nameMin || name.Length > nameMax)
+			{
+				string mistakeInfoTmp = "Недопустимый размер имени или фамилии!";
+				throw new FormatException(mistakeInfoTmp);
+			}
+		}
+
+
+		/// <summary>
+		/// Функция проверяющая имена и фамилии на наличие запрещенных симоволов
+		/// </summary>
+		/// <param name="name">Либо имя, либо фамилия</param>
+		/// <exception cref="Имя и Фамилия могут содержать только буквы!">
+		/// </exception>
+		private static void CheckNamePattern(string name)
+		{
+			string pattern = @"[^a-zа-яё-]";
+			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
+			Match mat = reg.Match(name);
+
+			if (mat.Success)
+			{
+				string mistakeInfoTmp = "Имя и Фамилия могут содержать только буквы!";
+				throw new FormatException(mistakeInfoTmp);
 			}
 		}
 	}

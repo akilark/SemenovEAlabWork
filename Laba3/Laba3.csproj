@@ -50,9 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\RandomWorker.cs" />
     <Compile Include="Logic\WageBase.cs" />
     <Compile Include="Logic\Worker.cs" />
-    <Compile Include="Logic\RandomName.cs" />
     <Compile Include="Logic\HorlyPayment.cs" />
     <Compile Include="Logic\Salary.cs" />
     <Compile Include="Logic\WorkersArray.cs" />
