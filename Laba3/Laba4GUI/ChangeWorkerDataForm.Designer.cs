@@ -31,19 +31,19 @@ namespace Laba4GUI
 		{
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.radioButton4 = new System.Windows.Forms.RadioButton();
-			this.radioButton3 = new System.Windows.Forms.RadioButton();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
+			this.sakaryRadioButton = new System.Windows.Forms.RadioButton();
+			this.horlyPaymentRadioButton = new System.Windows.Forms.RadioButton();
+			this.wageRateRadioButton = new System.Windows.Forms.RadioButton();
 			this.radioButton1 = new System.Windows.Forms.RadioButton();
-			this.textBox3 = new System.Windows.Forms.TextBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.textBox4 = new System.Windows.Forms.TextBox();
-			this.label4 = new System.Windows.Forms.Label();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
+			this.workMoneyTextBox = new System.Windows.Forms.TextBox();
+			this.workMoneyLabel = new System.Windows.Forms.Label();
+			this.workHoursTextBox = new System.Windows.Forms.TextBox();
+			this.workHoursLabel = new System.Windows.Forms.Label();
+			this.changeButton = new System.Windows.Forms.Button();
+			this.closeButton = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.secondNameTextBox = new System.Windows.Forms.TextBox();
+			this.firastNameTextBox = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.groupBox2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -52,10 +52,10 @@ namespace Laba4GUI
 			// groupBox2
 			// 
 			this.groupBox2.Controls.Add(this.groupBox1);
-			this.groupBox2.Controls.Add(this.textBox3);
-			this.groupBox2.Controls.Add(this.label3);
-			this.groupBox2.Controls.Add(this.textBox4);
-			this.groupBox2.Controls.Add(this.label4);
+			this.groupBox2.Controls.Add(this.workMoneyTextBox);
+			this.groupBox2.Controls.Add(this.workMoneyLabel);
+			this.groupBox2.Controls.Add(this.workHoursTextBox);
+			this.groupBox2.Controls.Add(this.workHoursLabel);
 			this.groupBox2.Location = new System.Drawing.Point(12, 48);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(308, 135);
@@ -65,9 +65,9 @@ namespace Laba4GUI
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.radioButton4);
-			this.groupBox1.Controls.Add(this.radioButton3);
-			this.groupBox1.Controls.Add(this.radioButton2);
+			this.groupBox1.Controls.Add(this.sakaryRadioButton);
+			this.groupBox1.Controls.Add(this.horlyPaymentRadioButton);
+			this.groupBox1.Controls.Add(this.wageRateRadioButton);
 			this.groupBox1.Controls.Add(this.radioButton1);
 			this.groupBox1.Location = new System.Drawing.Point(6, 19);
 			this.groupBox1.Name = "groupBox1";
@@ -76,38 +76,41 @@ namespace Laba4GUI
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Тип";
 			// 
-			// radioButton4
+			// sakaryRadioButton
 			// 
-			this.radioButton4.AutoSize = true;
-			this.radioButton4.Location = new System.Drawing.Point(7, 22);
-			this.radioButton4.Name = "radioButton4";
-			this.radioButton4.Size = new System.Drawing.Size(57, 17);
-			this.radioButton4.TabIndex = 3;
-			this.radioButton4.TabStop = true;
-			this.radioButton4.Text = "Оклад";
-			this.radioButton4.UseVisualStyleBackColor = true;
+			this.sakaryRadioButton.AutoSize = true;
+			this.sakaryRadioButton.Location = new System.Drawing.Point(7, 22);
+			this.sakaryRadioButton.Name = "sakaryRadioButton";
+			this.sakaryRadioButton.Size = new System.Drawing.Size(57, 17);
+			this.sakaryRadioButton.TabIndex = 3;
+			this.sakaryRadioButton.TabStop = true;
+			this.sakaryRadioButton.Text = "Оклад";
+			this.sakaryRadioButton.UseVisualStyleBackColor = true;
+			this.sakaryRadioButton.CheckedChanged += new System.EventHandler(this.salaryRadioButton_CheckedChanged);
 			// 
-			// radioButton3
+			// horlyPaymentRadioButton
 			// 
-			this.radioButton3.AutoSize = true;
-			this.radioButton3.Location = new System.Drawing.Point(7, 68);
-			this.radioButton3.Name = "radioButton3";
-			this.radioButton3.Size = new System.Drawing.Size(118, 17);
-			this.radioButton3.TabIndex = 2;
-			this.radioButton3.TabStop = true;
-			this.radioButton3.Text = "Почасовая оплата";
-			this.radioButton3.UseVisualStyleBackColor = true;
+			this.horlyPaymentRadioButton.AutoSize = true;
+			this.horlyPaymentRadioButton.Location = new System.Drawing.Point(7, 68);
+			this.horlyPaymentRadioButton.Name = "horlyPaymentRadioButton";
+			this.horlyPaymentRadioButton.Size = new System.Drawing.Size(118, 17);
+			this.horlyPaymentRadioButton.TabIndex = 2;
+			this.horlyPaymentRadioButton.TabStop = true;
+			this.horlyPaymentRadioButton.Text = "Почасовая оплата";
+			this.horlyPaymentRadioButton.UseVisualStyleBackColor = true;
+			this.horlyPaymentRadioButton.CheckedChanged += new System.EventHandler(this.horlyPaymentRadioButton_CheckedChanged);
 			// 
-			// radioButton2
+			// wageRateRadioButton
 			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(7, 44);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(114, 17);
-			this.radioButton2.TabIndex = 1;
-			this.radioButton2.TabStop = true;
-			this.radioButton2.Text = "Тарифная ставка";
-			this.radioButton2.UseVisualStyleBackColor = true;
+			this.wageRateRadioButton.AutoSize = true;
+			this.wageRateRadioButton.Location = new System.Drawing.Point(7, 44);
+			this.wageRateRadioButton.Name = "wageRateRadioButton";
+			this.wageRateRadioButton.Size = new System.Drawing.Size(114, 17);
+			this.wageRateRadioButton.TabIndex = 1;
+			this.wageRateRadioButton.TabStop = true;
+			this.wageRateRadioButton.Text = "Тарифная ставка";
+			this.wageRateRadioButton.UseVisualStyleBackColor = true;
+			this.wageRateRadioButton.CheckedChanged += new System.EventHandler(this.wageRateRadioButton_CheckedChanged);
 			// 
 			// radioButton1
 			// 
@@ -120,55 +123,56 @@ namespace Laba4GUI
 			this.radioButton1.Text = "Почасовая оплата";
 			this.radioButton1.UseVisualStyleBackColor = true;
 			// 
-			// textBox3
+			// workMoneyTextBox
 			// 
-			this.textBox3.Location = new System.Drawing.Point(173, 38);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(100, 20);
-			this.textBox3.TabIndex = 7;
+			this.workMoneyTextBox.Location = new System.Drawing.Point(173, 38);
+			this.workMoneyTextBox.Name = "workMoneyTextBox";
+			this.workMoneyTextBox.Size = new System.Drawing.Size(100, 20);
+			this.workMoneyTextBox.TabIndex = 7;
 			// 
-			// label3
+			// workMoneyLabel
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(170, 18);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(75, 13);
-			this.label3.TabIndex = 5;
-			this.label3.Text = "Ставка в час:";
+			this.workMoneyLabel.AutoSize = true;
+			this.workMoneyLabel.Location = new System.Drawing.Point(170, 18);
+			this.workMoneyLabel.Name = "workMoneyLabel";
+			this.workMoneyLabel.Size = new System.Drawing.Size(75, 13);
+			this.workMoneyLabel.TabIndex = 5;
+			this.workMoneyLabel.Text = "Ставка в час:";
 			// 
-			// textBox4
+			// workHoursTextBox
 			// 
-			this.textBox4.Location = new System.Drawing.Point(173, 87);
-			this.textBox4.Name = "textBox4";
-			this.textBox4.Size = new System.Drawing.Size(100, 20);
-			this.textBox4.TabIndex = 8;
+			this.workHoursTextBox.Location = new System.Drawing.Point(173, 87);
+			this.workHoursTextBox.Name = "workHoursTextBox";
+			this.workHoursTextBox.Size = new System.Drawing.Size(100, 20);
+			this.workHoursTextBox.TabIndex = 8;
 			// 
-			// label4
+			// workHoursLabel
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(170, 67);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(103, 13);
-			this.label4.TabIndex = 6;
-			this.label4.Text = "Часов отработано:";
+			this.workHoursLabel.AutoSize = true;
+			this.workHoursLabel.Location = new System.Drawing.Point(170, 67);
+			this.workHoursLabel.Name = "workHoursLabel";
+			this.workHoursLabel.Size = new System.Drawing.Size(103, 13);
+			this.workHoursLabel.TabIndex = 6;
+			this.workHoursLabel.Text = "Часов отработано:";
 			// 
-			// button2
+			// changeButton
 			// 
-			this.button2.Location = new System.Drawing.Point(245, 191);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 17;
-			this.button2.Text = "Изменить";
-			this.button2.UseVisualStyleBackColor = true;
+			this.changeButton.Location = new System.Drawing.Point(245, 191);
+			this.changeButton.Name = "changeButton";
+			this.changeButton.Size = new System.Drawing.Size(75, 23);
+			this.changeButton.TabIndex = 17;
+			this.changeButton.Text = "Изменить";
+			this.changeButton.UseVisualStyleBackColor = true;
 			// 
-			// button1
+			// closeButton
 			// 
-			this.button1.Location = new System.Drawing.Point(326, 191);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 16;
-			this.button1.Text = "Назад";
-			this.button1.UseVisualStyleBackColor = true;
+			this.closeButton.Location = new System.Drawing.Point(326, 191);
+			this.closeButton.Name = "closeButton";
+			this.closeButton.Size = new System.Drawing.Size(75, 23);
+			this.closeButton.TabIndex = 16;
+			this.closeButton.Text = "Назад";
+			this.closeButton.UseVisualStyleBackColor = true;
+			this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
 			// 
 			// label2
 			// 
@@ -179,19 +183,19 @@ namespace Laba4GUI
 			this.label2.TabIndex = 15;
 			this.label2.Text = "Фамилия:";
 			// 
-			// textBox2
+			// secondNameTextBox
 			// 
-			this.textBox2.Location = new System.Drawing.Point(12, 22);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(229, 20);
-			this.textBox2.TabIndex = 14;
+			this.secondNameTextBox.Location = new System.Drawing.Point(12, 22);
+			this.secondNameTextBox.Name = "secondNameTextBox";
+			this.secondNameTextBox.Size = new System.Drawing.Size(229, 20);
+			this.secondNameTextBox.TabIndex = 14;
 			// 
-			// textBox1
+			// firastNameTextBox
 			// 
-			this.textBox1.Location = new System.Drawing.Point(261, 22);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(143, 20);
-			this.textBox1.TabIndex = 13;
+			this.firastNameTextBox.Location = new System.Drawing.Point(261, 22);
+			this.firastNameTextBox.Name = "firastNameTextBox";
+			this.firastNameTextBox.Size = new System.Drawing.Size(143, 20);
+			this.firastNameTextBox.TabIndex = 13;
 			// 
 			// label1
 			// 
@@ -208,14 +212,15 @@ namespace Laba4GUI
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(413, 221);
 			this.Controls.Add(this.groupBox2);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.changeButton);
+			this.Controls.Add(this.closeButton);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.textBox2);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.secondNameTextBox);
+			this.Controls.Add(this.firastNameTextBox);
 			this.Controls.Add(this.label1);
 			this.Name = "ChangeWorkerDataForm";
 			this.Text = "Изменение информации о работнике";
+			this.Load += new System.EventHandler(this.ChangeWorkerDataForm_Load);
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
@@ -229,19 +234,19 @@ namespace Laba4GUI
 
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.RadioButton radioButton3;
-		private System.Windows.Forms.RadioButton radioButton2;
+		private System.Windows.Forms.RadioButton horlyPaymentRadioButton;
+		private System.Windows.Forms.RadioButton wageRateRadioButton;
 		private System.Windows.Forms.RadioButton radioButton1;
-		private System.Windows.Forms.TextBox textBox3;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox textBox4;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.TextBox workMoneyTextBox;
+		private System.Windows.Forms.Label workMoneyLabel;
+		private System.Windows.Forms.TextBox workHoursTextBox;
+		private System.Windows.Forms.Label workHoursLabel;
+		private System.Windows.Forms.Button changeButton;
+		private System.Windows.Forms.Button closeButton;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox secondNameTextBox;
+		private System.Windows.Forms.TextBox firastNameTextBox;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.RadioButton radioButton4;
+		private System.Windows.Forms.RadioButton sakaryRadioButton;
 	}
 }

@@ -29,40 +29,41 @@ namespace Laba4GUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.button1 = new System.Windows.Forms.Button();
+			this.closeButton = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.radioButton3 = new System.Windows.Forms.RadioButton();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
-			this.radioButton1 = new System.Windows.Forms.RadioButton();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.horlyPaymentRadioButton = new System.Windows.Forms.RadioButton();
+			this.wageRateRadioButton = new System.Windows.Forms.RadioButton();
+			this.salaryRadioButton = new System.Windows.Forms.RadioButton();
+			this.firstNameTextBox = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.SecondNameTextBox = new System.Windows.Forms.TextBox();
+			this.amountMoneyTextBox = new System.Windows.Forms.TextBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.radioButton5 = new System.Windows.Forms.RadioButton();
-			this.radioButton4 = new System.Windows.Forms.RadioButton();
-			this.button2 = new System.Windows.Forms.Button();
+			this.lessRadioButton = new System.Windows.Forms.RadioButton();
+			this.moreRadioButton = new System.Windows.Forms.RadioButton();
+			this.searchButton = new System.Windows.Forms.Button();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// button1
+			// closeButton
 			// 
-			this.button1.Location = new System.Drawing.Point(335, 190);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "Назад";
-			this.button1.UseVisualStyleBackColor = true;
+			this.closeButton.Location = new System.Drawing.Point(335, 190);
+			this.closeButton.Name = "closeButton";
+			this.closeButton.Size = new System.Drawing.Size(75, 23);
+			this.closeButton.TabIndex = 0;
+			this.closeButton.Text = "Назад";
+			this.closeButton.UseVisualStyleBackColor = true;
+			this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.radioButton3);
-			this.groupBox1.Controls.Add(this.radioButton2);
-			this.groupBox1.Controls.Add(this.radioButton1);
+			this.groupBox1.Controls.Add(this.horlyPaymentRadioButton);
+			this.groupBox1.Controls.Add(this.wageRateRadioButton);
+			this.groupBox1.Controls.Add(this.salaryRadioButton);
 			this.groupBox1.Location = new System.Drawing.Point(6, 19);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(143, 100);
@@ -70,45 +71,45 @@ namespace Laba4GUI
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Тип";
 			// 
-			// radioButton3
+			// horlyPaymentRadioButton
 			// 
-			this.radioButton3.AutoSize = true;
-			this.radioButton3.Location = new System.Drawing.Point(7, 68);
-			this.radioButton3.Name = "radioButton3";
-			this.radioButton3.Size = new System.Drawing.Size(118, 17);
-			this.radioButton3.TabIndex = 2;
-			this.radioButton3.TabStop = true;
-			this.radioButton3.Text = "Почасовая оплата";
-			this.radioButton3.UseVisualStyleBackColor = true;
+			this.horlyPaymentRadioButton.AutoSize = true;
+			this.horlyPaymentRadioButton.Location = new System.Drawing.Point(7, 68);
+			this.horlyPaymentRadioButton.Name = "horlyPaymentRadioButton";
+			this.horlyPaymentRadioButton.Size = new System.Drawing.Size(118, 17);
+			this.horlyPaymentRadioButton.TabIndex = 2;
+			this.horlyPaymentRadioButton.TabStop = true;
+			this.horlyPaymentRadioButton.Text = "Почасовая оплата";
+			this.horlyPaymentRadioButton.UseVisualStyleBackColor = true;
 			// 
-			// radioButton2
+			// wageRateRadioButton
 			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(7, 44);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(114, 17);
-			this.radioButton2.TabIndex = 1;
-			this.radioButton2.TabStop = true;
-			this.radioButton2.Text = "Тарифная ставка";
-			this.radioButton2.UseVisualStyleBackColor = true;
+			this.wageRateRadioButton.AutoSize = true;
+			this.wageRateRadioButton.Location = new System.Drawing.Point(7, 44);
+			this.wageRateRadioButton.Name = "wageRateRadioButton";
+			this.wageRateRadioButton.Size = new System.Drawing.Size(114, 17);
+			this.wageRateRadioButton.TabIndex = 1;
+			this.wageRateRadioButton.TabStop = true;
+			this.wageRateRadioButton.Text = "Тарифная ставка";
+			this.wageRateRadioButton.UseVisualStyleBackColor = true;
 			// 
-			// radioButton1
+			// salaryRadioButton
 			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.Location = new System.Drawing.Point(7, 20);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(57, 17);
-			this.radioButton1.TabIndex = 0;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "Оклад";
-			this.radioButton1.UseVisualStyleBackColor = true;
+			this.salaryRadioButton.AutoSize = true;
+			this.salaryRadioButton.Location = new System.Drawing.Point(7, 20);
+			this.salaryRadioButton.Name = "salaryRadioButton";
+			this.salaryRadioButton.Size = new System.Drawing.Size(57, 17);
+			this.salaryRadioButton.TabIndex = 0;
+			this.salaryRadioButton.TabStop = true;
+			this.salaryRadioButton.Text = "Оклад";
+			this.salaryRadioButton.UseVisualStyleBackColor = true;
 			// 
-			// textBox1
+			// firstNameTextBox
 			// 
-			this.textBox1.Location = new System.Drawing.Point(267, 27);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(143, 20);
-			this.textBox1.TabIndex = 7;
+			this.firstNameTextBox.Location = new System.Drawing.Point(267, 27);
+			this.firstNameTextBox.Name = "firstNameTextBox";
+			this.firstNameTextBox.Size = new System.Drawing.Size(143, 20);
+			this.firstNameTextBox.TabIndex = 7;
 			// 
 			// label1
 			// 
@@ -128,25 +129,25 @@ namespace Laba4GUI
 			this.label2.TabIndex = 9;
 			this.label2.Text = "Фамилия:";
 			// 
-			// textBox2
+			// SecondNameTextBox
 			// 
-			this.textBox2.Location = new System.Drawing.Point(12, 27);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(229, 20);
-			this.textBox2.TabIndex = 8;
+			this.SecondNameTextBox.Location = new System.Drawing.Point(12, 27);
+			this.SecondNameTextBox.Name = "SecondNameTextBox";
+			this.SecondNameTextBox.Size = new System.Drawing.Size(229, 20);
+			this.SecondNameTextBox.TabIndex = 8;
 			// 
-			// textBox3
+			// amountMoneyTextBox
 			// 
-			this.textBox3.Location = new System.Drawing.Point(6, 18);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(100, 20);
-			this.textBox3.TabIndex = 10;
+			this.amountMoneyTextBox.Location = new System.Drawing.Point(6, 18);
+			this.amountMoneyTextBox.Name = "amountMoneyTextBox";
+			this.amountMoneyTextBox.Size = new System.Drawing.Size(100, 20);
+			this.amountMoneyTextBox.TabIndex = 10;
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.radioButton5);
-			this.groupBox2.Controls.Add(this.radioButton4);
-			this.groupBox2.Controls.Add(this.textBox3);
+			this.groupBox2.Controls.Add(this.lessRadioButton);
+			this.groupBox2.Controls.Add(this.moreRadioButton);
+			this.groupBox2.Controls.Add(this.amountMoneyTextBox);
 			this.groupBox2.Location = new System.Drawing.Point(155, 19);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(229, 65);
@@ -154,36 +155,37 @@ namespace Laba4GUI
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "За месяц";
 			// 
-			// radioButton5
+			// lessRadioButton
 			// 
-			this.radioButton5.AutoSize = true;
-			this.radioButton5.Location = new System.Drawing.Point(116, 42);
-			this.radioButton5.Name = "radioButton5";
-			this.radioButton5.Size = new System.Drawing.Size(66, 17);
-			this.radioButton5.TabIndex = 1;
-			this.radioButton5.TabStop = true;
-			this.radioButton5.Text = "Меньше";
-			this.radioButton5.UseVisualStyleBackColor = true;
+			this.lessRadioButton.AutoSize = true;
+			this.lessRadioButton.Location = new System.Drawing.Point(116, 42);
+			this.lessRadioButton.Name = "lessRadioButton";
+			this.lessRadioButton.Size = new System.Drawing.Size(66, 17);
+			this.lessRadioButton.TabIndex = 1;
+			this.lessRadioButton.TabStop = true;
+			this.lessRadioButton.Text = "Меньше";
+			this.lessRadioButton.UseVisualStyleBackColor = true;
 			// 
-			// radioButton4
+			// moreRadioButton
 			// 
-			this.radioButton4.AutoSize = true;
-			this.radioButton4.Location = new System.Drawing.Point(116, 19);
-			this.radioButton4.Name = "radioButton4";
-			this.radioButton4.Size = new System.Drawing.Size(64, 17);
-			this.radioButton4.TabIndex = 0;
-			this.radioButton4.TabStop = true;
-			this.radioButton4.Text = "Больше";
-			this.radioButton4.UseVisualStyleBackColor = true;
+			this.moreRadioButton.AutoSize = true;
+			this.moreRadioButton.Location = new System.Drawing.Point(116, 19);
+			this.moreRadioButton.Name = "moreRadioButton";
+			this.moreRadioButton.Size = new System.Drawing.Size(64, 17);
+			this.moreRadioButton.TabIndex = 0;
+			this.moreRadioButton.TabStop = true;
+			this.moreRadioButton.Text = "Больше";
+			this.moreRadioButton.UseVisualStyleBackColor = true;
 			// 
-			// button2
+			// searchButton
 			// 
-			this.button2.Location = new System.Drawing.Point(254, 190);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 13;
-			this.button2.Text = "Поиск";
-			this.button2.UseVisualStyleBackColor = true;
+			this.searchButton.Location = new System.Drawing.Point(254, 190);
+			this.searchButton.Name = "searchButton";
+			this.searchButton.Size = new System.Drawing.Size(75, 23);
+			this.searchButton.TabIndex = 13;
+			this.searchButton.Text = "Поиск";
+			this.searchButton.UseVisualStyleBackColor = true;
+			this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
 			// 
 			// groupBox3
 			// 
@@ -202,12 +204,12 @@ namespace Laba4GUI
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(419, 221);
 			this.Controls.Add(this.groupBox3);
-			this.Controls.Add(this.button2);
+			this.Controls.Add(this.searchButton);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.textBox2);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.SecondNameTextBox);
+			this.Controls.Add(this.firstNameTextBox);
 			this.Controls.Add(this.label1);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.closeButton);
 			this.Name = "SearchForm";
 			this.Text = "Поиск работников";
 			this.groupBox1.ResumeLayout(false);
@@ -222,20 +224,20 @@ namespace Laba4GUI
 
 		#endregion
 
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button closeButton;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.RadioButton radioButton3;
-		private System.Windows.Forms.RadioButton radioButton2;
-		private System.Windows.Forms.RadioButton radioButton1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.RadioButton horlyPaymentRadioButton;
+		private System.Windows.Forms.RadioButton wageRateRadioButton;
+		private System.Windows.Forms.RadioButton salaryRadioButton;
+		private System.Windows.Forms.TextBox firstNameTextBox;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.TextBox SecondNameTextBox;
+		private System.Windows.Forms.TextBox amountMoneyTextBox;
 		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.RadioButton radioButton5;
-		private System.Windows.Forms.RadioButton radioButton4;
-		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.RadioButton lessRadioButton;
+		private System.Windows.Forms.RadioButton moreRadioButton;
+		private System.Windows.Forms.Button searchButton;
 		private System.Windows.Forms.GroupBox groupBox3;
 	}
 }
