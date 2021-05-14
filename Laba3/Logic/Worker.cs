@@ -29,10 +29,15 @@ namespace Laba3.Logic
 		private int _allowWorkHoursInDay;
 
 		/// <summary>
-		/// Поле класса хранящее количество типов начисления зарплат
+		/// Поле класса хранящее номер типа начисления зарплат
 		/// </summary>
-		public int amountTypesWage = 3;
+		private int _typeWage;
 
+
+		/// <summary>
+		/// Свойство возвращающее номер типи зарплаты
+		/// </summary>
+		public int NumberOfTypeWage => _typeWage;
 
 		/// <summary>
 		/// Свойство возвращающее и принимающее с проверкой имя работника
@@ -123,6 +128,7 @@ namespace Laba3.Logic
 			{
 				throw new Exception("Необходимо ввести число в диапазоне от 1 до 3");
 			}
+			_typeWage = type;
 			switch (type)
 			{
 				case 1:

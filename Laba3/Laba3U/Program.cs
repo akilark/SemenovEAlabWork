@@ -136,8 +136,7 @@ namespace Laba3UI
 					}
 				default:
 					{
-						throw new Exception($"вариантов заработной " +
-							$"платы всего {worker.amountTypesWage}");
+						throw new Exception($"Неверный тип заработной платы");
 					}
 			}
 

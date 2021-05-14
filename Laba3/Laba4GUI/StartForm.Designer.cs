@@ -119,33 +119,41 @@ namespace Laba4GUI
             this.ammountMoney});
 			this.workerListDataGrid.Location = new System.Drawing.Point(6, 22);
 			this.workerListDataGrid.Name = "workerListDataGrid";
-			this.workerListDataGrid.Size = new System.Drawing.Size(553, 264);
+			this.workerListDataGrid.Size = new System.Drawing.Size(543, 264);
 			this.workerListDataGrid.TabIndex = 9;
 			this.workerListDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workerListDataGrid_CellContentClick);
 			// 
 			// SecondName
 			// 
+			this.SecondName.Frozen = true;
 			this.SecondName.HeaderText = "Фамилия";
 			this.SecondName.Name = "SecondName";
 			this.SecondName.ReadOnly = true;
+			this.SecondName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			// 
 			// FirstName
 			// 
+			this.FirstName.Frozen = true;
 			this.FirstName.HeaderText = "Имя";
 			this.FirstName.Name = "FirstName";
 			this.FirstName.ReadOnly = true;
+			this.FirstName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			// 
 			// WageType
 			// 
+			this.WageType.Frozen = true;
 			this.WageType.HeaderText = "Тип ЗП";
 			this.WageType.Name = "WageType";
 			this.WageType.ReadOnly = true;
+			this.WageType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.WageType.Width = 200;
 			// 
 			// ammountMoney
 			// 
 			this.ammountMoney.HeaderText = "Доход за месяц";
 			this.ammountMoney.Name = "ammountMoney";
 			this.ammountMoney.ReadOnly = true;
+			this.ammountMoney.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			// 
 			// changeButton
 			// 

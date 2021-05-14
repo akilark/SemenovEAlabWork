@@ -149,6 +149,7 @@ namespace Laba4GUI
 			this.addButton.TabIndex = 10;
 			this.addButton.Text = "Добавить";
 			this.addButton.UseVisualStyleBackColor = true;
+			this.addButton.Click += new System.EventHandler(this.addButton_Click);
 			// 
 			// closeButton
 			// 
@@ -175,6 +176,8 @@ namespace Laba4GUI
 			this.firstNameTextBox.Name = "firstNameTextBox";
 			this.firstNameTextBox.Size = new System.Drawing.Size(143, 20);
 			this.firstNameTextBox.TabIndex = 1;
+			this.firstNameTextBox.TextChanged += new System.EventHandler(this.firstNameTextBox_TextChanged);
+			this.firstNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.firstNameTextBox_Validating);
 			// 
 			// label1
 			// 
@@ -191,6 +194,8 @@ namespace Laba4GUI
 			this.secondNameTextBox.Name = "secondNameTextBox";
 			this.secondNameTextBox.Size = new System.Drawing.Size(229, 20);
 			this.secondNameTextBox.TabIndex = 2;
+			this.secondNameTextBox.TextChanged += new System.EventHandler(this.secondNameTextBox_TextChanged);
+			this.secondNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.secondNameTextBox_Validating);
 			// 
 			// groupBox2
 			// 

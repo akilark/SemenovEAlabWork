@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using Laba3.Logic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +13,11 @@ namespace Laba4GUI
 		SearchForm searchForm = null;
 		AddWorkerForm addWorkerForm = null;
 		ChangeWorkerDataForm changeWorkerDataForm = null;
+		WorkersArray workerInfoList;
+		string filepath = @"C:\Users\akila\source\repos\akilark\SemenovEAlabWork\Laba3\data\202104.kek";
+		WorkWithFiles files;
+
+
 		public StartForm()
 		{
 			InitializeComponent();
@@ -25,7 +28,11 @@ namespace Laba4GUI
 			searchForm = new SearchForm();
 			addWorkerForm = new AddWorkerForm();
 			resetButton.Visible = false;
-			
+			files = new WorkWithFiles(filepath);
+			files.ReadFileInfo();
+			workerInfoList = files.WorkerArray;
+			fillingGridParam();
+
 		}
 
 		private void closeButton_Click(object sender, EventArgs e)
@@ -45,6 +52,10 @@ namespace Laba4GUI
 		{
 			this.Hide();
 			addWorkerForm.ShowDialog();
+			files = new WorkWithFiles(filepath);
+			files.ReadFileInfo();
+			workerInfoList = files.WorkerArray;
+			fillingGridParam();
 			this.Show();
 		}
 
@@ -64,6 +75,20 @@ namespace Laba4GUI
 		private void workerListDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
 
+		}
+
+		internal void fillingGridParam()
+		{
+			workerListDataGrid.Rows.Clear();
+			foreach (Worker info in workerInfoList.Workers)
+			{
+				workerListDataGrid.Rows.Add(new string[] {
+					info.SecondName, 
+					info.FirstName, 
+					info.Wage.NameOfWageType,
+					info.Wage.AmountMoney.ToString() });
+			}
+			
 		}
 	}
 }

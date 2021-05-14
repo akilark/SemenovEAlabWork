@@ -61,7 +61,7 @@ namespace Laba3.Logic
 		/// <summary>
 		/// Свойство возвращающее строку с типом зарплаты
 		/// </summary>
-		public override string NameOfWageType => "Работник получает фиксированную ставку";
+		public override string NameOfWageType => "Работник получает ставку";
 
 		/// <summary>
 		/// Свойство принимающее с проверкой и возвращающее стоимость часа работ

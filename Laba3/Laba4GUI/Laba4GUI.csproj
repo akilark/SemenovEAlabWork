@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkWithFiles.cs" />
     <EmbeddedResource Include="AddWorkerForm.resx">
       <DependentUpon>AddWorkerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Laba3.csproj">
+      <Project>{2b97e526-da45-44a1-b896-99b7787a6ce8}</Project>
+      <Name>Laba3</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
