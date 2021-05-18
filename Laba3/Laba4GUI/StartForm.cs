@@ -12,10 +12,10 @@ namespace Laba4GUI
 	{
 		SearchForm searchForm = null;
 		AddWorkerForm addWorkerForm = null;
-		ChangeWorkerDataForm changeWorkerDataForm = null;
-		WorkersArray workerInfoList;
+		
+		internal WorkersArray workerInfoList;
 		string filepath = @"C:\Users\akila\source\repos\akilark\SemenovEAlabWork\Laba3\data\202104.kek";
-		WorkWithFiles files;
+		public WorkWithFiles files;
 
 
 		public StartForm()
@@ -45,6 +45,7 @@ namespace Laba4GUI
 			this.Hide();
 			resetButton.Visible = true;
 			searchForm.ShowDialog();
+			fillingGridParam();
 			this.Show();
 		}
 
@@ -62,8 +63,7 @@ namespace Laba4GUI
 		private void changeButton_Click(object sender, EventArgs e)
 		{
 			this.Hide();
-			changeWorkerDataForm = new ChangeWorkerDataForm();
-			changeWorkerDataForm.ShowDialog();
+			
 			this.Show();
 		}
 
@@ -89,6 +89,22 @@ namespace Laba4GUI
 					info.Wage.AmountMoney.ToString() });
 			}
 			
+		}
+
+		private void deleteButton_Click(object sender, EventArgs e)
+		{
+			int indexDataGrid = workerListDataGrid.CurrentRow.Index;
+			int indexRemove = workerInfoList.FindByName(
+				workerListDataGrid.Rows[indexDataGrid].Cells[0].Value.ToString(), 
+				workerListDataGrid.Rows[indexDataGrid].Cells[1].Value.ToString());
+			workerInfoList.DeleteElement(indexRemove);
+			files.rewriteFile(workerInfoList);
+			workerListDataGrid.Rows.Remove(workerListDataGrid.CurrentRow);
+		}
+
+		private void groupBox1_Enter(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

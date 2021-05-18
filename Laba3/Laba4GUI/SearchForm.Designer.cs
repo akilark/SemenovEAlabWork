@@ -212,6 +212,7 @@ namespace Laba4GUI
 			this.Controls.Add(this.closeButton);
 			this.Name = "SearchForm";
 			this.Text = "Поиск работников";
+			this.Load += new System.EventHandler(this.SearchForm_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);

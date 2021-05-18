@@ -73,6 +73,7 @@ namespace Laba4GUI
 			this.deleteButton.TabIndex = 3;
 			this.deleteButton.Text = "Удалить";
 			this.deleteButton.UseVisualStyleBackColor = true;
+			this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
 			// 
 			// closeButton
 			// 
@@ -108,6 +109,7 @@ namespace Laba4GUI
 			this.groupBox1.TabIndex = 8;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Список работников:";
+			this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
 			// 
 			// workerListDataGrid
 			// 

@@ -56,15 +56,7 @@ namespace Laba4GUI
 			using (StreamWriter sw = new StreamWriter(_path, true , Encoding.UTF8))
 			{
 
-				sw.WriteLine(
-					workerTmp.SecondName + "|" + 
-					workerTmp.FirstName + "|" + 
-					workerTmp.Wage.NameOfWageType + "|" + 
-					workerTmp.Wage.AmountMoney + "|" + 
-					workerTmp.NumberOfTypeWage + "|" +
-					workerTmp.Wage.PriceOfWork + "|" +
-					workerTmp.Wage.WorkHours + "|" +
-					workerTmp.Wage.AllowToWorkHoursInDay);
+				sw.WriteLine(workerInfo(workerTmp));
 				sw.Close();
 			}
 		}
@@ -75,6 +67,32 @@ namespace Laba4GUI
 			int year = Int32.Parse(fileName.Substring(0,4));
 			int month = Int32.Parse(fileName.Substring(4, 2));
 			return new DateTime(year, month, 1);
+		}
+
+		public void rewriteFile(WorkersArray workersArray)
+		{
+			using (StreamWriter sw2 = new StreamWriter(_path, false, Encoding.UTF8))
+			{
+				int lenght = workersArray.Count;
+				for (int i = 0; i < lenght; i++)
+				{
+					sw2.WriteLine(workerInfo(workersArray[i]));
+				}
+				sw2.Close();
+			}
+		}
+
+
+		private string workerInfo(Worker workerTmp)
+		{
+			return workerTmp.SecondName + "|" +
+			workerTmp.FirstName + "|" +
+			workerTmp.Wage.NameOfWageType + "|" +
+			workerTmp.Wage.AmountMoney + "|" +
+			workerTmp.NumberOfTypeWage + "|" +
+			workerTmp.Wage.PriceOfWork + "|" +
+			workerTmp.Wage.WorkHours + "|" +
+			workerTmp.Wage.AllowToWorkHoursInDay;
 		}
 	}
 }

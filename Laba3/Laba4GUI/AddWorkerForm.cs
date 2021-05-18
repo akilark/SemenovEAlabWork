@@ -156,6 +156,8 @@ namespace Laba4GUI
 		{
 			secondNameTextBox.Text = "";
 			firstNameTextBox.Text = "";
+			workMoneyTextBox.Text = "";
+			workHoursTextBox.Text = "";
 			secondNameTextBox.BackColor = Color.White;
 			firstNameTextBox.BackColor = Color.White;
 			wageRateRadioButton.Checked = false;

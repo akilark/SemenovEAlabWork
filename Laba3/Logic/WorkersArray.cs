@@ -76,7 +76,7 @@ namespace Laba3.Logic
 		{
 			int elementCount = Count;
 
-			if (index < Count - 1)
+			if (index < Count )
 			{
 				for (int i = index; i + 1 < elementCount; i++)
 				{
@@ -107,6 +107,21 @@ namespace Laba3.Logic
 				return _localWorkerArray[index];
 			}
 		}
+
+		public int FindByName(string secondName, string firstName)
+		{
+			for(int i=0; i<Count;i++)
+			{
+				if(_localWorkerArray[i].SecondName == secondName 
+					&& _localWorkerArray[i].FirstName == firstName)
+				{
+					return i;
+				}
+			}
+			throw new Exception("Работника с такой комбинацией имени и фамилии нет");
+			
+		}
+
 
 		/// <summary>
 		/// Статический метод создания нового массива 

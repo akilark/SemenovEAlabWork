@@ -52,12 +52,6 @@
     <Compile Include="AddWorkerForm.Designer.cs">
       <DependentUpon>AddWorkerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangeWorkerDataForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChangeWorkerDataForm.Designer.cs">
-      <DependentUpon>ChangeWorkerDataForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,9 +69,6 @@
     <Compile Include="WorkWithFiles.cs" />
     <EmbeddedResource Include="AddWorkerForm.resx">
       <DependentUpon>AddWorkerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ChangeWorkerDataForm.resx">
-      <DependentUpon>ChangeWorkerDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
