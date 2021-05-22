@@ -31,10 +31,6 @@ namespace Laba3.Logic
 		private int _daysOfWork;
 
 
-		/// <summary>
-		/// Конструктор класса без параметров
-		/// </summary>
-		public WageRate():base() { }
 
 		/// <summary>
 		/// Конструктор класса с 1 параметром
@@ -57,14 +53,14 @@ namespace Laba3.Logic
 			WorkHours = workHours;
 		}
 
-
+		
 		/// <summary>
-		/// Свойство возвращающее строку с типом зарплаты
+		/// <inheritdoc/>
 		/// </summary>
 		public override string NameOfWageType => "Работник получает ставку";
 
 		/// <summary>
-		/// Свойство принимающее с проверкой и возвращающее стоимость часа работ
+		/// <inheritdoc/>
 		/// </summary>
 		public override int PriceOfWork
 		{
@@ -110,9 +106,7 @@ namespace Laba3.Logic
 		}
 
 		/// <summary>
-		/// Свойство принимающее с проверкой и возвращающее 
-		/// количество отработанных часов с последующей конвертацией
-		/// в количесвто отработанных дней
+		/// <inheritdoc/>
 		/// </summary>
 		public override int WorkHours
 		{
@@ -129,7 +123,7 @@ namespace Laba3.Logic
 		}
 
 		/// <summary>
-		/// Метод расчета ЗП за конкретный месяц
+		/// <inheritdoc/>
 		/// </summary>
 		public override void CalculateAmountMoney()
 		{

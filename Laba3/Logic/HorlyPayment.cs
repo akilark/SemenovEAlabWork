@@ -24,12 +24,6 @@ namespace Laba3.Logic
 		/// </summary>
 		private int _priceOfWork;
 
-
-		/// <summary>
-		/// Конструктор класса без параметров
-		/// </summary>
-		public HorlyPayment():base() { }
-
 		/// <summary>
 		/// Конструктор класса с 1 параметром
 		/// </summary>
@@ -55,14 +49,14 @@ namespace Laba3.Logic
 			WorkHours = workHours;
 		}
 
-	
+
 		/// <summary>
-		/// Свойство возвращающее строку с типом зарплаты
+		/// <inheritdoc/>
 		/// </summary>
 		public override string NameOfWageType => "Почасовая оплата";
 
 		/// <summary>
-		/// Свойство принимающее с проверкой и возвращающее стоимость часа работ
+		/// <inheritdoc/>
 		/// </summary>
 		public override int PriceOfWork
 		{
@@ -85,8 +79,7 @@ namespace Laba3.Logic
 		}
 
 		/// <summary>
-		/// Свойство принимающее с проверкой и возвращающее 
-		/// количество отработанных часов
+		/// <inheritdoc/>
 		/// </summary>
 		public override int WorkHours
 		{
@@ -112,7 +105,7 @@ namespace Laba3.Logic
 		}
 
 		/// <summary>
-		/// Метод расчета ЗП за конкретный месяц
+		/// <inheritdoc/>
 		/// </summary>
 		public override void CalculateAmountMoney()
 		{

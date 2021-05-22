@@ -34,29 +34,25 @@ namespace Laba3.Logic
 		/// </summary>
 		private int _allowToWorkHoursInDay;
 
-
-		/// <summary>
-		/// Конструктор класса без параметров
-		/// </summary>
-		public WageBase() { }
-
+		//TODO:(V)
 		/// <summary>
 		/// Конструктор класса с 1 параметром
 		/// </summary>
 		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
 		/// один день</param>
-		public WageBase(int allowToWorkHoursInDay)
+		protected WageBase(int allowToWorkHoursInDay)
 		{
 			AllowToWorkHoursInDay = allowToWorkHoursInDay;
 		}
 
+		//TODO:(V)
 		/// <summary>
 		/// Конструкор класса с 2 параметрами
 		/// </summary>
 		/// <param name="date">Дата для расчета ЗП за конкретный месяц</param>
 		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
 		/// один день</param>
-		public WageBase(DateTime date, int allowToWorkHoursInDay)
+		protected WageBase(DateTime date, int allowToWorkHoursInDay)
 		{
 			Date = date;
 			AllowToWorkHoursInDay = allowToWorkHoursInDay;
@@ -74,9 +70,19 @@ namespace Laba3.Logic
 				return amountMoney;
 			}
 		}
+		
 
+		
+		/// <summary>
+		/// Возвращает название типа заработной платы
+		/// </summary>
 		public abstract string NameOfWageType { get; }
 
+
+		/// <summary>
+		/// Свойство содержащее информацию о количестве денег, 
+		/// которое получает работник за единицу работы
+		/// </summary>
 		public abstract int PriceOfWork { get; set; }
 
 		/// <summary>
@@ -102,6 +108,9 @@ namespace Laba3.Logic
 		/// </summary>
 		public int WorkDaysInMonth => _allowToWorkDaysInMonth;
 
+		/// <summary>
+		/// Свойство содержащее значение отработанных часов
+		/// </summary>
 		public abstract int WorkHours { get; set; }
 
 
@@ -124,7 +133,9 @@ namespace Laba3.Logic
 			}
 		}
 
-
+		/// <summary>
+		/// Метод расчета заработанных денег работником
+		/// </summary>
 		public abstract void CalculateAmountMoney();
 
 
@@ -171,6 +182,10 @@ namespace Laba3.Logic
 					throw new Exception("Доступна информация о зарплате только за предыдущие месяцы");
 				}
 			}
+			if (dateTime.Year < 2000)
+			{
+				throw new Exception("Фирма работает с 2000 года");
+			}
 		}
 
 
@@ -181,8 +196,8 @@ namespace Laba3.Logic
 		/// <returns>количество рабочех дней в месяце</returns>
 		protected static int AllowToWorkDaysInMonth(DateTime dateTime)
 		{
-			int Month = dateTime.Month;
-			int Count = 0;
+			var Month = dateTime.Month;
+			var Count = 0;
 			while (true)
 			{
 				if (dateTime.DayOfWeek != DayOfWeek.Saturday && dateTime.DayOfWeek != DayOfWeek.Sunday)

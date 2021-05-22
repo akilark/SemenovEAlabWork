@@ -197,6 +197,7 @@ namespace Laba4GUI
 			this.groupBox3.TabIndex = 14;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Заработная плата";
+			this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
 			// 
 			// SearchForm
 			// 

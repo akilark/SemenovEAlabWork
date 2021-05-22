@@ -20,58 +20,10 @@ namespace Laba3UI
 				int allowWorkHoursInDay = 8;
 				int arraySize = 3;
 				var workers = WorkersArray.Create(arraySize, allowWorkHoursInDay);
+
 				for (int i = 0; i < workers.Count; i++)
 				{
-					int timer = 0;
-					while (true)
-					{
-						try
-						{
-							switch (timer)
-							{
-								case 0:
-									{
-										Console.WriteLine($"Выберите тип зарплаты для работника " +
-											$"{workers[i].FirstName} {workers[i].SecondName}");
-										Console.WriteLine("" +
-											"1- Оклад \n" +
-											"2- Тарифная ставка \n" +
-											"3- Часовая плата");
-										workers[i].WageType(Int32.Parse(Console.ReadLine()));
-										timer++;
-										continue;
-									}
-								case 1:
-									{
-										Console.WriteLine($"За какой месяц необходимо посмотреть " +
-											$"заработок работника ? В формате ХХ");
-										int month = Int32.Parse(Console.ReadLine());
-										Console.WriteLine($"За какой год необходимо посмотреть " +
-											$"заработок работника ? В формате ХХXX");
-										int year = Int32.Parse(Console.ReadLine());
-										workers[i].DesiredDate(new DateTime(year, month, 1));
-										timer++;
-										continue;
-									}
-								case 2:
-									{
-										(int, int) workMoneyAndHours =
-											workMoneyAnHoursDependingOnWageType(
-												workers[i], allowWorkHoursInDay);
-										workers[i].MoneyEarnedInMonth(workMoneyAndHours.Item1,
-											workMoneyAndHours.Item2);
-										timer++;
-										break;
-									}
-							}
-							break;
-						}
-						catch (Exception e)
-						{
-							Console.WriteLine("Допущена ошибка");
-							Console.WriteLine(e.Message);
-						}
-					}
+					PersonInformationAdd(workers[i], allowWorkHoursInDay);
 				}
 				ShowInfo(workers);
 				Console.WriteLine();
@@ -86,13 +38,190 @@ namespace Laba3UI
 		}
 
 		/// <summary>
+		/// Метод производящий получение корректных данных о персоне с клавиатуры 
+		/// </summary>
+		/// <param name="outputMessage">Запрос пользователю</param>
+		/// <param name="validationAction">действие, которое необходимо выполнить
+		/// после запроса пользователю</param>
+		private static void ValidateInputInfo(string outputMessage, Action validationAction)
+		{
+			while (true)
+			{
+				try
+				{
+					Console.WriteLine(outputMessage);
+					validationAction.Invoke();
+					return;
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("Допущена ошибка");
+					Console.WriteLine(e.Message);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Метод добавления всей информации о работнике с клавиатуры 
+		/// (Кроме имени и фамилии)
+		/// </summary>
+		/// <param name="workerTmp">Работник</param>
+		/// <param name="allowWorkHoursInDay">Допустимое число часов 
+		/// работы в день</param>
+		private static void PersonInformationAdd(Worker workerTmp, int allowWorkHoursInDay)
+		{
+			Console.WriteLine("Выберите тип зарплаты для работника " +
+						$"{workerTmp.FirstName} {workerTmp.SecondName}" +
+						"\n1- Оклад \n" +
+						"2- Тарифная ставка \n" +
+						"3- Часовая плата");
+			
+			WageType wageType;
+			switch (Int32.Parse(Console.ReadLine()))
+			{
+				case 1:
+					{
+						wageType = WageType.Salary;
+						break;
+					}
+				case 2:
+					{
+						wageType = WageType.WageRate;
+						break;
+					}
+				case 3:
+					{
+						wageType = WageType.HorlyPayment;
+						break;
+					}
+				default:
+					{
+						throw new Exception("Такого типа зарплаты нет");
+					}
+
+			}
+			workerTmp.WageType(wageType);
+
+			List<Tuple<string, Action>> validationActions = new List<Tuple<string, Action>>()
+			{
+				
+				new Tuple<string, Action>
+				(
+					"За какой месяц необходимо посмотреть " +
+						"заработок работника ? В формате ХХ",
+					() =>
+					{
+						(int,int) yearMonth= DataRequest();
+						workerTmp.DesiredDate(new DateTime(
+							yearMonth.Item1, yearMonth.Item2, 1));
+					}
+				),
+				new Tuple<string, Action>
+				(
+					MoneyRequest(workerTmp.TypeOfWage),
+					() =>
+					{
+						workerTmp.Wage.PriceOfWork = Int32.Parse(Console.ReadLine());
+					}
+				),
+				new Tuple<string, Action>
+				(
+					TimeRequest(workerTmp.TypeOfWage),
+					() =>
+					{
+						int hours = workerTmp.TypeOfWage == WageType.HorlyPayment
+						?Int32.Parse(Console.ReadLine())
+						:Int32.Parse(Console.ReadLine()) * allowWorkHoursInDay;
+						workerTmp.Wage.WorkHours = hours;
+
+					}
+				)
+			};
+
+			foreach(var action in validationActions)
+			{
+				ValidateInputInfo(action.Item1, action.Item2);
+			}
+		}
+
+		/// <summary>
+		/// Метод запроса даты у пользователя
+		/// </summary>
+		/// <returns>Год, месяц</returns>
+		private static (int,int) DataRequest()
+		{
+			int month = Int32.Parse(Console.ReadLine());
+			Console.WriteLine($"За какой год необходимо посмотреть " +
+				$"заработок работника ? В формате ХХXX");
+			int year = Int32.Parse(Console.ReadLine());
+			return (year, month);
+		}
+
+		/// <summary>
+		/// Метод возвращающий строку с соответсвующим запросом количества 
+		/// денег за единицу времени для конкретного типа зарплаты
+		/// </summary>
+		/// <param name="wageType">Тип зарплаты</param>
+		/// <returns>Строка с запросом ЗП за единицу времени</returns>
+		private static string MoneyRequest(WageType wageType)
+		{
+			switch (wageType)
+			{
+				case WageType.HorlyPayment:
+					{
+						return "Введите сколько денег зарабатывает работник за час";
+					}
+				case WageType.WageRate:
+					{
+						return "Введите сколько денег зарабатывает работник за день";
+					}
+				case WageType.Salary:
+					{
+						return "Введите сколько денег зарабатывает работник за месяц";
+					}
+				default:
+					{
+						throw new Exception($"Неверный тип заработной платы");
+					}
+			}
+		}
+
+		/// <summary>
+		/// Метод возвращающий строку с соответсвующим запросом временного 
+		/// отрезка для конкретного типа зарплаты
+		/// </summary>
+		/// <param name="wageType">Тип зарплаты</param>
+		/// <returns>Строка с запросом временного отрезка</returns>
+		private static string TimeRequest(WageType wageType)
+		{
+			switch (wageType)
+			{
+				case WageType.HorlyPayment:
+					{
+						return "Введите количество отработанных часов";
+					}
+				case WageType.WageRate:
+					{
+						return "Введите количество отработанных дней";
+					}
+				case WageType.Salary:
+					{
+						return "Введите количество отработанных дней";
+					}
+				default:
+					{
+						throw new Exception($"Неверный тип заработной платы");
+					}
+			}
+		}
+
+		/// <summary>
 		/// Метод с помощью которого выводится информация о 
 		/// всех работниках из списка работников
 		/// </summary>
 		/// <param name="workersArray">Список работников</param>
 		public static void ShowInfo(WorkersArray workersArray)
 		{
-
 			foreach (string workerInfo in workersArray.WorkerInfo())
 			{
 				Console.WriteLine(workerInfo);
@@ -100,81 +229,6 @@ namespace Laba3UI
 			}
 			Console.WriteLine();
 		}
-
-		/// <summary>
-		/// Метод запрашивающий данные в зависимости от типа 
-		/// заработной платы работника
-		/// </summary>
-		/// <param name="worker">Работник</param>
-		/// <param name="allowWorkHoursInDay">Сколько дней в день 
-		/// разрешается работать</param>
-		/// <returns>сколько денег зарабатывает работник за час день или месяц 
-		/// (в зависимости от типа заработной платы) 
-		/// и сколько часов он отработал</returns>
-		private static (int, int) workMoneyAnHoursDependingOnWageType(
-			Worker worker, int allowWorkHoursInDay)
-		{
-			int WageNumber;
-			Console.WriteLine($"У работника {worker.FirstName} {worker.SecondName}" +
-				$" тип зарплаты: {worker.Wage.NameOfWageType}");
-			switch (worker.Wage)
-			{
-				case HorlyPayment horlyPayment:
-					{
-						WageNumber = 2;
-						return СommunicateWithUser(WageNumber, allowWorkHoursInDay);
-					}
-				case WageRate wageRate:
-					{
-						WageNumber = 1;
-						return СommunicateWithUser(WageNumber, allowWorkHoursInDay);
-					}
-				case Salary salary:
-					{
-						WageNumber = 0;
-						return СommunicateWithUser(WageNumber, allowWorkHoursInDay);
-					}
-				default:
-					{
-						throw new Exception($"Неверный тип заработной платы");
-					}
-			}
-
-		}
-
-		/// <summary>
-		/// Метод для опроса пользователя для получения необходимх исходных данных
-		/// </summary>
-		/// <param name="wageNumber">Номер типа заработной платы в листе</param>
-		/// <param name="allowWorkHoursInDay">Сколько часов в день разрешается 
-		/// работать</param>
-		/// <returns>item1 - сколько работник получает за свою работу
-		/// item2 - сколько часов в месяц он работал</returns>
-		private static (int, int) СommunicateWithUser(int wageNumber,
-			int allowWorkHoursInDay)
-		{
-			List<(string, string)> stringInfo = new List<(string, string)>()
-			{
-			("Введите сколько денег зарабатывает работник за месяц",
-			"Введите количество отработанных дней"),
-			("Введите сколько денег зарабатывает работник за день",
-			"Введите количество отработанных дней"),
-			("Введите сколько денег зарабатывает работник за час",
-			"Введите количество отработанных часов")
-			};
-			Console.WriteLine(stringInfo[wageNumber].Item1);
-			int workMoney = Int32.Parse(Console.ReadLine());
-			int workHours;
-			Console.WriteLine(stringInfo[wageNumber].Item2);
-			if (wageNumber == 2)
-			{
-				workHours = Int32.Parse(Console.ReadLine());
-			}
-			else
-			{
-				workHours = Int32.Parse(Console.ReadLine()) * allowWorkHoursInDay;
-			}
-			return (workMoney, workHours);
-		}
+		//TODO: wageNumber - в перечисление (V)
 	}
 }

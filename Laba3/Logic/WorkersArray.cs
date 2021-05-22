@@ -44,7 +44,7 @@ namespace Laba3.Logic
 		/// <param name="newElement">Персона подлежащая добавлению</param>
 		public void AddElement(Worker newElement)
 		{
-			int elementCount = Count;
+			var elementCount = Count;
 
 			Array.Resize(ref _localWorkerArray, elementCount + 1);
 
@@ -58,7 +58,7 @@ namespace Laba3.Logic
 		/// <returns> Массив содержащий информацию про каждого работника </returns>
 		public string[] WorkerInfo()
 		{
-			string[] workerInfoArray = new string[Count];
+			var workerInfoArray = new string[Count];
 
 			for (int i = 0; i < Count; i++)
 			{
@@ -74,7 +74,7 @@ namespace Laba3.Logic
 		/// (нумерация начинается с нуля)</param>
 		public void DeleteElement(int index)
 		{
-			int elementCount = Count;
+			var elementCount = Count;
 
 			if (index < Count )
 			{
@@ -108,6 +108,14 @@ namespace Laba3.Logic
 			}
 		}
 
+
+		/// <summary>
+		/// Метод возвращающий индекс работника найденного по имени и фамилии
+		/// из списка работников
+		/// </summary>
+		/// <param name="secondName">Фамилия искомого работника</param>
+		/// <param name="firstName">Имя искомого работника</param>
+		/// <returns>индекс работника в списке</returns>
 		public int FindByName(string secondName, string firstName)
 		{
 			for(int i=0; i<Count;i++)
@@ -133,7 +141,7 @@ namespace Laba3.Logic
 		/// <returns>Массив работников</returns>
 		public static WorkersArray Create(int quantity, int allowWorkHoursInDay)
 		{
-			WorkersArray workersArray = new WorkersArray();
+			var workersArray = new WorkersArray();
 
 			for (int i = 0; i < quantity; i++)
 			{
@@ -154,7 +162,7 @@ namespace Laba3.Logic
 		/// <returns>Массив работников</returns>
 		public static WorkersArray CreateFullInfo(int quantity, int allowWorkHoursInDay)
 		{
-			WorkersArray workersArray = new WorkersArray();
+			var workersArray = new WorkersArray();
 
 			for (int i = 0; i < quantity; i++)
 			{

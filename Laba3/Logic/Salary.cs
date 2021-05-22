@@ -30,12 +30,6 @@ namespace Laba3.Logic
 		/// </summary>
 		private int _daysOfWork;
 
-
-		/// <summary>
-		/// Конструктор класса без параметров
-		/// </summary>
-		public Salary(): base() { }
-
 		/// <summary>
 		/// Конструктор класса с 1 параметром
 		/// </summary>
@@ -51,20 +45,24 @@ namespace Laba3.Logic
 		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
 		/// один день</param>
 		/// <param name="workHours">Количество часов отработанных за выбранный месяц</param>
-		public Salary(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours): base(date, allowToWorkHoursInDay) 
+		//TODO: (V)
+		public Salary(
+			DateTime date, 
+			int priceOfWork, 
+			int allowToWorkHoursInDay, 
+			int workHours): base(date, allowToWorkHoursInDay) 
 		{
 			PriceOfWork = priceOfWork;
 			WorkHours = workHours;
 		}
 
-
 		/// <summary>
-		/// Свойство возвращающее строку с типом зарплаты
+		/// <inheritdoc/>
 		/// </summary>
 		public override string NameOfWageType => "Работник получает оклад";
 
 		/// <summary>
-		/// Свойство принимающее с проверкой и возвращающее стоимость часа работ
+		/// <inheritdoc/>
 		/// </summary>
 		public override int PriceOfWork
 		{
@@ -110,9 +108,7 @@ namespace Laba3.Logic
 		}
 
 		/// <summary>
-		/// Свойство принимающее с проверкой и возвращающее 
-		/// количество отработанных часов с последующей конвертацией
-		/// в количесвто отработанных дней
+		/// <inheritdoc/>
 		/// </summary>
 		public override int WorkHours
 		{
@@ -129,7 +125,7 @@ namespace Laba3.Logic
 		}
 
 		/// <summary>
-		/// Метод расчета ЗП за конкретный месяц
+		/// <inheritdoc/>
 		/// </summary>
 		public override void CalculateAmountMoney()
 		{

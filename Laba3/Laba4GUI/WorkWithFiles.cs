@@ -40,7 +40,7 @@ namespace Laba4GUI
 					fileWorkerInfo[i] = sr.ReadLine();
 					string[] stringWorkerInfo = fileWorkerInfo[i].Split(new char[] { '|' });
 					Worker workerForAdd = new Worker(Int32.Parse(stringWorkerInfo[7]));
-					workerForAdd.WageType(Int32.Parse(stringWorkerInfo[4]));
+					workerForAdd.WageType(WageType.NonIdentified); /////// Заглушка
 					workerForAdd.DesiredDate(extractDate());
 					workerForAdd.FirstName = stringWorkerInfo[1];
 					workerForAdd.SecondName = stringWorkerInfo[0];
@@ -89,7 +89,7 @@ namespace Laba4GUI
 			workerTmp.FirstName + "|" +
 			workerTmp.Wage.NameOfWageType + "|" +
 			workerTmp.Wage.AmountMoney + "|" +
-			workerTmp.NumberOfTypeWage + "|" +
+			workerTmp.TypeOfWage + "|" +
 			workerTmp.Wage.PriceOfWork + "|" +
 			workerTmp.Wage.WorkHours + "|" +
 			workerTmp.Wage.AllowToWorkHoursInDay;

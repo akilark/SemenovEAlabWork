@@ -29,15 +29,15 @@ namespace Laba3.Logic
 		private int _allowWorkHoursInDay;
 
 		/// <summary>
-		/// Поле класса хранящее номер типа начисления зарплат
+		/// Поле класса хранящее тип начисления зарплат
 		/// </summary>
-		private int _typeWage;
+		private WageType _typeWage = Logic.WageType.NonIdentified;
 
 
 		/// <summary>
 		/// Свойство возвращающее номер типи зарплаты
 		/// </summary>
-		public int NumberOfTypeWage => _typeWage;
+		public WageType TypeOfWage => _typeWage;
 
 		/// <summary>
 		/// Свойство возвращающее и принимающее с проверкой имя работника
@@ -122,27 +122,25 @@ namespace Laba3.Logic
 		/// Метод обрабатывающий вводимый тип зарплаты
 		/// </summary>
 		/// <param name="type">номер типа зарплаты</param>
-		public void WageType(int type)
+		public void WageType(WageType wageType)
 		{
-			if (type > 3 || type <= 0)
+			switch (wageType)
 			{
-				throw new Exception("Необходимо ввести число в диапазоне от 1 до 3");
-			}
-			_typeWage = type;
-			switch (type)
-			{
-				case 1:
+				case Logic.WageType.Salary:
 					{
+						_typeWage = Logic.WageType.Salary;
 						Wage = new Salary(_allowWorkHoursInDay);
 						break;
 					}
-				case 2:
+				case Logic.WageType.WageRate:
 					{
+						_typeWage = Logic.WageType.WageRate;
 						Wage = new WageRate(_allowWorkHoursInDay);
 						break;
 					}
-				default:
+				case Logic.WageType.HorlyPayment:
 					{
+						_typeWage = Logic.WageType.HorlyPayment;
 						Wage = new HorlyPayment(_allowWorkHoursInDay);
 						break;
 					}
@@ -159,9 +157,9 @@ namespace Laba3.Logic
 		/// все слова начинаются с большой буквы </returns>
 		public static string CorrectName(string name)
 		{
-			string nameTmp = "";
-			string outputName = "";
-			string[] subString =
+			var nameTmp = "";
+			var outputName = "";
+			var subString =
 				name.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
 
 			foreach (string subTmp in subString)
@@ -215,12 +213,12 @@ namespace Laba3.Logic
 		/// составных частей имени или фамилии!"></exception>
 		private static void CheckQuantityName(string name)
 		{
-			string[] subString = name.Split('-');
-			int allowQuantity = 2;
+			var subString = name.Split('-');
+			var allowQuantity = 2;
 
 			if (subString.Length > allowQuantity)
 			{
-				string mistakeInfoTmp = $"Недопустимо использование " +
+				var mistakeInfoTmp = $"Недопустимо использование " +
 					$"более {allowQuantity} составных частей имени или фамилии!";
 				throw new FormatException(mistakeInfoTmp);
 			}
@@ -234,8 +232,8 @@ namespace Laba3.Logic
 		/// <exception cref="Недопустимый размер имени или фамилии!"></exception>
 		private static void CheckNamelength(string name)
 		{
-			int nameMin = 2;
-			int nameMax = 30;
+			var nameMin = 2;
+			var nameMax = 30;
 
 			if (name.Length < nameMin || name.Length > nameMax)
 			{
@@ -253,13 +251,14 @@ namespace Laba3.Logic
 		/// </exception>
 		private static void CheckNamePattern(string name)
 		{
-			string pattern = @"[^a-zа-яё-]";
-			Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
-			Match mat = reg.Match(name);
+			var pattern = @"[^a-zа-яё-]";
+			//TODO: RSDN(V)
+			var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+			var match = regex.Match(name);
 
-			if (mat.Success)
+			if (match.Success)
 			{
-				string mistakeInfoTmp = "Имя и Фамилия могут содержать только буквы!";
+				var mistakeInfoTmp = "Имя и Фамилия могут содержать только буквы!";
 				throw new FormatException(mistakeInfoTmp);
 			}
 		}
