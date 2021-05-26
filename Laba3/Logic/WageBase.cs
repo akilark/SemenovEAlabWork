@@ -9,15 +9,12 @@ namespace Laba3.Logic
 	/// </summary>
 	public abstract class WageBase
 	{
+		//TODO: RSDN(V)
 		/// <summary>
 		/// Поле класса определяющее минимально допустимое время работы в часах
 		/// </summary>
-		protected int minTime = 1;
+		protected int MinTime = 1;
 
-		/// <summary>
-		/// Поле класса хранящее значение ЗП за определенный месяц
-		/// </summary>
-		protected int amountMoney;
 
 		/// <summary>
 		/// Поле класса хранящее значение рассматриваемой даты
@@ -34,7 +31,6 @@ namespace Laba3.Logic
 		/// </summary>
 		private int _allowToWorkHoursInDay;
 
-		//TODO:(V)
 		/// <summary>
 		/// Конструктор класса с 1 параметром
 		/// </summary>
@@ -45,7 +41,6 @@ namespace Laba3.Logic
 			AllowToWorkHoursInDay = allowToWorkHoursInDay;
 		}
 
-		//TODO:(V)
 		/// <summary>
 		/// Конструкор класса с 2 параметрами
 		/// </summary>
@@ -66,8 +61,8 @@ namespace Laba3.Logic
 		{
 			get
 			{
-				CalculateAmountMoney();
-				return amountMoney;
+				//TODO: Сделать с возвращаемым значением(V)
+				return CalculateAmountMoney();
 			}
 		}
 		
@@ -126,7 +121,7 @@ namespace Laba3.Logic
 			}
 			set
 			{
-				if (value >= minTime && value <= 24)
+				if (value >= MinTime && value <= 24)
 				{
 					_allowToWorkHoursInDay = value;
 				}
@@ -136,7 +131,7 @@ namespace Laba3.Logic
 		/// <summary>
 		/// Метод расчета заработанных денег работником
 		/// </summary>
-		public abstract void CalculateAmountMoney();
+		public abstract int CalculateAmountMoney();
 
 
 		/// <summary>
@@ -144,11 +139,11 @@ namespace Laba3.Logic
 		/// </summary>
 		protected void CheckInputInformationForWorkHours()
 		{
-			if (_allowToWorkDaysInMonth == 0)
+			if (Date == null)
 			{
 				throw new Exception($"Сначала необходимо задать дату");
 			}
-			if (AllowToWorkHoursInDay == 0)
+			if (Date == null)
 			{
 				throw new Exception($"Сначала необходимо задать допустимое " +
 					$"количество часов работы в день");
@@ -161,9 +156,10 @@ namespace Laba3.Logic
 		/// </summary>
 		protected void CheckInformationAboutWorkDaysInMounth()
 		{
-			if (WorkDaysInMonth == 0)
+			if (Date == null)
 			{
-				throw new Exception("Перед расчетом заработной платы введите месяц расчета");
+				throw new Exception("Перед расчетом заработной платы " +
+					"введите месяц расчета");
 			}
 		}
 
@@ -179,7 +175,8 @@ namespace Laba3.Logic
 			{
 				if (dateTime.Year >= DateTime.Now.Year)
 				{
-					throw new Exception("Доступна информация о зарплате только за предыдущие месяцы");
+					throw new Exception("Доступна информация о зарплате " +
+						"только за предыдущие месяцы");
 				}
 			}
 			if (dateTime.Year < 2000)
@@ -200,7 +197,8 @@ namespace Laba3.Logic
 			var Count = 0;
 			while (true)
 			{
-				if (dateTime.DayOfWeek != DayOfWeek.Saturday && dateTime.DayOfWeek != DayOfWeek.Sunday)
+				if (dateTime.DayOfWeek != DayOfWeek.Saturday && 
+					dateTime.DayOfWeek != DayOfWeek.Sunday)
 				{
 					Count += 1;
 				}

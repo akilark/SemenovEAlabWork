@@ -252,7 +252,6 @@ namespace Laba3.Logic
 		private static void CheckNamePattern(string name)
 		{
 			var pattern = @"[^a-zа-яё-]";
-			//TODO: RSDN(V)
 			var regex = new Regex(pattern, RegexOptions.IgnoreCase);
 			var match = regex.Match(name);
 

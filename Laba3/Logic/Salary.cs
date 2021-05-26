@@ -45,7 +45,6 @@ namespace Laba3.Logic
 		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
 		/// один день</param>
 		/// <param name="workHours">Количество часов отработанных за выбранный месяц</param>
-		//TODO: (V)
 		public Salary(
 			DateTime date, 
 			int priceOfWork, 
@@ -127,10 +126,10 @@ namespace Laba3.Logic
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public override void CalculateAmountMoney()
+		public override int CalculateAmountMoney()
 		{
 			CheckInformationAboutWorkDaysInMounth();
-			amountMoney = _priceOfWork * _daysOfWork / WorkDaysInMonth;
+			return _priceOfWork * _daysOfWork / WorkDaysInMonth;
 		}
 
 	}

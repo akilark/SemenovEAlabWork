@@ -4,7 +4,7 @@
 namespace Laba3.Logic
 {
 	/// <summary>
-	/// Класс- наследник от WageBase, определяет методы, поля и свойства 
+	/// Класс- наследник от <see cref="WageBase">, определяет методы, поля и свойства 
 	/// для типа зарплаты - тарифная ставка
 	/// </summary>
 	public class WageRate : WageBase
@@ -30,8 +30,6 @@ namespace Laba3.Logic
 		/// </summary>
 		private int _daysOfWork;
 
-
-
 		/// <summary>
 		/// Конструктор класса с 1 параметром
 		/// </summary>
@@ -47,7 +45,11 @@ namespace Laba3.Logic
 		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
 		/// один день</param>
 		/// <param name="workHours">Количество часов отработанных за выбранный месяц</param>
-		public WageRate(DateTime date, int priceOfWork, int allowToWorkHoursInDay, int workHours) : base(date, allowToWorkHoursInDay)
+		public WageRate(
+			DateTime date, 
+			int priceOfWork, 
+			int allowToWorkHoursInDay, 
+			int workHours) : base(date, allowToWorkHoursInDay)
 		{
 			PriceOfWork = priceOfWork;
 			WorkHours = workHours;
@@ -93,9 +95,11 @@ namespace Laba3.Logic
 			}
 			private set
 			{
+				//TODO: Не связан контекст(v)
 				if (value <= WorkDaysInMonth)
 				{
 					_daysOfWork = value;
+					_workHours = value * AllowToWorkHoursInDay;
 				}
 				else
 				{
@@ -125,10 +129,10 @@ namespace Laba3.Logic
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public override void CalculateAmountMoney()
+		public override int CalculateAmountMoney()
 		{
 			CheckInformationAboutWorkDaysInMounth();
-			amountMoney = _priceOfWork * _daysOfWork;
+			return _priceOfWork * _daysOfWork;
 		}
 	}
 }

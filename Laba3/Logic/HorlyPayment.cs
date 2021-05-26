@@ -29,7 +29,8 @@ namespace Laba3.Logic
 		/// </summary>
 		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
 		/// один день</param>
-		public HorlyPayment(int allowToWorkHoursInDay) : base(allowToWorkHoursInDay) { }
+		public HorlyPayment(int allowToWorkHoursInDay) : 
+			base(allowToWorkHoursInDay) { }
 
 		/// <summary>
 		/// Конструкор класса с 4 параметрами
@@ -90,29 +91,27 @@ namespace Laba3.Logic
 			set
 			{
 				CheckInputInformationForWorkHours();
-				if (value >= minTime && value <= WorkDaysInMonth * AllowToWorkHoursInDay)
+				if (value >= MinTime && value <= WorkDaysInMonth * AllowToWorkHoursInDay)
 				{
 					_workHours = value;
 				}
 				else
 				{
 					throw new Exception($"Время работы в месяц {Date.Month}.{Date.Year} " +
-						$"должно больше {minTime} часа и меньше " +
+						$"должно больше {MinTime} часа и меньше " +
 						$"{WorkDaysInMonth * AllowToWorkHoursInDay}");
 				}
-				
 			}
 		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public override void CalculateAmountMoney()
+		public override int CalculateAmountMoney()
 		{
 			CheckInformationAboutWorkDaysInMounth();
-			amountMoney = _priceOfWork * _workHours;
+			return _priceOfWork * _workHours;
 
 		}
 	}
-
 }

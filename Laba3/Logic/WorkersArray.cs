@@ -102,9 +102,7 @@ namespace Laba3.Logic
 			}
 			else
 			{
-				index = Count - 1;
-
-				return _localWorkerArray[index];
+				return _localWorkerArray[Count - 1];
 			}
 		}
 
@@ -160,7 +158,9 @@ namespace Laba3.Logic
 		/// <param name="allowWorkHoursInDay">Сколько часов в день разрешается 
 		/// работать</param>
 		/// <returns>Массив работников</returns>
-		public static WorkersArray CreateFullInfo(int quantity, int allowWorkHoursInDay)
+		public static WorkersArray CreateFullInfo(
+			int quantity, 
+			int allowWorkHoursInDay)
 		{
 			var workersArray = new WorkersArray();
 

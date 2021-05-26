@@ -43,7 +43,9 @@ namespace Laba3UI
 		/// <param name="outputMessage">Запрос пользователю</param>
 		/// <param name="validationAction">действие, которое необходимо выполнить
 		/// после запроса пользователю</param>
-		private static void ValidateInputInfo(string outputMessage, Action validationAction)
+		private static void ValidateInputInfo(
+			string outputMessage, 
+			Action validationAction)
 		{
 			while (true)
 			{
@@ -68,7 +70,9 @@ namespace Laba3UI
 		/// <param name="workerTmp">Работник</param>
 		/// <param name="allowWorkHoursInDay">Допустимое число часов 
 		/// работы в день</param>
-		private static void PersonInformationAdd(Worker workerTmp, int allowWorkHoursInDay)
+		private static void PersonInformationAdd(
+			Worker workerTmp, 
+			int allowWorkHoursInDay)
 		{
 			Console.WriteLine("Выберите тип зарплаты для работника " +
 						$"{workerTmp.FirstName} {workerTmp.SecondName}" +
@@ -80,20 +84,20 @@ namespace Laba3UI
 			switch (Int32.Parse(Console.ReadLine()))
 			{
 				case 1:
-					{
-						wageType = WageType.Salary;
-						break;
-					}
+				{
+					wageType = WageType.Salary;
+					break;
+				}
 				case 2:
-					{
-						wageType = WageType.WageRate;
-						break;
-					}
+				{
+					wageType = WageType.WageRate;
+					break;
+				}
 				case 3:
-					{
-						wageType = WageType.HorlyPayment;
-						break;
-					}
+				{
+					wageType = WageType.HorlyPayment;
+					break;
+				}
 				default:
 					{
 						throw new Exception("Такого типа зарплаты нет");
@@ -111,7 +115,7 @@ namespace Laba3UI
 						"заработок работника ? В формате ХХ",
 					() =>
 					{
-						(int,int) yearMonth= DataRequest();
+						(int,int) yearMonth = YearMonth();
 						workerTmp.DesiredDate(new DateTime(
 							yearMonth.Item1, yearMonth.Item2, 1));
 					}
@@ -130,8 +134,8 @@ namespace Laba3UI
 					() =>
 					{
 						int hours = workerTmp.TypeOfWage == WageType.HorlyPayment
-						?Int32.Parse(Console.ReadLine())
-						:Int32.Parse(Console.ReadLine()) * allowWorkHoursInDay;
+							? Int32.Parse(Console.ReadLine())
+							: Int32.Parse(Console.ReadLine()) * allowWorkHoursInDay;
 						workerTmp.Wage.WorkHours = hours;
 
 					}
@@ -148,7 +152,7 @@ namespace Laba3UI
 		/// Метод запроса даты у пользователя
 		/// </summary>
 		/// <returns>Год, месяц</returns>
-		private static (int,int) DataRequest()
+		private static (int,int) YearMonth()
 		{
 			int month = Int32.Parse(Console.ReadLine());
 			Console.WriteLine($"За какой год необходимо посмотреть " +
@@ -165,25 +169,13 @@ namespace Laba3UI
 		/// <returns>Строка с запросом ЗП за единицу времени</returns>
 		private static string MoneyRequest(WageType wageType)
 		{
-			switch (wageType)
+			var moneyRequest = new Dictionary<WageType, string>
 			{
-				case WageType.HorlyPayment:
-					{
-						return "Введите сколько денег зарабатывает работник за час";
-					}
-				case WageType.WageRate:
-					{
-						return "Введите сколько денег зарабатывает работник за день";
-					}
-				case WageType.Salary:
-					{
-						return "Введите сколько денег зарабатывает работник за месяц";
-					}
-				default:
-					{
-						throw new Exception($"Неверный тип заработной платы");
-					}
-			}
+				{WageType.HorlyPayment, "Введите сколько денег зарабатывает работник за час"},
+				{WageType.Salary,"Введите сколько денег зарабатывает работник за месяц" },
+				{WageType.WageRate, "Введите сколько денег зарабатывает работник за день"}
+			};
+			return moneyRequest[wageType];
 		}
 
 		/// <summary>
@@ -194,25 +186,13 @@ namespace Laba3UI
 		/// <returns>Строка с запросом временного отрезка</returns>
 		private static string TimeRequest(WageType wageType)
 		{
-			switch (wageType)
+			var timeRequest = new Dictionary<WageType, string>
 			{
-				case WageType.HorlyPayment:
-					{
-						return "Введите количество отработанных часов";
-					}
-				case WageType.WageRate:
-					{
-						return "Введите количество отработанных дней";
-					}
-				case WageType.Salary:
-					{
-						return "Введите количество отработанных дней";
-					}
-				default:
-					{
-						throw new Exception($"Неверный тип заработной платы");
-					}
-			}
+				{WageType.HorlyPayment, "Введите количество отработанных часов"},
+				{WageType.Salary,"Введите количество отработанных дней" },
+				{WageType.WageRate, "Введите количество отработанных дней"}
+			};
+			return timeRequest[wageType];
 		}
 
 		/// <summary>
@@ -229,6 +209,5 @@ namespace Laba3UI
 			}
 			Console.WriteLine();
 		}
-		//TODO: wageNumber - в перечисление (V)
 	}
 }
