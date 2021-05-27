@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Laba3.Logic;
 using System.IO;
 using System.Text;
@@ -14,13 +15,19 @@ namespace Laba4GUI
 		AddWorkerForm addWorkerForm = null;
 		
 		internal WorkersArray workerInfoList;
-		string filepath = @"C:\Users\akila\source\repos\akilark\SemenovEAlabWork\Laba3\data\202104.kek";
-		public WorkWithFiles files;
+		string filepath = @"C:\";
+		public WorkWithFiles filesWork;
+		BindingList<Worker> bindingList;
 
+		#if !DEBUG
+		CreateRandomData.Visible = false
+		#endif
 
 		public StartForm()
 		{
 			InitializeComponent();
+			
+			
 		}
 
 		private void StartForm_Load(object sender, EventArgs e)
@@ -28,10 +35,8 @@ namespace Laba4GUI
 			searchForm = new SearchForm();
 			addWorkerForm = new AddWorkerForm();
 			resetButton.Visible = false;
-			files = new WorkWithFiles(filepath);
-			files.ReadFileInfo();
-			workerInfoList = files.WorkerArray;
-			fillingGridParam();
+			
+
 
 		}
 
@@ -53,9 +58,9 @@ namespace Laba4GUI
 		{
 			this.Hide();
 			addWorkerForm.ShowDialog();
-			files = new WorkWithFiles(filepath);
-			files.ReadFileInfo();
-			workerInfoList = files.WorkerArray;
+			//files = new WorkWithFiles(filepath);
+		//	files.ReadFileInfo();
+		//	workerInfoList = files.WorkerArray;
 			fillingGridParam();
 			this.Show();
 		}
@@ -79,16 +84,16 @@ namespace Laba4GUI
 
 		internal void fillingGridParam()
 		{
-			workerListDataGrid.Rows.Clear();
-			foreach (Worker info in workerInfoList.Workers)
-			{
-				workerListDataGrid.Rows.Add(new string[] {
-					info.SecondName, 
-					info.FirstName, 
-					info.Wage.NameOfWageType,
-					info.Wage.AmountMoney.ToString() });
-			}
-			
+			bindingList = new BindingList<Worker>(filesWork.ReadFileInfo());
+			var source = new BindingSource(bindingList, null);
+			workerListDataGrid.DataSource = source;
+			workerListDataGrid.Columns[0].HeaderText = "Фамилия";
+			workerListDataGrid.Columns[1].HeaderText = "Имя";
+			workerListDataGrid.Columns[2].HeaderText = "Зарплата за месяц";
+			workerListDataGrid.Columns[3].HeaderText = "Месяц оплаты";
+			workerListDataGrid.Columns[5].HeaderText = "тип ЗП";
+			workerListDataGrid.Columns[4].Visible = false;
+
 		}
 
 		private void deleteButton_Click(object sender, EventArgs e)
@@ -98,7 +103,7 @@ namespace Laba4GUI
 				workerListDataGrid.Rows[indexDataGrid].Cells[0].Value.ToString(), 
 				workerListDataGrid.Rows[indexDataGrid].Cells[1].Value.ToString());
 			workerInfoList.DeleteElement(indexRemove);
-			files.rewriteFile(workerInfoList);
+			//files.rewriteFile(workerInfoList);
 			workerListDataGrid.Rows.Remove(workerListDataGrid.CurrentRow);
 		}
 
@@ -106,5 +111,32 @@ namespace Laba4GUI
 		{
 
 		}
+
+		private void DownloadButton_Click(object sender, EventArgs e)
+		{
+			FolderBrowserDialog DirDialog = new FolderBrowserDialog();
+			DirDialog.Description = "Выбор директории";
+			DirDialog.SelectedPath = filepath;
+
+			if (DirDialog.ShowDialog() == DialogResult.OK)
+			{
+				filepath = DirDialog.SelectedPath + @"\WorkersData.kek";
+				filesWork = new WorkWithFiles(filepath);
+				fillingGridParam();
+				
+			}
+		}
+
+		private void CreateRandomData_Click(object sender, EventArgs e)
+		{
+			var workerTmp = new List<Worker>();
+			for(int i = 0; i<10; i++)
+			{
+				workerTmp.Add(RandomWorker.WorkerFullInformation(8));
+			}
+			filesWork.rewriteFile(workerTmp);
+			fillingGridParam();
+		}
+
 	}
 }

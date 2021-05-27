@@ -53,21 +53,21 @@ namespace Laba4GUI
 		{
 			wageTypeInfoChange("Ставка за месяц:", "Дней отработано:");
 			visibleChange(true);
-			workerTmp.WageType(1);
+			workerTmp.WageType(WageType.Salary);
 		}
 
 		private void wageRateRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			wageTypeInfoChange("Ставка за день:", "Дней отработано:");
 			visibleChange(true);
-			workerTmp.WageType(2);
+			workerTmp.WageType(WageType.WageRate);
 		}
 
 		private void horlyPaymentRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			wageTypeInfoChange("Ставка за час:", "Часов отработано:");
 			visibleChange(true);
-			workerTmp.WageType(3);
+			workerTmp.WageType(WageType.HorlyPayment);
 		}
 
 		private void addButton_Click(object sender, EventArgs e)
@@ -87,7 +87,7 @@ namespace Laba4GUI
 					}
 					else
 					{
-						workerTmp.DesiredDate(files.extractDate());
+						workerTmp.DesiredDate(new DateTime(2011,11,11)); //TODO: Заглушка
 						if (horlyPaymentRadioButton.Checked == true)
 						{
 							workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), Int32.Parse(workHoursTextBox.Text));
@@ -96,7 +96,7 @@ namespace Laba4GUI
 						{
 							workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), Int32.Parse(workHoursTextBox.Text)* allowWorkHours);
 						}
-						files.WriteWorkerInfoToFile(workerTmp);
+					//	files.WriteWorkerInfoToFile(workerTmp);
 						erasePreviousData();
 						MessageBox.Show("Работник успешно добавлен", "Успех");
 					}

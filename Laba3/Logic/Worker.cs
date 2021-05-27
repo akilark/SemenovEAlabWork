@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 
 namespace Laba3.Logic
 {
 	/// <summary>
 	/// Класс работник
 	/// </summary>
+	[Serializable]
 	public class Worker
 	{
 		/// <summary>
@@ -29,15 +31,20 @@ namespace Laba3.Logic
 		private int _allowWorkHoursInDay;
 
 		/// <summary>
-		/// Поле класса хранящее тип начисления зарплат
+		/// Свойство возвращающее и принимающее с проверкой фамилию работника
 		/// </summary>
-		private WageType _typeWage = Logic.WageType.NonIdentified;
-
-
-		/// <summary>
-		/// Свойство возвращающее номер типи зарплаты
-		/// </summary>
-		public WageType TypeOfWage => _typeWage;
+		public string SecondName
+		{
+			get
+			{
+				return _secondName;
+			}
+			set
+			{
+				CheckName(value);
+				_secondName = CorrectName(value);
+			}
+		}
 
 		/// <summary>
 		/// Свойство возвращающее и принимающее с проверкой имя работника
@@ -55,22 +62,31 @@ namespace Laba3.Logic
 			}
 		}
 
+
+		[XmlIgnore]
+		public int AmountMoney => Wage.AmountMoney;
+
+
+		[XmlIgnore]
+		public DateTime dateTime => Wage.Date;
+
 		/// <summary>
-		/// Свойство возвращающее и принимающее с проверкой фамилию работника
+		/// Свойство возвращающее номер типи зарплаты
 		/// </summary>
-		public string SecondName
+		public WageType TypeOfWage
 		{
 			get
 			{
-				return _secondName;
-			}
-			set
-			{
-				CheckName(value);
-				_secondName = CorrectName(value);
+				return Wage.WageType;
 			}
 		}
 
+		/// <summary>
+		/// Конструктор класса без параметров, нужен для XML сериализации
+		/// </summary>
+		public Worker()
+		{
+		}
 
 		/// <summary>
 		/// Конструктор класса с 1 параметром
@@ -118,6 +134,9 @@ namespace Laba3.Logic
 			return Wage.AmountMoney;
 		}
 
+		[XmlIgnore]
+		public string TypeWageName => Wage.NameOfWageType;
+
 		/// <summary>
 		/// Метод обрабатывающий вводимый тип зарплаты
 		/// </summary>
@@ -128,19 +147,16 @@ namespace Laba3.Logic
 			{
 				case Logic.WageType.Salary:
 					{
-						_typeWage = Logic.WageType.Salary;
 						Wage = new Salary(_allowWorkHoursInDay);
 						break;
 					}
 				case Logic.WageType.WageRate:
 					{
-						_typeWage = Logic.WageType.WageRate;
 						Wage = new WageRate(_allowWorkHoursInDay);
 						break;
 					}
 				case Logic.WageType.HorlyPayment:
 					{
-						_typeWage = Logic.WageType.HorlyPayment;
 						Wage = new HorlyPayment(_allowWorkHoursInDay);
 						break;
 					}

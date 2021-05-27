@@ -6,6 +6,7 @@ namespace Laba3.Logic
 	/// Класс- наследник от WageBase, определяет методы, поля и свойства 
 	/// для типа зарплаты - почасовая оплата
 	/// </summary>
+	[Serializable]
 	public class HorlyPayment : WageBase
 	{
 		/// <summary>
@@ -23,6 +24,19 @@ namespace Laba3.Logic
 		/// Поле класса хранящее значение стоимости часа работ
 		/// </summary>
 		private int _priceOfWork;
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		public override WageType WageType => WageType.HorlyPayment;
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		public HorlyPayment()
+		{
+
+		}
 
 		/// <summary>
 		/// Конструктор класса с 1 параметром
@@ -55,6 +69,7 @@ namespace Laba3.Logic
 		/// <inheritdoc/>
 		/// </summary>
 		public override string NameOfWageType => "Почасовая оплата";
+
 
 		/// <summary>
 		/// <inheritdoc/>

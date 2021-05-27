@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Xml.Serialization;
 
 namespace Laba3.Logic
 {
@@ -7,6 +7,7 @@ namespace Laba3.Logic
 	/// Класс- наследник от <see cref="WageBase">, определяет методы, поля и свойства 
 	/// для типа зарплаты - тарифная ставка
 	/// </summary>
+	[Serializable]
 	public class WageRate : WageBase
 	{
 		/// <summary>
@@ -29,6 +30,20 @@ namespace Laba3.Logic
 		/// Поле класса содержащее количество отработанных дней в месяце
 		/// </summary>
 		private int _daysOfWork;
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		public override WageType WageType => WageType.WageRate;
+
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		public WageRate()
+		{
+
+		}
 
 		/// <summary>
 		/// Конструктор класса с 1 параметром
@@ -59,7 +74,7 @@ namespace Laba3.Logic
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public override string NameOfWageType => "Работник получает ставку";
+		public override string NameOfWageType => "Ставку";
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -83,10 +98,12 @@ namespace Laba3.Logic
 			}
 		}
 
+
 		/// <summary>
 		/// Свойство принимающее с проверкой и возвращающее 
 		/// количество отработанных дней
 		/// </summary>
+		[XmlIgnore]
 		public int DayOfWork
 		{
 			get

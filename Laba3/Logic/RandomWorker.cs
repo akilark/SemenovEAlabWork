@@ -98,14 +98,14 @@ namespace Laba3.Logic
 			
 			Array wageTypeArray = Enum.GetValues(typeof(WageType));
 			
-			switch ((WageType)wageTypeArray.GetValue(_rand.Next(wageTypeArray.Length)))
+			switch ((WageType)wageTypeArray.GetValue(_rand.Next(wageTypeArray.Length-1)))
 			{
 				case WageType.Salary:
 					{
 						workerTmp.WageType(WageType.Salary);
 						workerTmp.DesiredDate(LastMonth);
 						workerTmp.MoneyEarnedInMonth(_rand.Next(24000, 32000),
-							_rand.Next(0,150));
+							_rand.Next(1,150));
 						break;
 					}
 				case WageType.WageRate:
@@ -113,7 +113,7 @@ namespace Laba3.Logic
 						workerTmp.WageType(WageType.WageRate);
 						workerTmp.DesiredDate(LastMonth);
 						workerTmp.MoneyEarnedInMonth(_rand.Next(600, 1500), 
-							_rand.Next(0, 150));
+							_rand.Next(1, 150));
 						break;
 					}
 				case WageType.HorlyPayment:
@@ -121,7 +121,7 @@ namespace Laba3.Logic
 						workerTmp.WageType(WageType.HorlyPayment);
 						workerTmp.DesiredDate(LastMonth);
 						workerTmp.MoneyEarnedInMonth(_rand.Next(50, 300), 
-							_rand.Next(0, 150));
+							_rand.Next(1, 150));
 						break;
 					}
 			}

@@ -36,11 +36,9 @@ namespace Laba4GUI
 			this.resetButton = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.workerListDataGrid = new System.Windows.Forms.DataGridView();
-			this.SecondName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.WageType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ammountMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.changeButton = new System.Windows.Forms.Button();
+			this.DownloadButton = new System.Windows.Forms.Button();
+			this.CreateRandomData = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.workerListDataGrid)).BeginInit();
 			this.SuspendLayout();
@@ -114,48 +112,11 @@ namespace Laba4GUI
 			// workerListDataGrid
 			// 
 			this.workerListDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.workerListDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SecondName,
-            this.FirstName,
-            this.WageType,
-            this.ammountMoney});
 			this.workerListDataGrid.Location = new System.Drawing.Point(6, 22);
 			this.workerListDataGrid.Name = "workerListDataGrid";
 			this.workerListDataGrid.Size = new System.Drawing.Size(543, 264);
 			this.workerListDataGrid.TabIndex = 9;
 			this.workerListDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workerListDataGrid_CellContentClick);
-			// 
-			// SecondName
-			// 
-			this.SecondName.Frozen = true;
-			this.SecondName.HeaderText = "Фамилия";
-			this.SecondName.Name = "SecondName";
-			this.SecondName.ReadOnly = true;
-			this.SecondName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			// 
-			// FirstName
-			// 
-			this.FirstName.Frozen = true;
-			this.FirstName.HeaderText = "Имя";
-			this.FirstName.Name = "FirstName";
-			this.FirstName.ReadOnly = true;
-			this.FirstName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			// 
-			// WageType
-			// 
-			this.WageType.Frozen = true;
-			this.WageType.HeaderText = "Тип ЗП";
-			this.WageType.Name = "WageType";
-			this.WageType.ReadOnly = true;
-			this.WageType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.WageType.Width = 200;
-			// 
-			// ammountMoney
-			// 
-			this.ammountMoney.HeaderText = "Доход за месяц";
-			this.ammountMoney.Name = "ammountMoney";
-			this.ammountMoney.ReadOnly = true;
-			this.ammountMoney.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			// 
 			// changeButton
 			// 
@@ -167,11 +128,34 @@ namespace Laba4GUI
 			this.changeButton.UseVisualStyleBackColor = true;
 			this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
 			// 
+			// DownloadButton
+			// 
+			this.DownloadButton.Location = new System.Drawing.Point(12, 313);
+			this.DownloadButton.Name = "DownloadButton";
+			this.DownloadButton.Size = new System.Drawing.Size(75, 23);
+			this.DownloadButton.TabIndex = 10;
+			this.DownloadButton.Text = "Загрузить";
+			this.DownloadButton.UseCompatibleTextRendering = true;
+			this.DownloadButton.UseVisualStyleBackColor = true;
+			this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
+			// 
+			// CreateRandomData
+			// 
+			this.CreateRandomData.Location = new System.Drawing.Point(134, 313);
+			this.CreateRandomData.Name = "CreateRandomData";
+			this.CreateRandomData.Size = new System.Drawing.Size(75, 23);
+			this.CreateRandomData.TabIndex = 11;
+			this.CreateRandomData.Text = "Заполнить";
+			this.CreateRandomData.UseVisualStyleBackColor = true;
+			this.CreateRandomData.Click += new System.EventHandler(this.CreateRandomData_Click);
+			// 
 			// StartForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(670, 348);
+			this.Controls.Add(this.CreateRandomData);
+			this.Controls.Add(this.DownloadButton);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.closeButton);
 			this.Name = "StartForm";
@@ -193,10 +177,8 @@ namespace Laba4GUI
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Button changeButton;
 		private System.Windows.Forms.DataGridView workerListDataGrid;
-		private System.Windows.Forms.DataGridViewTextBoxColumn SecondName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn WageType;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ammountMoney;
+		private System.Windows.Forms.Button DownloadButton;
+		private System.Windows.Forms.Button CreateRandomData;
 	}
 }
 

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Xml.Serialization;
 
 namespace Laba3.Logic
 {
@@ -7,6 +7,10 @@ namespace Laba3.Logic
 	/// Абстрактный класс определяющий основные методы, поля и свойства,
 	/// необходимые для расчета заработной платы
 	/// </summary>
+	[Serializable]
+	[XmlInclude(typeof(HorlyPayment))]
+	[XmlInclude(typeof(Salary))]
+	[XmlInclude(typeof(WageRate))]
 	public abstract class WageBase
 	{
 		//TODO: RSDN(V)
@@ -29,7 +33,17 @@ namespace Laba3.Logic
 		/// <summary>
 		/// Поле класса хранящее количество рабочих часов в дне
 		/// </summary>
-		private int _allowToWorkHoursInDay;
+		private int _allowToWorkHoursInDay = 8;
+
+		public virtual WageType WageType => WageType.NonIdentified;
+
+		/// <summary>
+		/// Конструктор класса без параметров, необходим для XML сериализации
+		/// </summary>
+		protected WageBase()
+		{
+		}
+
 
 		/// <summary>
 		/// Конструктор класса с 1 параметром
@@ -55,30 +69,39 @@ namespace Laba3.Logic
 
 
 		/// <summary>
+		/// Свойство принимающее с проверкой и возвращающее 
+		/// допустимое количество рабочих часов в дне
+		/// </summary>
+		public int AllowToWorkHoursInDay
+		{
+			get
+			{
+				return _allowToWorkHoursInDay;
+			}
+			set
+			{
+				if (value >= MinTime && value <= 24)
+				{
+					_allowToWorkHoursInDay = value;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Свойство возвращающее значение ЗП за конкретный месяц
 		/// </summary>
 		public int AmountMoney
 		{
 			get
 			{
-				//TODO: Сделать с возвращаемым значением(V)
 				return CalculateAmountMoney();
 			}
 		}
-		
 
-		
 		/// <summary>
 		/// Возвращает название типа заработной платы
 		/// </summary>
 		public abstract string NameOfWageType { get; }
-
-
-		/// <summary>
-		/// Свойство содержащее информацию о количестве денег, 
-		/// которое получает работник за единицу работы
-		/// </summary>
-		public abstract int PriceOfWork { get; set; }
 
 		/// <summary>
 		/// Свойство возвращающее дату и производящее определение корректности
@@ -99,6 +122,12 @@ namespace Laba3.Logic
 		}
 
 		/// <summary>
+		/// Свойство содержащее информацию о количестве денег, 
+		/// которое получает работник за единицу работы
+		/// </summary>
+		public abstract int PriceOfWork { get; set; }
+
+		/// <summary>
 		/// Свойство возвращающее допустимое количество дней в месяце для работы
 		/// </summary>
 		public int WorkDaysInMonth => _allowToWorkDaysInMonth;
@@ -108,25 +137,6 @@ namespace Laba3.Logic
 		/// </summary>
 		public abstract int WorkHours { get; set; }
 
-
-		/// <summary>
-		/// Свойство принимающее с проверкой и возвращающее 
-		/// допустимое количество рабочих часов в дне
-		/// </summary>
-		public int AllowToWorkHoursInDay
-		{
-			get
-			{
-				return _allowToWorkHoursInDay;
-			}
-			set
-			{
-				if (value >= MinTime && value <= 24)
-				{
-					_allowToWorkHoursInDay = value;
-				}
-			}
-		}
 
 		/// <summary>
 		/// Метод расчета заработанных денег работником
