@@ -9,7 +9,7 @@ namespace Laba4GUI
 	public class WorkWithFiles
 	{
 		private string _path;
-		XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Worker>));
+		private XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Worker>));
 
 		public WorkWithFiles(string path)
 		{

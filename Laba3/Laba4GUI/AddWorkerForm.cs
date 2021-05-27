@@ -13,12 +13,11 @@ namespace Laba4GUI
 {
 	public partial class AddWorkerForm : Form
 	{
-		int allowWorkHours = 8;
-		Worker workerTmp;
-		string filepath = @"C:\Users\akila\source\repos\akilark\SemenovEAlabWork\Laba3\data\202104.kek";
-		WorkWithFiles files;
+		
+		private int allowWorkHours = 8;
+		private Worker workerTmp;
 
-			public AddWorkerForm()
+		public AddWorkerForm()
 		{
 			InitializeComponent();
 		}
@@ -26,6 +25,7 @@ namespace Laba4GUI
 		private void closeButton_Click(object sender, EventArgs e)
 		{
 			this.Close();
+			
 		}
 
 		private void AddWorkerForm_Load(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace Laba4GUI
 			workerTmp = new Worker(allowWorkHours);
 			
 		}
-
+		
 		private void visibleChange(bool bl)
 		{
 			workHoursLabel.Visible = bl;
@@ -72,7 +72,6 @@ namespace Laba4GUI
 
 		private void addButton_Click(object sender, EventArgs e)
 		{
-			files = new WorkWithFiles(filepath);
 			try
 			{
 				if (secondNameTextBox.Text == "" || firstNameTextBox.Text == "")
@@ -96,7 +95,7 @@ namespace Laba4GUI
 						{
 							workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), Int32.Parse(workHoursTextBox.Text)* allowWorkHours);
 						}
-					//	files.WriteWorkerInfoToFile(workerTmp);
+					
 						erasePreviousData();
 						MessageBox.Show("Работник успешно добавлен", "Успех");
 					}

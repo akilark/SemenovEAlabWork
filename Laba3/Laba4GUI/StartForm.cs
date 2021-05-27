@@ -13,9 +13,7 @@ namespace Laba4GUI
 	{
 		SearchForm searchForm = null;
 		AddWorkerForm addWorkerForm = null;
-		
-		internal WorkersArray workerInfoList;
-		string filepath = @"C:\";
+		public string filepath = @"C:\";
 		public WorkWithFiles filesWork;
 		BindingList<Worker> bindingList;
 
@@ -33,7 +31,6 @@ namespace Laba4GUI
 		private void StartForm_Load(object sender, EventArgs e)
 		{
 			searchForm = new SearchForm();
-			addWorkerForm = new AddWorkerForm();
 			resetButton.Visible = false;
 			
 
@@ -56,6 +53,7 @@ namespace Laba4GUI
 
 		private void addButton_Click(object sender, EventArgs e)
 		{
+			addWorkerForm = new AddWorkerForm();
 			this.Hide();
 			addWorkerForm.ShowDialog();
 			//files = new WorkWithFiles(filepath);
@@ -99,12 +97,7 @@ namespace Laba4GUI
 		private void deleteButton_Click(object sender, EventArgs e)
 		{
 			int indexDataGrid = workerListDataGrid.CurrentRow.Index;
-			int indexRemove = workerInfoList.FindByName(
-				workerListDataGrid.Rows[indexDataGrid].Cells[0].Value.ToString(), 
-				workerListDataGrid.Rows[indexDataGrid].Cells[1].Value.ToString());
-			workerInfoList.DeleteElement(indexRemove);
-			//files.rewriteFile(workerInfoList);
-			workerListDataGrid.Rows.Remove(workerListDataGrid.CurrentRow);
+			bindingList.Remove(workerListDataGrid.CurrentRow.DataBoundItem as Worker);
 		}
 
 		private void groupBox1_Enter(object sender, EventArgs e)
@@ -138,5 +131,9 @@ namespace Laba4GUI
 			fillingGridParam();
 		}
 
+		private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			filesWork.rewriteFile(new List<Worker>(bindingList));
+		}
 	}
 }

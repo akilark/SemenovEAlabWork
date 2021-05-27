@@ -160,6 +160,7 @@ namespace Laba4GUI
 			this.Controls.Add(this.closeButton);
 			this.Name = "StartForm";
 			this.Text = "Данные о работниках";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartForm_FormClosing);
 			this.Load += new System.EventHandler(this.StartForm_Load);
 			this.groupBox1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.workerListDataGrid)).EndInit();
