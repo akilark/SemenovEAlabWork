@@ -16,6 +16,7 @@ namespace Laba4GUI
 		
 		private int allowWorkHours = 8;
 		private Worker workerTmp;
+		private BindingList<Worker> bindingList;
 
 		public AddWorkerForm()
 		{
@@ -86,7 +87,7 @@ namespace Laba4GUI
 					}
 					else
 					{
-						workerTmp.DesiredDate(new DateTime(2011,11,11)); //TODO: Заглушка
+						workerTmp.dateTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month-1,1);
 						if (horlyPaymentRadioButton.Checked == true)
 						{
 							workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), Int32.Parse(workHoursTextBox.Text));
@@ -95,7 +96,7 @@ namespace Laba4GUI
 						{
 							workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), Int32.Parse(workHoursTextBox.Text)* allowWorkHours);
 						}
-					
+						ListForDataGrid.BindingWorkerList.Add(workerTmp);
 						erasePreviousData();
 						MessageBox.Show("Работник успешно добавлен", "Успех");
 					}
@@ -125,7 +126,6 @@ namespace Laba4GUI
 			try
 			{
 				workerTmp.SecondName = secondNameTextBox.Text;
-				
 			}
 			catch (Exception exception)
 			{

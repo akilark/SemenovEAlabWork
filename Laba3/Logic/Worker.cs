@@ -62,13 +62,27 @@ namespace Laba3.Logic
 			}
 		}
 
-
+		/// <summary>
+		/// Свойство возвращающее ЗП за месяц
+		/// </summary>
 		[XmlIgnore]
 		public int AmountMoney => Wage.AmountMoney;
 
-
+		/// <summary>
+		/// Свойство возвращающее рассматриваемую дату
+		/// </summary>
 		[XmlIgnore]
-		public DateTime dateTime => Wage.Date;
+		public DateTime dateTime
+		{
+			get
+			{ 
+				return Wage.Date; 
+			}
+			set
+			{
+				Wage.Date = value;
+			}
+		}
 
 		/// <summary>
 		/// Свойство возвращающее номер типи зарплаты
@@ -110,14 +124,6 @@ namespace Laba3.Logic
 				$"рублей в {Wage.Date.Month}.{Wage.Date.Year}";
 		}
 
-		/// <summary>
-		/// Метод предварительного занесения рассматриваемой даты
-		/// </summary>
-		/// <param name="date">Дата для расчета ЗП за конкретный месяц</param>
-		public void DesiredDate(DateTime date)
-		{
-			Wage.Date = date;
-		}
 
 		/// <summary>
 		/// Метод принимающий цену работы и количество часов работы и 
@@ -134,6 +140,9 @@ namespace Laba3.Logic
 			return Wage.AmountMoney;
 		}
 
+		/// <summary>
+		/// Свойство хранащее название типа ЗП
+		/// </summary>
 		[XmlIgnore]
 		public string TypeWageName => Wage.NameOfWageType;
 

@@ -116,8 +116,8 @@ namespace Laba3UI
 					() =>
 					{
 						(int,int) yearMonth = YearMonth();
-						workerTmp.DesiredDate(new DateTime(
-							yearMonth.Item1, yearMonth.Item2, 1));
+						workerTmp.dateTime = new DateTime(
+							yearMonth.Item1, yearMonth.Item2, 1);
 					}
 				),
 				new Tuple<string, Action>

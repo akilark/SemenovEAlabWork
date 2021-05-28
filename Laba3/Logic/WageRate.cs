@@ -51,25 +51,6 @@ namespace Laba3.Logic
 		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
 		/// один день</param>
 		public WageRate(int allowToWorkHoursInDay) : base(allowToWorkHoursInDay) { }
-
-		/// <summary>
-		/// Конструкор класса с 4 параметрами
-		/// </summary>
-		/// <param name="date">Дата для расчета ЗП за конкретный месяц</param>
-		/// <param name="priceOfWork">Стоимость часа работ</param>
-		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
-		/// один день</param>
-		/// <param name="workHours">Количество часов отработанных за выбранный месяц</param>
-		public WageRate(
-			DateTime date, 
-			int priceOfWork, 
-			int allowToWorkHoursInDay, 
-			int workHours) : base(date, allowToWorkHoursInDay)
-		{
-			PriceOfWork = priceOfWork;
-			WorkHours = workHours;
-		}
-
 		
 		/// <summary>
 		/// <inheritdoc/>

@@ -52,6 +52,7 @@
     <Compile Include="AddWorkerForm.Designer.cs">
       <DependentUpon>AddWorkerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListForDataGrid.cs" />
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -55,18 +55,6 @@ namespace Laba3.Logic
 			AllowToWorkHoursInDay = allowToWorkHoursInDay;
 		}
 
-		/// <summary>
-		/// Конструкор класса с 2 параметрами
-		/// </summary>
-		/// <param name="date">Дата для расчета ЗП за конкретный месяц</param>
-		/// <param name="allowToWorkHoursInDay">Допустимое время работы за 
-		/// один день</param>
-		protected WageBase(DateTime date, int allowToWorkHoursInDay)
-		{
-			Date = date;
-			AllowToWorkHoursInDay = allowToWorkHoursInDay;
-		}
-
 
 		/// <summary>
 		/// Свойство принимающее с проверкой и возвращающее 

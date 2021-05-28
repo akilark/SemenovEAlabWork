@@ -103,7 +103,7 @@ namespace Laba3.Logic
 				case WageType.Salary:
 					{
 						workerTmp.WageType(WageType.Salary);
-						workerTmp.DesiredDate(LastMonth);
+						workerTmp.dateTime = LastMonth;
 						workerTmp.MoneyEarnedInMonth(_rand.Next(24000, 32000),
 							_rand.Next(1,150));
 						break;
@@ -111,7 +111,7 @@ namespace Laba3.Logic
 				case WageType.WageRate:
 					{
 						workerTmp.WageType(WageType.WageRate);
-						workerTmp.DesiredDate(LastMonth);
+						workerTmp.dateTime = LastMonth;
 						workerTmp.MoneyEarnedInMonth(_rand.Next(600, 1500), 
 							_rand.Next(1, 150));
 						break;
@@ -119,7 +119,7 @@ namespace Laba3.Logic
 				case WageType.HorlyPayment:
 					{
 						workerTmp.WageType(WageType.HorlyPayment);
-						workerTmp.DesiredDate(LastMonth);
+						workerTmp.dateTime = LastMonth;
 						workerTmp.MoneyEarnedInMonth(_rand.Next(50, 300), 
 							_rand.Next(1, 150));
 						break;

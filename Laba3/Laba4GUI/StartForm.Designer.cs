@@ -39,6 +39,7 @@ namespace Laba4GUI
 			this.changeButton = new System.Windows.Forms.Button();
 			this.DownloadButton = new System.Windows.Forms.Button();
 			this.CreateRandomData = new System.Windows.Forms.Button();
+			this.searchTextBox = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.workerListDataGrid)).BeginInit();
 			this.SuspendLayout();
@@ -55,7 +56,7 @@ namespace Laba4GUI
 			// 
 			// searchButton
 			// 
-			this.searchButton.Location = new System.Drawing.Point(576, 22);
+			this.searchButton.Location = new System.Drawing.Point(286, 40);
 			this.searchButton.Name = "searchButton";
 			this.searchButton.Size = new System.Drawing.Size(75, 23);
 			this.searchButton.TabIndex = 2;
@@ -75,7 +76,7 @@ namespace Laba4GUI
 			// 
 			// closeButton
 			// 
-			this.closeButton.Location = new System.Drawing.Point(583, 313);
+			this.closeButton.Location = new System.Drawing.Point(649, 366);
 			this.closeButton.Name = "closeButton";
 			this.closeButton.Size = new System.Drawing.Size(75, 23);
 			this.closeButton.TabIndex = 5;
@@ -85,7 +86,7 @@ namespace Laba4GUI
 			// 
 			// resetButton
 			// 
-			this.resetButton.Location = new System.Drawing.Point(576, 48);
+			this.resetButton.Location = new System.Drawing.Point(576, 177);
 			this.resetButton.Name = "resetButton";
 			this.resetButton.Size = new System.Drawing.Size(75, 23);
 			this.resetButton.TabIndex = 6;
@@ -99,9 +100,8 @@ namespace Laba4GUI
 			this.groupBox1.Controls.Add(this.changeButton);
 			this.groupBox1.Controls.Add(this.resetButton);
 			this.groupBox1.Controls.Add(this.addButton);
-			this.groupBox1.Controls.Add(this.searchButton);
 			this.groupBox1.Controls.Add(this.deleteButton);
-			this.groupBox1.Location = new System.Drawing.Point(6, 12);
+			this.groupBox1.Location = new System.Drawing.Point(73, 68);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(660, 292);
 			this.groupBox1.TabIndex = 8;
@@ -130,7 +130,7 @@ namespace Laba4GUI
 			// 
 			// DownloadButton
 			// 
-			this.DownloadButton.Location = new System.Drawing.Point(12, 313);
+			this.DownloadButton.Location = new System.Drawing.Point(79, 366);
 			this.DownloadButton.Name = "DownloadButton";
 			this.DownloadButton.Size = new System.Drawing.Size(75, 23);
 			this.DownloadButton.TabIndex = 10;
@@ -141,7 +141,7 @@ namespace Laba4GUI
 			// 
 			// CreateRandomData
 			// 
-			this.CreateRandomData.Location = new System.Drawing.Point(134, 313);
+			this.CreateRandomData.Location = new System.Drawing.Point(205, 366);
 			this.CreateRandomData.Name = "CreateRandomData";
 			this.CreateRandomData.Size = new System.Drawing.Size(75, 23);
 			this.CreateRandomData.TabIndex = 11;
@@ -149,15 +149,27 @@ namespace Laba4GUI
 			this.CreateRandomData.UseVisualStyleBackColor = true;
 			this.CreateRandomData.Click += new System.EventHandler(this.CreateRandomData_Click);
 			// 
+			// searchTextBox
+			// 
+			this.searchTextBox.Location = new System.Drawing.Point(79, 42);
+			this.searchTextBox.Name = "searchTextBox";
+			this.searchTextBox.Size = new System.Drawing.Size(201, 20);
+			this.searchTextBox.TabIndex = 12;
+			this.searchTextBox.Text = "Введите фамилию:";
+			this.searchTextBox.Leave += new System.EventHandler(this.searchTextBox_Leave);
+			this.searchTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.searchTextBox_MouseDown);
+			// 
 			// StartForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(670, 348);
+			this.ClientSize = new System.Drawing.Size(739, 401);
+			this.Controls.Add(this.searchTextBox);
 			this.Controls.Add(this.CreateRandomData);
 			this.Controls.Add(this.DownloadButton);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.closeButton);
+			this.Controls.Add(this.searchButton);
 			this.Name = "StartForm";
 			this.Text = "Данные о работниках";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartForm_FormClosing);
@@ -165,6 +177,7 @@ namespace Laba4GUI
 			this.groupBox1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.workerListDataGrid)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -180,6 +193,7 @@ namespace Laba4GUI
 		private System.Windows.Forms.DataGridView workerListDataGrid;
 		private System.Windows.Forms.Button DownloadButton;
 		private System.Windows.Forms.Button CreateRandomData;
+		private System.Windows.Forms.TextBox searchTextBox;
 	}
 }
 

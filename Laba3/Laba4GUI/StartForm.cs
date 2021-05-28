@@ -11,11 +11,10 @@ namespace Laba4GUI
 {
 	public partial class StartForm : Form
 	{
-		SearchForm searchForm = null;
-		AddWorkerForm addWorkerForm = null;
-		public string filepath = @"C:\";
-		public WorkWithFiles filesWork;
-		BindingList<Worker> bindingList;
+		private SearchForm searchForm = null;
+		private AddWorkerForm addWorkerForm = null;
+		private string filepath = @"C:\";
+		private WorkWithFiles filesWork;
 
 		#if !DEBUG
 		CreateRandomData.Visible = false
@@ -44,11 +43,23 @@ namespace Laba4GUI
 
 		private void searchButton_Click(object sender, EventArgs e)
 		{
-			this.Hide();
-			resetButton.Visible = true;
-			searchForm.ShowDialog();
-			fillingGridParam();
-			this.Show();
+			var collectionForSearch = new BindingList<Worker>();
+			if (searchTextBox.Text == "Введите фамилию:")
+			{
+			}
+			else
+			{
+				foreach (Worker worker in ListForDataGrid.BindingWorkerList)
+				{
+					if(worker.SecondName.ToLower() == searchTextBox.Text.ToLower())
+					{
+						collectionForSearch.Add(worker);
+					}
+				}
+				var source = new BindingSource(collectionForSearch, null);
+				workerListDataGrid.DataSource = source;
+				resetButton.Visible = true;
+			}
 		}
 
 		private void addButton_Click(object sender, EventArgs e)
@@ -56,11 +67,8 @@ namespace Laba4GUI
 			addWorkerForm = new AddWorkerForm();
 			this.Hide();
 			addWorkerForm.ShowDialog();
-			//files = new WorkWithFiles(filepath);
-		//	files.ReadFileInfo();
-		//	workerInfoList = files.WorkerArray;
-			fillingGridParam();
 			this.Show();
+
 		}
 
 		private void changeButton_Click(object sender, EventArgs e)
@@ -73,6 +81,8 @@ namespace Laba4GUI
 		private void resetButton_Click(object sender, EventArgs e)
 		{
 			resetButton.Visible = false;
+			fillingGridParam();
+			searchTextBox.Text = "Введите фамилию:";
 		}
 
 		private void workerListDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -82,8 +92,8 @@ namespace Laba4GUI
 
 		internal void fillingGridParam()
 		{
-			bindingList = new BindingList<Worker>(filesWork.ReadFileInfo());
-			var source = new BindingSource(bindingList, null);
+			ListForDataGrid.BindingWorkerList = new BindingList<Worker>(filesWork.ReadFileInfo());
+			var source = new BindingSource(ListForDataGrid.BindingWorkerList, null);
 			workerListDataGrid.DataSource = source;
 			workerListDataGrid.Columns[0].HeaderText = "Фамилия";
 			workerListDataGrid.Columns[1].HeaderText = "Имя";
@@ -97,7 +107,7 @@ namespace Laba4GUI
 		private void deleteButton_Click(object sender, EventArgs e)
 		{
 			int indexDataGrid = workerListDataGrid.CurrentRow.Index;
-			bindingList.Remove(workerListDataGrid.CurrentRow.DataBoundItem as Worker);
+			ListForDataGrid.BindingWorkerList.Remove(workerListDataGrid.CurrentRow.DataBoundItem as Worker);
 		}
 
 		private void groupBox1_Enter(object sender, EventArgs e)
@@ -133,7 +143,30 @@ namespace Laba4GUI
 
 		private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			filesWork.rewriteFile(new List<Worker>(bindingList));
+			try
+			{
+				filesWork.rewriteFile(new List<Worker>(ListForDataGrid.BindingWorkerList));
+			}
+			catch
+			{
+
+			}
+		}
+
+		private void searchTextBox_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (searchTextBox.Text == "Введите фамилию:")
+			{
+				searchTextBox.Clear();
+			}
+		}
+
+		private void searchTextBox_Leave(object sender, EventArgs e)
+		{
+			if (searchTextBox.Text == "")
+			{
+				searchTextBox.Text = "Введите фамилию:";
+			}
 		}
 	}
 }
