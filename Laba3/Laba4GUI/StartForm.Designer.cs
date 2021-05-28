@@ -36,7 +36,6 @@ namespace Laba4GUI
 			this.resetButton = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.workerListDataGrid = new System.Windows.Forms.DataGridView();
-			this.changeButton = new System.Windows.Forms.Button();
 			this.DownloadButton = new System.Windows.Forms.Button();
 			this.CreateRandomData = new System.Windows.Forms.Button();
 			this.searchTextBox = new System.Windows.Forms.TextBox();
@@ -46,7 +45,7 @@ namespace Laba4GUI
 			// 
 			// addButton
 			// 
-			this.addButton.Location = new System.Drawing.Point(576, 206);
+			this.addButton.Location = new System.Drawing.Point(576, 235);
 			this.addButton.Name = "addButton";
 			this.addButton.Size = new System.Drawing.Size(75, 23);
 			this.addButton.TabIndex = 1;
@@ -86,7 +85,7 @@ namespace Laba4GUI
 			// 
 			// resetButton
 			// 
-			this.resetButton.Location = new System.Drawing.Point(576, 177);
+			this.resetButton.Location = new System.Drawing.Point(576, 206);
 			this.resetButton.Name = "resetButton";
 			this.resetButton.Size = new System.Drawing.Size(75, 23);
 			this.resetButton.TabIndex = 6;
@@ -97,7 +96,6 @@ namespace Laba4GUI
 			// groupBox1
 			// 
 			this.groupBox1.Controls.Add(this.workerListDataGrid);
-			this.groupBox1.Controls.Add(this.changeButton);
 			this.groupBox1.Controls.Add(this.resetButton);
 			this.groupBox1.Controls.Add(this.addButton);
 			this.groupBox1.Controls.Add(this.deleteButton);
@@ -107,7 +105,6 @@ namespace Laba4GUI
 			this.groupBox1.TabIndex = 8;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Список работников:";
-			this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
 			// 
 			// workerListDataGrid
 			// 
@@ -116,17 +113,6 @@ namespace Laba4GUI
 			this.workerListDataGrid.Name = "workerListDataGrid";
 			this.workerListDataGrid.Size = new System.Drawing.Size(543, 264);
 			this.workerListDataGrid.TabIndex = 9;
-			this.workerListDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workerListDataGrid_CellContentClick);
-			// 
-			// changeButton
-			// 
-			this.changeButton.Location = new System.Drawing.Point(577, 235);
-			this.changeButton.Name = "changeButton";
-			this.changeButton.Size = new System.Drawing.Size(75, 23);
-			this.changeButton.TabIndex = 8;
-			this.changeButton.Text = "Изменить";
-			this.changeButton.UseVisualStyleBackColor = true;
-			this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
 			// 
 			// DownloadButton
 			// 
@@ -155,7 +141,7 @@ namespace Laba4GUI
 			this.searchTextBox.Name = "searchTextBox";
 			this.searchTextBox.Size = new System.Drawing.Size(201, 20);
 			this.searchTextBox.TabIndex = 12;
-			this.searchTextBox.Text = "Введите фамилию:";
+			this.searchTextBox.Text = "Введите фамилию или имя:";
 			this.searchTextBox.Leave += new System.EventHandler(this.searchTextBox_Leave);
 			this.searchTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.searchTextBox_MouseDown);
 			// 
@@ -189,7 +175,6 @@ namespace Laba4GUI
 		private System.Windows.Forms.Button closeButton;
 		private System.Windows.Forms.Button resetButton;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.Button changeButton;
 		private System.Windows.Forms.DataGridView workerListDataGrid;
 		private System.Windows.Forms.Button DownloadButton;
 		private System.Windows.Forms.Button CreateRandomData;

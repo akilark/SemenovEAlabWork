@@ -11,29 +11,24 @@ namespace Laba4GUI
 {
 	public partial class StartForm : Form
 	{
-		private SearchForm searchForm = null;
 		private AddWorkerForm addWorkerForm = null;
 		private string filepath = @"C:\";
 		private WorkWithFiles filesWork;
+		private BindingList<Worker> BindingWorkerList;
+		private string searchTextBoxLText = "Введите фамилию или имя:";
 
 		#if !DEBUG
 		CreateRandomData.Visible = false
-		#endif
+#endif
 
 		public StartForm()
 		{
 			InitializeComponent();
-			
-			
 		}
 
 		private void StartForm_Load(object sender, EventArgs e)
 		{
-			searchForm = new SearchForm();
 			resetButton.Visible = false;
-			
-
-
 		}
 
 		private void closeButton_Click(object sender, EventArgs e)
@@ -44,16 +39,30 @@ namespace Laba4GUI
 		private void searchButton_Click(object sender, EventArgs e)
 		{
 			var collectionForSearch = new BindingList<Worker>();
-			if (searchTextBox.Text == "Введите фамилию:")
+			if (searchTextBox.Text == searchTextBoxLText)
 			{
 			}
 			else
 			{
-				foreach (Worker worker in ListForDataGrid.BindingWorkerList)
+				foreach (Worker worker in BindingWorkerList)
 				{
-					if(worker.SecondName.ToLower() == searchTextBox.Text.ToLower())
+					int searchLenght = searchTextBox.Text.Length;
+					if (worker.SecondName.Length >= searchLenght)
 					{
-						collectionForSearch.Add(worker);
+						if (worker.SecondName.ToLower().Substring(0, searchLenght) == searchTextBox.Text.ToLower())
+						{
+							collectionForSearch.Add(worker);
+							continue;
+						}
+					}
+
+					if (worker.FirstName.Length >= searchLenght)
+					{
+						if (worker.FirstName.ToLower().Substring(0, searchLenght) == searchTextBox.Text.ToLower())
+						{
+							collectionForSearch.Add(worker);
+							continue;
+						}
 					}
 				}
 				var source = new BindingSource(collectionForSearch, null);
@@ -67,14 +76,10 @@ namespace Laba4GUI
 			addWorkerForm = new AddWorkerForm();
 			this.Hide();
 			addWorkerForm.ShowDialog();
-			this.Show();
-
-		}
-
-		private void changeButton_Click(object sender, EventArgs e)
-		{
-			this.Hide();
-			
+			if (addWorkerForm.addFlag)
+			{
+				BindingWorkerList.Add(addWorkerForm.workerTmp);
+			}
 			this.Show();
 		}
 
@@ -82,18 +87,13 @@ namespace Laba4GUI
 		{
 			resetButton.Visible = false;
 			fillingGridParam();
-			searchTextBox.Text = "Введите фамилию:";
-		}
-
-		private void workerListDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-
+			searchTextBox.Text = searchTextBoxLText;
 		}
 
 		internal void fillingGridParam()
 		{
-			ListForDataGrid.BindingWorkerList = new BindingList<Worker>(filesWork.ReadFileInfo());
-			var source = new BindingSource(ListForDataGrid.BindingWorkerList, null);
+			BindingWorkerList = new BindingList<Worker>(filesWork.ReadFileInfo());
+			var source = new BindingSource(BindingWorkerList, null);
 			workerListDataGrid.DataSource = source;
 			workerListDataGrid.Columns[0].HeaderText = "Фамилия";
 			workerListDataGrid.Columns[1].HeaderText = "Имя";
@@ -101,18 +101,12 @@ namespace Laba4GUI
 			workerListDataGrid.Columns[3].HeaderText = "Месяц оплаты";
 			workerListDataGrid.Columns[5].HeaderText = "тип ЗП";
 			workerListDataGrid.Columns[4].Visible = false;
-
 		}
 
 		private void deleteButton_Click(object sender, EventArgs e)
 		{
 			int indexDataGrid = workerListDataGrid.CurrentRow.Index;
-			ListForDataGrid.BindingWorkerList.Remove(workerListDataGrid.CurrentRow.DataBoundItem as Worker);
-		}
-
-		private void groupBox1_Enter(object sender, EventArgs e)
-		{
-
+			BindingWorkerList.Remove(workerListDataGrid.CurrentRow.DataBoundItem as Worker);
 		}
 
 		private void DownloadButton_Click(object sender, EventArgs e)
@@ -145,7 +139,7 @@ namespace Laba4GUI
 		{
 			try
 			{
-				filesWork.rewriteFile(new List<Worker>(ListForDataGrid.BindingWorkerList));
+				filesWork.rewriteFile(new List<Worker>(BindingWorkerList));
 			}
 			catch
 			{
@@ -155,7 +149,7 @@ namespace Laba4GUI
 
 		private void searchTextBox_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (searchTextBox.Text == "Введите фамилию:")
+			if (searchTextBox.Text == searchTextBoxLText)
 			{
 				searchTextBox.Clear();
 			}
@@ -165,7 +159,7 @@ namespace Laba4GUI
 		{
 			if (searchTextBox.Text == "")
 			{
-				searchTextBox.Text = "Введите фамилию:";
+				searchTextBox.Text = searchTextBoxLText;
 			}
 		}
 	}

@@ -74,39 +74,51 @@ namespace Laba3UI
 			Worker workerTmp, 
 			int allowWorkHoursInDay)
 		{
-			Console.WriteLine("Выберите тип зарплаты для работника " +
+			while (true)
+			{
+				try
+				{
+					Console.WriteLine("Выберите тип зарплаты для работника " +
 						$"{workerTmp.FirstName} {workerTmp.SecondName}" +
 						"\n1- Оклад \n" +
 						"2- Тарифная ставка \n" +
 						"3- Часовая плата");
-			
-			WageType wageType;
-			switch (Int32.Parse(Console.ReadLine()))
-			{
-				case 1:
-				{
-					wageType = WageType.Salary;
-					break;
-				}
-				case 2:
-				{
-					wageType = WageType.WageRate;
-					break;
-				}
-				case 3:
-				{
-					wageType = WageType.HorlyPayment;
-					break;
-				}
-				default:
+
+					WageType wageType;
+					switch (Int32.Parse(Console.ReadLine()))
 					{
-						throw new Exception("Такого типа зарплаты нет");
+						case 1:
+							{
+								wageType = WageType.Salary;
+								break;
+							}
+						case 2:
+							{
+								wageType = WageType.WageRate;
+								break;
+							}
+						case 3:
+							{
+								wageType = WageType.HorlyPayment;
+								break;
+							}
+						default:
+							{
+								throw new Exception("Такого типа зарплаты нет");
+							}
+
 					}
-
+					workerTmp.WageType(wageType);
+					break;
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("Допущена ошибка");
+					Console.WriteLine(e.Message);
+				}
 			}
-			workerTmp.WageType(wageType);
-
-			List<Tuple<string, Action>> validationActions = new List<Tuple<string, Action>>()
+			
+			var validationActions = new List<Tuple<string, Action>>()
 			{
 				
 				new Tuple<string, Action>
@@ -155,9 +167,17 @@ namespace Laba3UI
 		private static (int,int) YearMonth()
 		{
 			int month = Int32.Parse(Console.ReadLine());
+			if(month<1 || month >12)
+			{
+				throw new Exception("необходимо ввести номер месяца (от 1 до 12)");
+			}
 			Console.WriteLine($"За какой год необходимо посмотреть " +
 				$"заработок работника ? В формате ХХXX");
 			int year = Int32.Parse(Console.ReadLine());
+			if (year < 1900 || year > DateTime.Now.Year)
+			{
+				throw new Exception("недопустимая дата");
+			}
 			return (year, month);
 		}
 

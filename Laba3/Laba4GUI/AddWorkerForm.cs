@@ -15,8 +15,8 @@ namespace Laba4GUI
 	{
 		
 		private int allowWorkHours = 8;
-		private Worker workerTmp;
-		private BindingList<Worker> bindingList;
+		public Worker workerTmp;
+		public bool addFlag = false;
 
 		public AddWorkerForm()
 		{
@@ -33,7 +33,7 @@ namespace Laba4GUI
 		{
 			visibleChange(false);
 			workerTmp = new Worker(allowWorkHours);
-			
+			addFlag = false;
 		}
 		
 		private void visibleChange(bool bl)
@@ -54,52 +54,50 @@ namespace Laba4GUI
 		{
 			wageTypeInfoChange("Ставка за месяц:", "Дней отработано:");
 			visibleChange(true);
-			workerTmp.WageType(WageType.Salary);
 		}
 
 		private void wageRateRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			wageTypeInfoChange("Ставка за день:", "Дней отработано:");
 			visibleChange(true);
-			workerTmp.WageType(WageType.WageRate);
 		}
 
 		private void horlyPaymentRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			wageTypeInfoChange("Ставка за час:", "Часов отработано:");
 			visibleChange(true);
-			workerTmp.WageType(WageType.HorlyPayment);
 		}
 
 		private void addButton_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				if (secondNameTextBox.Text == "" || firstNameTextBox.Text == "")
+				if (secondNameTextBox.Text == "" || 
+					firstNameTextBox.Text == "" ||
+					workHoursTextBox.Text == "" ||
+					workMoneyTextBox.Text == "")
 				{
-					MessageBox.Show("Необходимо ввести данные", "Ошибка");
+					MessageBox.Show("Для создания работника необходимо заполнить все поля",
+						"Ошибка");
 				}
 				else
 				{
-					if (workHoursTextBox.Text == "" || workMoneyTextBox.Text == "")
+					workerTmp.WageType(wageTypeFromRadioButton());
+					workerTmp.dateTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month-1,1);
+					if (horlyPaymentRadioButton.Checked == true)
 					{
-						DialogResult result = MessageBox.Show("Нельзя создать работника без данных о заработной плате", "Ошибка");
+						workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), 
+							Int32.Parse(workHoursTextBox.Text));
 					}
 					else
 					{
-						workerTmp.dateTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month-1,1);
-						if (horlyPaymentRadioButton.Checked == true)
-						{
-							workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), Int32.Parse(workHoursTextBox.Text));
-						}
-						else
-						{
-							workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), Int32.Parse(workHoursTextBox.Text)* allowWorkHours);
-						}
-						ListForDataGrid.BindingWorkerList.Add(workerTmp);
-						erasePreviousData();
-						MessageBox.Show("Работник успешно добавлен", "Успех");
+						workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), 
+							Int32.Parse(workHoursTextBox.Text)* allowWorkHours);
 					}
+					erasePreviousData();
+					
+					addFlag = true;
+					this.Hide();
 				}
 			}
 			catch(Exception exception)
@@ -165,5 +163,37 @@ namespace Laba4GUI
 			visibleChange(false);
 			
 		}
+
+		private WageType wageTypeFromRadioButton()
+		{
+			Tuple<bool,WageType>[] radioButtonsChecked = new Tuple<bool,WageType>[] 
+			{
+				new Tuple<bool, WageType>
+				(
+				horlyPaymentRadioButton.Checked,
+				WageType.HorlyPayment
+				),
+				new Tuple<bool, WageType>
+				(
+				wageRateRadioButton.Checked,
+				WageType.WageRate
+				),
+				new Tuple<bool, WageType>
+				(
+				salaryRadioButton.Checked,
+				WageType.Salary
+				),
+			};
+			foreach(Tuple<bool,WageType> radioButtonWageType in radioButtonsChecked)
+			{
+				if(radioButtonWageType.Item1)
+				{
+					return radioButtonWageType.Item2;
+				}
+			}
+			throw new Exception("Ничего не выбрано");
+		}
+
+		
 	}
 }
