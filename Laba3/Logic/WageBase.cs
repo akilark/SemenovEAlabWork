@@ -13,12 +13,10 @@ namespace Laba3.Logic
 	[XmlInclude(typeof(WageRate))]
 	public abstract class WageBase
 	{
-		//TODO: RSDN(V)
 		/// <summary>
 		/// Поле класса определяющее минимально допустимое время работы в часах
 		/// </summary>
 		protected int MinTime = 1;
-
 
 		/// <summary>
 		/// Поле класса хранящее значение рассматриваемой даты

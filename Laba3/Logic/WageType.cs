@@ -2,7 +2,6 @@
 
 namespace Laba3.Logic
 {
-	//TODO: RSDN (V)
 	/// <summary>
 	/// Перечисление доступных типов начисления зарплаты
 	/// </summary>
