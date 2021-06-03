@@ -93,7 +93,6 @@ namespace Laba3.Logic
 			}
 			private set
 			{
-				//TODO: Не связан контекст(v)
 				if (value <= WorkDaysInMonth)
 				{
 					_daysOfWork = value;
