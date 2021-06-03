@@ -174,9 +174,9 @@ namespace Laba3UI
 			Console.WriteLine($"За какой год необходимо посмотреть " +
 				$"заработок работника ? В формате ХХXX");
 			int year = Int32.Parse(Console.ReadLine());
-			if (year < 1900 || year > DateTime.Now.Year)
+			if (year < 1800 || year > DateTime.Now.Year)
 			{
-				throw new Exception("недопустимая дата");
+				throw new Exception("Недопустимая дата");
 			}
 			return (year, month);
 		}

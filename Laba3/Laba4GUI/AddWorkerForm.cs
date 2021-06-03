@@ -1,73 +1,120 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Laba3.Logic;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Laba4GUI
 {
+	/// <summary>
+	/// Класс определяющий поведение формы добавления работника
+	/// </summary>
 	public partial class AddWorkerForm : Form
 	{
-		
-		private int allowWorkHours = 8;
-		public Worker workerTmp;
-		public bool addFlag = false;
+		/// <summary>
+		/// Поле класса хранящее количество допустимых часов работы для работника
+		/// </summary>
+		private int _allowWorkHours = 8;
 
+		/// <summary>
+		/// Поле класса хранящее работника
+		/// </summary>
+		public Worker WorkerTmp;
+
+		/// <summary>
+		/// Поле класса необходимо для определения добавлена ли персона
+		/// </summary>
+		public bool AddFlag = false;
+
+		/// <summary>
+		/// Конструктор класса без параметров
+		/// </summary>
 		public AddWorkerForm()
 		{
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Выход"
+		/// </summary>
 		private void closeButton_Click(object sender, EventArgs e)
 		{
 			this.Close();
-			
 		}
 
+		/// <summary>
+		/// Метод который выполняется при загрузке данной формы
+		/// </summary>
 		private void AddWorkerForm_Load(object sender, EventArgs e)
 		{
 			visibleChange(false);
-			workerTmp = new Worker(allowWorkHours);
-			addFlag = false;
+			WorkerTmp = new Worker(_allowWorkHours);
+			AddFlag = false;
 		}
 		
-		private void visibleChange(bool bl)
+		/// <summary>
+		/// Метод позволяющий изменять видимость некоторых объектов,
+		/// связанных с вводом информации для расчета ЗП
+		/// </summary>
+		/// <param name="visible">false - скрывает объекты
+		/// true - показывает объекты</param>
+		private void visibleChange(bool visible)
 		{
-			workHoursLabel.Visible = bl;
-			workHoursTextBox.Visible = bl;
-			workMoneyLabel.Visible = bl;
-			workMoneyTextBox.Visible = bl;
+			workHoursLabel.Visible = visible;
+			workHoursTextBox.Visible = visible;
+			workMoneyLabel.Visible = visible;
+			workMoneyTextBox.Visible = visible;
 		}
 
-		private void wageTypeInfoChange(string workHours, string workMoney)
+		/// <summary>
+		/// Метод определяющий текст для workMoneyLabel и workHoursLabel 
+		/// в зависимости от выбранного radioButton
+		/// </summary>
+		private void wageTypeInfoChange()
 		{
-			workHoursLabel.Text = workMoney;
-			workMoneyLabel.Text = workHours;
+			var labelsText = new Dictionary<WageType,string[]>
+			{
+				{WageType.HorlyPayment, 
+					new string [] { "Ставка за час:", "Часов отработано:" } },
+				{WageType.Salary, 
+					new string [] { "Ставка за месяц:", "Дней отработано:" } },
+				{WageType.WageRate, 
+					new string [] { "Ставка за день:", "Дней отработано:"}}
+			};
+			var wageType = wageTypeFromRadioButton();
+			workMoneyLabel.Text = labelsText[wageType][0];
+			workHoursLabel.Text = labelsText[wageType][1];
+			visibleChange(true);
 		}
 
+		/// <summary>
+		/// Метод инициируемый при выборе salaryRadioButton
+		/// </summary>
 		private void salaryRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			wageTypeInfoChange("Ставка за месяц:", "Дней отработано:");
-			visibleChange(true);
+			wageTypeInfoChange();
 		}
 
+		/// <summary>
+		/// Метод инициируемый при выборе wageRateRadioButton
+		/// </summary>
 		private void wageRateRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			wageTypeInfoChange("Ставка за день:", "Дней отработано:");
-			visibleChange(true);
+			wageTypeInfoChange();
 		}
 
+		/// <summary>
+		/// Метод инициируемый при выборе horlyPaymentRadioButton
+		/// </summary>
 		private void horlyPaymentRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			wageTypeInfoChange("Ставка за час:", "Часов отработано:");
-			visibleChange(true);
+			wageTypeInfoChange();
 		}
 
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Добавить"
+		/// </summary>
 		private void addButton_Click(object sender, EventArgs e)
 		{
 			try
@@ -82,21 +129,19 @@ namespace Laba4GUI
 				}
 				else
 				{
-					workerTmp.WageType(wageTypeFromRadioButton());
-					workerTmp.dateTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month-1,1);
+					WorkerTmp.WageType(wageTypeFromRadioButton());
+					WorkerTmp.dateTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month-1,1);
 					if (horlyPaymentRadioButton.Checked == true)
 					{
-						workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), 
+						WorkerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), 
 							Int32.Parse(workHoursTextBox.Text));
 					}
 					else
 					{
-						workerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), 
-							Int32.Parse(workHoursTextBox.Text)* allowWorkHours);
+						WorkerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), 
+							Int32.Parse(workHoursTextBox.Text)* _allowWorkHours);
 					}
-					erasePreviousData();
-					
-					addFlag = true;
+					AddFlag = true;
 					this.Hide();
 				}
 			}
@@ -106,24 +151,22 @@ namespace Laba4GUI
 			}
 		}
 
+		/// <summary>
+		/// Метод инициируемый при изменении secondNameTextBox
+		/// </summary>
 		private void secondNameTextBox_TextChanged(object sender, EventArgs e)
 		{
-			try
-			{
-				workerTmp.SecondName = secondNameTextBox.Text;
-				secondNameTextBox.BackColor = Color.White;
-			}
-			catch (Exception)
-			{
-				secondNameTextBox.BackColor = Color.DeepPink;
-			}
+			nameTextBoxes("Фамилия");
 		}
 
+		/// <summary>
+		/// Метод инициируемый при смене фокуса с secondNameTextBox
+		/// </summary>
 		private void secondNameTextBox_Validating(object sender, CancelEventArgs e)
 		{
 			try
 			{
-				workerTmp.SecondName = secondNameTextBox.Text;
+				WorkerTmp.SecondName = secondNameTextBox.Text;
 			}
 			catch (Exception exception)
 			{
@@ -131,42 +174,21 @@ namespace Laba4GUI
 			}
 		}
 
+		/// <summary>
+		/// Метод инициируемый при изменении firstNameTextBox
+		/// </summary>
 		private void firstNameTextBox_TextChanged(object sender, EventArgs e)
 		{
-			try
-			{
-				workerTmp.FirstName = firstNameTextBox.Text;
-				firstNameTextBox.BackColor = Color.White;
-			}
-			catch (Exception)
-			{
-				firstNameTextBox.BackColor = Color.DeepPink;
-			}
+			nameTextBoxes("Имя");
 		}
 
-		private void firstNameTextBox_Validating(object sender, CancelEventArgs e)
-		{
-
-		}
-
-		private void erasePreviousData()
-		{
-			secondNameTextBox.Text = "";
-			firstNameTextBox.Text = "";
-			workMoneyTextBox.Text = "";
-			workHoursTextBox.Text = "";
-			secondNameTextBox.BackColor = Color.White;
-			firstNameTextBox.BackColor = Color.White;
-			wageRateRadioButton.Checked = false;
-			salaryRadioButton.Checked = false;
-			horlyPaymentRadioButton.Checked = false;
-			visibleChange(false);
-			
-		}
-
+		/// <summary>
+		/// Метод определяющий какой RadioButton был выбран пользователем
+		/// </summary>
+		/// <returns>Тип заработной платы</returns>
 		private WageType wageTypeFromRadioButton()
 		{
-			Tuple<bool,WageType>[] radioButtonsChecked = new Tuple<bool,WageType>[] 
+			var radioButtonsChecked = new Tuple<bool,WageType>[] 
 			{
 				new Tuple<bool, WageType>
 				(
@@ -191,9 +213,44 @@ namespace Laba4GUI
 					return radioButtonWageType.Item2;
 				}
 			}
-			throw new Exception("Ничего не выбрано");
+			throw new Exception("не выбран тип зарплаты");
 		}
 
-		
+		/// <summary>
+		/// Метод производящий валидацию вводимых данных для имени и фамилии
+		/// </summary>
+		/// <param name="name">"Фамилия" или "Имя"</param>
+		private void nameTextBoxes(string name)
+		{
+			switch(name)
+			{
+				case "Фамилия":
+				{
+					try
+					{
+						WorkerTmp.SecondName = secondNameTextBox.Text;
+						secondNameTextBox.BackColor = Color.White;
+					}
+					catch (Exception)
+					{
+						secondNameTextBox.BackColor = Color.DeepPink;
+					}
+					break;
+				}
+				case "Имя":
+				{
+					try
+					{
+						WorkerTmp.FirstName = firstNameTextBox.Text;
+						firstNameTextBox.BackColor = Color.White;
+					}
+					catch (Exception)
+					{
+						firstNameTextBox.BackColor = Color.DeepPink;
+					}
+					break;
+				}
+			}
+		}
 	}
 }

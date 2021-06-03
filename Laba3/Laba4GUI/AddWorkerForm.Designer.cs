@@ -29,7 +29,7 @@ namespace Laba4GUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.wageTypeGroupBox = new System.Windows.Forms.GroupBox();
 			this.salaryRadioButton = new System.Windows.Forms.RadioButton();
 			this.horlyPaymentRadioButton = new System.Windows.Forms.RadioButton();
 			this.wageRateRadioButton = new System.Windows.Forms.RadioButton();
@@ -45,22 +45,22 @@ namespace Laba4GUI
 			this.label1 = new System.Windows.Forms.Label();
 			this.secondNameTextBox = new System.Windows.Forms.TextBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.groupBox1.SuspendLayout();
+			this.wageTypeGroupBox.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// groupBox1
+			// wageTypeGroupBox
 			// 
-			this.groupBox1.Controls.Add(this.salaryRadioButton);
-			this.groupBox1.Controls.Add(this.horlyPaymentRadioButton);
-			this.groupBox1.Controls.Add(this.wageRateRadioButton);
-			this.groupBox1.Controls.Add(this.radioButton1);
-			this.groupBox1.Location = new System.Drawing.Point(6, 19);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(143, 100);
-			this.groupBox1.TabIndex = 4;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Тип";
+			this.wageTypeGroupBox.Controls.Add(this.salaryRadioButton);
+			this.wageTypeGroupBox.Controls.Add(this.horlyPaymentRadioButton);
+			this.wageTypeGroupBox.Controls.Add(this.wageRateRadioButton);
+			this.wageTypeGroupBox.Controls.Add(this.radioButton1);
+			this.wageTypeGroupBox.Location = new System.Drawing.Point(6, 19);
+			this.wageTypeGroupBox.Name = "wageTypeGroupBox";
+			this.wageTypeGroupBox.Size = new System.Drawing.Size(143, 100);
+			this.wageTypeGroupBox.TabIndex = 4;
+			this.wageTypeGroupBox.TabStop = false;
+			this.wageTypeGroupBox.Text = "Тип";
 			// 
 			// salaryRadioButton
 			// 
@@ -177,7 +177,6 @@ namespace Laba4GUI
 			this.firstNameTextBox.Size = new System.Drawing.Size(143, 20);
 			this.firstNameTextBox.TabIndex = 1;
 			this.firstNameTextBox.TextChanged += new System.EventHandler(this.firstNameTextBox_TextChanged);
-			this.firstNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.firstNameTextBox_Validating);
 			// 
 			// label1
 			// 
@@ -199,7 +198,7 @@ namespace Laba4GUI
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.groupBox1);
+			this.groupBox2.Controls.Add(this.wageTypeGroupBox);
 			this.groupBox2.Controls.Add(this.workMoneyTextBox);
 			this.groupBox2.Controls.Add(this.workMoneyLabel);
 			this.groupBox2.Controls.Add(this.workHoursTextBox);
@@ -223,11 +222,12 @@ namespace Laba4GUI
 			this.Controls.Add(this.secondNameTextBox);
 			this.Controls.Add(this.firstNameTextBox);
 			this.Controls.Add(this.label1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "AddWorkerForm";
 			this.Text = "Добавление нового работника";
 			this.Load += new System.EventHandler(this.AddWorkerForm_Load);
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
+			this.wageTypeGroupBox.ResumeLayout(false);
+			this.wageTypeGroupBox.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
@@ -236,7 +236,7 @@ namespace Laba4GUI
 		}
 
 		#endregion
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox wageTypeGroupBox;
 		private System.Windows.Forms.RadioButton horlyPaymentRadioButton;
 		private System.Windows.Forms.RadioButton wageRateRadioButton;
 		private System.Windows.Forms.RadioButton radioButton1;

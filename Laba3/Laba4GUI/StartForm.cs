@@ -3,43 +3,76 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Laba3.Logic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Laba4GUI
 {
+	/// <summary>
+	/// Класс определяющий поведение стартовой формы
+	/// </summary>
 	public partial class StartForm : Form
 	{
+		/// <summary>
+		/// Поле класса хранящее объект класса AddWorkerForm
+		/// </summary>
 		private AddWorkerForm addWorkerForm = null;
+
+		/// <summary>
+		/// Поле класса содержащее путь к файлу
+		/// </summary>
 		private string filepath = @"C:\";
+
+		/// <summary>
+		/// Поле класса содержащее объект класса WorkWithFiles
+		/// </summary>
 		private WorkWithFiles filesWork;
+
+		/// <summary>
+		/// Поле класса содержащее лист-источник для DataGridView с работниками
+		/// </summary>
 		private BindingList<Worker> BindingWorkerList;
-		private string searchTextBoxLText = "Введите фамилию или имя:";
+
+		/// <summary>
+		/// Поле класса хранящее текст для текстбокса поиска
+		/// </summary>
+		private string searchTextBoxText = "Введите фамилию или имя:";
 
 		#if !DEBUG
 		CreateRandomData.Visible = false
-#endif
+		#endif
 
+		/// <summary>
+		/// Конструктор класса без параметров
+		/// </summary>
 		public StartForm()
 		{
 			InitializeComponent();
+			workWithDataButtonsVisible(false);
 		}
 
+		/// <summary>
+		/// Метод который выполняется при загрузке данной формы
+		/// </summary>
 		private void StartForm_Load(object sender, EventArgs e)
 		{
 			resetButton.Visible = false;
 		}
 
+		/// <summary>
+		/// Метод обозначающий работу кнопки "Выход"
+		/// </summary>
 		private void closeButton_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
 
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Поиск"
+		/// </summary>
 		private void searchButton_Click(object sender, EventArgs e)
 		{
 			var collectionForSearch = new BindingList<Worker>();
-			if (searchTextBox.Text == searchTextBoxLText)
+			if (searchTextBox.Text == searchTextBoxText)
 			{
 			}
 			else
@@ -71,26 +104,35 @@ namespace Laba4GUI
 			}
 		}
 
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Добавить"
+		/// </summary>
 		private void addButton_Click(object sender, EventArgs e)
 		{
 			addWorkerForm = new AddWorkerForm();
 			this.Hide();
 			addWorkerForm.ShowDialog();
-			if (addWorkerForm.addFlag)
+			if (addWorkerForm.AddFlag)
 			{
-				BindingWorkerList.Add(addWorkerForm.workerTmp);
+				BindingWorkerList.Add(addWorkerForm.WorkerTmp);
 			}
 			this.Show();
 		}
 
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Сбросить"
+		/// </summary>
 		private void resetButton_Click(object sender, EventArgs e)
 		{
 			resetButton.Visible = false;
 			fillingGridParam();
-			searchTextBox.Text = searchTextBoxLText;
+			searchTextBox.Text = searchTextBoxText;
 		}
 
-		internal void fillingGridParam()
+		/// <summary>
+		/// Метод производящий заполнение dataGridView
+		/// </summary>
+		private void fillingGridParam()
 		{
 			BindingWorkerList = new BindingList<Worker>(filesWork.ReadFileInfo());
 			var source = new BindingSource(BindingWorkerList, null);
@@ -100,67 +142,151 @@ namespace Laba4GUI
 			workerListDataGrid.Columns[2].HeaderText = "Зарплата за месяц";
 			workerListDataGrid.Columns[3].HeaderText = "Месяц оплаты";
 			workerListDataGrid.Columns[5].HeaderText = "тип ЗП";
+			workerListDataGrid.Columns[5].Width = 110;
 			workerListDataGrid.Columns[4].Visible = false;
+			fileNameLabelChange();
+			workWithDataButtonsVisible(true);
 		}
 
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Удалить"
+		/// </summary>
 		private void deleteButton_Click(object sender, EventArgs e)
 		{
 			int indexDataGrid = workerListDataGrid.CurrentRow.Index;
 			BindingWorkerList.Remove(workerListDataGrid.CurrentRow.DataBoundItem as Worker);
 		}
 
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Загрузить"
+		/// </summary>
 		private void DownloadButton_Click(object sender, EventArgs e)
 		{
-			FolderBrowserDialog DirDialog = new FolderBrowserDialog();
-			DirDialog.Description = "Выбор директории";
-			DirDialog.SelectedPath = filepath;
 
-			if (DirDialog.ShowDialog() == DialogResult.OK)
+			using (OpenFileDialog openFileDialog = new OpenFileDialog())
 			{
-				filepath = DirDialog.SelectedPath + @"\WorkersData.kek";
-				filesWork = new WorkWithFiles(filepath);
-				fillingGridParam();
-				
+				openFileDialog.InitialDirectory = "c:\\";
+				openFileDialog.Filter = "txt files (*.kek)|*.kek";
+				openFileDialog.FilterIndex = 2;
+				openFileDialog.RestoreDirectory = true;
+
+				if (openFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					filepath = openFileDialog.FileName;
+					filesWork = new WorkWithFiles(filepath);
+					fillingGridParam();
+					saveButton.Visible = true;
+				}
 			}
 		}
 
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Заполнить"
+		/// </summary>
 		private void CreateRandomData_Click(object sender, EventArgs e)
 		{
-			var workerTmp = new List<Worker>();
-			for(int i = 0; i<10; i++)
+			if (filesWork == null)
 			{
-				workerTmp.Add(RandomWorker.WorkerFullInformation(8));
+				createButton_Click(sender, e);
 			}
-			filesWork.rewriteFile(workerTmp);
-			fillingGridParam();
+			for (int i = 0; i<10; i++)
+			{
+				BindingWorkerList.Add(RandomWorker.WorkerFullInformation(8));
+			}
 		}
 
+		/// <summary>
+		/// Метод срабатывающий при закрытии формы
+		/// </summary>
 		private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			try
+			if (BindingWorkerList != null)
 			{
-				filesWork.rewriteFile(new List<Worker>(BindingWorkerList));
-			}
-			catch
-			{
-
+				if(MessageBox.Show(this, "Сохранить список ?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
+				{
+					filesWork.rewriteFile(new List<Worker>(BindingWorkerList));
+				}
 			}
 		}
 
+		/// <summary>
+		/// Метод инициируемый при нажатии на searchTextBox
+		/// </summary>
 		private void searchTextBox_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (searchTextBox.Text == searchTextBoxLText)
+			if (searchTextBox.Text == searchTextBoxText)
 			{
 				searchTextBox.Clear();
 			}
 		}
 
+		/// <summary>
+		/// Метод инициируемый при смене фокуса с searchTextBox
+		/// </summary>
 		private void searchTextBox_Leave(object sender, EventArgs e)
 		{
 			if (searchTextBox.Text == "")
 			{
-				searchTextBox.Text = searchTextBoxLText;
+				searchTextBox.Text = searchTextBoxText;
 			}
+		}
+
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "создать"
+		/// </summary>
+		private void createButton_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog createFileDialog = new SaveFileDialog();
+
+			createFileDialog.Filter = "txt files (*.kek)|*.kek";
+			createFileDialog.FilterIndex = 2;
+			createFileDialog.RestoreDirectory = true;
+			createFileDialog.Title = "Создание нового файла";
+			if (createFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				filepath = Path.GetFullPath(createFileDialog.FileName);
+				filesWork = new WorkWithFiles(filepath);
+				filesWork.rewriteFile(new List<Worker>());
+				fillingGridParam();
+			}
+		}
+
+		/// <summary>
+		/// Метод изменяющий fileNameLabel на название файла
+		/// </summary>
+		private void fileNameLabelChange()
+		{
+			fileNameLabel.Visible = true;
+			fileNameLabel.Text = Path.GetFileName(filepath);
+		}
+
+		/// <summary>
+		/// Метод производящий действия после нажатия кнопки "Сохранить"
+		/// </summary>
+		private void saveButton_Click(object sender, EventArgs e)
+		{
+			if (filesWork != null)
+			{
+				filesWork.rewriteFile(new List<Worker>(BindingWorkerList));
+				MessageBox.Show("Файл сохранен");
+			}
+		}
+
+		/// <summary>
+		/// Метод позволяющий изменять видимость некоторых объектов, 
+		/// для работы которых нужен выбранный файл
+		/// </summary>
+		/// <param name="visible">false - скрывает объекты
+		/// true - показывает объекты</param>
+		private void workWithDataButtonsVisible(bool visible)
+		{
+			fileNameLabel.Visible = visible;
+			saveButton.Visible = visible;
+			addButton.Visible = visible;
+			deleteButton.Visible = visible;
+			CreateRandomData.Visible = visible;
+			searchButton.Visible = visible;
+			searchTextBox.Visible = visible;
 		}
 	}
 }

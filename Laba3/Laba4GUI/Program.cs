@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Laba3.Logic;
 
 namespace Laba4GUI
 {
-	static class Program
+	/// <summary>
+	/// Класс инициирующий работы программы
+	/// </summary>
+	public static class Program
 	{
 		/// <summary>
 		/// Главная точка входа для приложения.
 		/// </summary>
 		[STAThread]
-		static void Main()
+		public static void Main()
 		{		
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);

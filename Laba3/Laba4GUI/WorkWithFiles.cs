@@ -5,37 +5,60 @@ using System.Xml.Serialization;
 
 namespace Laba4GUI
 {
+	/// <summary>
+	/// Класс для работы с файлами
+	/// </summary>
 	public class WorkWithFiles
 	{
+		/// <summary>
+		/// Поле класса хранящее путь к файлу
+		/// </summary>
 		private string _path;
-		private XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Worker>));
 
+		/// <summary>
+		/// Поле класса хранящее тип сериалазиции
+		/// </summary>
+		private XmlSerializer _xmlSerializer = 
+			new XmlSerializer(typeof(List<Worker>));
+
+		/// <summary>
+		/// Конструктор класса с 1 параметром
+		/// </summary>
+		/// <param name="path">Путь к файлу</param>
 		public WorkWithFiles(string path)
 		{
 			_path = path;
 		}
 
-
+		/// <summary>
+		/// Метод позволяющий получить список работников из XML файла
+		/// </summary>
+		/// <returns>Лист работников</returns>
 		public List<Worker> ReadFileInfo()
 		{
 			if (File.Exists(_path) == false)
 			{
 				using (FileStream fs = new FileStream(_path, FileMode.Create))
 				{
-					xmlSerializer.Serialize(fs,new List<Worker>());
+					_xmlSerializer.Serialize(fs,new List<Worker>());
 				}
 			}
 			using (FileStream fs = new FileStream(_path, FileMode.OpenOrCreate))
 			{
-				return (List<Worker>)xmlSerializer.Deserialize(fs); 			
+				return (List<Worker>)_xmlSerializer.Deserialize(fs); 			
 			}
 		}
 		
+		/// <summary>
+		/// Метод для переписывания данных в файл
+		/// </summary>
+		/// <param name="workerList">Лист работников,
+		/// который необходимо записать в файл</param>
 		public void rewriteFile(List<Worker> workerList)
 		{
 			using (FileStream fs = new FileStream(_path, FileMode.Create))
 			{
-				xmlSerializer.Serialize(fs, workerList);
+				_xmlSerializer.Serialize(fs, workerList);
 			}
 		}
 	}
