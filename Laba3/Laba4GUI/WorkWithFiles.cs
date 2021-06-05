@@ -13,12 +13,12 @@ namespace Laba4GUI
 		/// <summary>
 		/// Поле класса хранящее путь к файлу
 		/// </summary>
-		private string _path;
+		private readonly string _path;
 
 		/// <summary>
 		/// Поле класса хранящее тип сериалазиции
 		/// </summary>
-		private XmlSerializer _xmlSerializer = 
+		private readonly XmlSerializer _xmlSerializer = 
 			new XmlSerializer(typeof(List<Worker>));
 
 		/// <summary>
@@ -36,19 +36,13 @@ namespace Laba4GUI
 		/// <returns>Лист работников</returns>
 		public List<Worker> ReadFileInfo()
 		{
-			if (File.Exists(_path) == false)
-			{
-				using (FileStream fs = new FileStream(_path, FileMode.Create))
-				{
-					_xmlSerializer.Serialize(fs,new List<Worker>());
-				}
-			}
 			using (FileStream fs = new FileStream(_path, FileMode.OpenOrCreate))
 			{
 				return (List<Worker>)_xmlSerializer.Deserialize(fs); 			
 			}
 		}
 		
+		//TODO: RSDN naming
 		/// <summary>
 		/// Метод для переписывания данных в файл
 		/// </summary>

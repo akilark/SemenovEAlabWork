@@ -53,6 +53,7 @@ namespace Laba4GUI
 			AddFlag = false;
 		}
 		
+		//TODO: RSDN naming
 		/// <summary>
 		/// Метод позволяющий изменять видимость некоторых объектов,
 		/// связанных с вводом информации для расчета ЗП
@@ -67,6 +68,7 @@ namespace Laba4GUI
 			workMoneyTextBox.Visible = visible;
 		}
 
+		//TODO: RSDN naming
 		/// <summary>
 		/// Метод определяющий текст для workMoneyLabel и workHoursLabel 
 		/// в зависимости от выбранного radioButton
@@ -91,23 +93,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод инициируемый при выборе salaryRadioButton
 		/// </summary>
-		private void salaryRadioButton_CheckedChanged(object sender, EventArgs e)
-		{
-			wageTypeInfoChange();
-		}
-
-		/// <summary>
-		/// Метод инициируемый при выборе wageRateRadioButton
-		/// </summary>
-		private void wageRateRadioButton_CheckedChanged(object sender, EventArgs e)
-		{
-			wageTypeInfoChange();
-		}
-
-		/// <summary>
-		/// Метод инициируемый при выборе horlyPaymentRadioButton
-		/// </summary>
-		private void horlyPaymentRadioButton_CheckedChanged(object sender, EventArgs e)
+		private void RadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			wageTypeInfoChange();
 		}
@@ -192,21 +178,21 @@ namespace Laba4GUI
 			{
 				new Tuple<bool, WageType>
 				(
-				horlyPaymentRadioButton.Checked,
-				WageType.HorlyPayment
+					horlyPaymentRadioButton.Checked,
+					WageType.HorlyPayment
 				),
 				new Tuple<bool, WageType>
 				(
-				wageRateRadioButton.Checked,
-				WageType.WageRate
+					wageRateRadioButton.Checked,
+					WageType.WageRate
 				),
 				new Tuple<bool, WageType>
 				(
-				salaryRadioButton.Checked,
-				WageType.Salary
+					salaryRadioButton.Checked,
+					WageType.Salary
 				),
 			};
-			foreach(Tuple<bool,WageType> radioButtonWageType in radioButtonsChecked)
+			foreach(var radioButtonWageType in radioButtonsChecked)
 			{
 				if(radioButtonWageType.Item1)
 				{
@@ -226,6 +212,7 @@ namespace Laba4GUI
 			{
 				case "Фамилия":
 				{
+					        //TODO: Duplication
 					try
 					{
 						WorkerTmp.SecondName = secondNameTextBox.Text;
@@ -239,6 +226,7 @@ namespace Laba4GUI
 				}
 				case "Имя":
 				{
+					//TODO: Duplication
 					try
 					{
 						WorkerTmp.FirstName = firstNameTextBox.Text;

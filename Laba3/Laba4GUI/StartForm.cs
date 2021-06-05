@@ -12,21 +12,19 @@ namespace Laba4GUI
 	/// </summary>
 	public partial class StartForm : Form
 	{
-		/// <summary>
-		/// Поле класса хранящее объект класса AddWorkerForm
-		/// </summary>
-		private AddWorkerForm addWorkerForm = null;
-
-		/// <summary>
+		 //TODO: RSDN
+        /// <summary>
 		/// Поле класса содержащее путь к файлу
 		/// </summary>
 		private string filepath = @"C:\";
 
+		 //TODO: RSDN
 		/// <summary>
 		/// Поле класса содержащее объект класса WorkWithFiles
 		/// </summary>
 		private WorkWithFiles filesWork;
 
+		//TODO: RSDN naming
 		/// <summary>
 		/// Поле класса содержащее лист-источник для DataGridView с работниками
 		/// </summary>
@@ -80,17 +78,20 @@ namespace Laba4GUI
 				foreach (Worker worker in BindingWorkerList)
 				{
 					int searchLenght = searchTextBox.Text.Length;
+					//TODO: Duplication
 					if (worker.SecondName.Length >= searchLenght)
 					{
+						 //TODO: RSDN
 						if (worker.SecondName.ToLower().Substring(0, searchLenght) == searchTextBox.Text.ToLower())
 						{
 							collectionForSearch.Add(worker);
 							continue;
 						}
 					}
-
+					//TODO: Duplication
 					if (worker.FirstName.Length >= searchLenght)
 					{
+						 //TODO: RSDN
 						if (worker.FirstName.ToLower().Substring(0, searchLenght) == searchTextBox.Text.ToLower())
 						{
 							collectionForSearch.Add(worker);
@@ -109,7 +110,7 @@ namespace Laba4GUI
 		/// </summary>
 		private void addButton_Click(object sender, EventArgs e)
 		{
-			addWorkerForm = new AddWorkerForm();
+			var addWorkerForm = new AddWorkerForm();
 			this.Hide();
 			addWorkerForm.ShowDialog();
 			if (addWorkerForm.AddFlag)
@@ -153,6 +154,7 @@ namespace Laba4GUI
 		/// </summary>
 		private void deleteButton_Click(object sender, EventArgs e)
 		{
+			//BUG:
 			int indexDataGrid = workerListDataGrid.CurrentRow.Index;
 			BindingWorkerList.Remove(workerListDataGrid.CurrentRow.DataBoundItem as Worker);
 		}
@@ -170,14 +172,13 @@ namespace Laba4GUI
 				openFileDialog.FilterIndex = 2;
 				openFileDialog.RestoreDirectory = true;
 
-				if (openFileDialog.ShowDialog() == DialogResult.OK)
-				{
-					filepath = openFileDialog.FileName;
-					filesWork = new WorkWithFiles(filepath);
-					fillingGridParam();
-					saveButton.Visible = true;
-				}
-			}
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
+                filepath = openFileDialog.FileName;
+                filesWork = new WorkWithFiles(filepath);
+                fillingGridParam();
+                saveButton.Visible = true;
+            }
 		}
 
 		/// <summary>
@@ -199,15 +200,15 @@ namespace Laba4GUI
 		/// Метод срабатывающий при закрытии формы
 		/// </summary>
 		private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			if (BindingWorkerList != null)
-			{
-				if(MessageBox.Show(this, "Сохранить список ?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
-				{
-					filesWork.rewriteFile(new List<Worker>(BindingWorkerList));
-				}
-			}
-		}
+        {
+            if (BindingWorkerList == null) return;
+
+            //TODO: RSDN
+            if(MessageBox.Show(this, "Сохранить список ?", "Предупреждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                filesWork.rewriteFile(new List<Worker>(BindingWorkerList));
+            }
+        }
 
 		/// <summary>
 		/// Метод инициируемый при нажатии на searchTextBox
@@ -236,20 +237,21 @@ namespace Laba4GUI
 		/// </summary>
 		private void createButton_Click(object sender, EventArgs e)
 		{
-			SaveFileDialog createFileDialog = new SaveFileDialog();
+            var createFileDialog = new SaveFileDialog
+            {
+                Filter = "txt files (*.kek)|*.kek",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+                Title = "Создание нового файла"
+            };
 
-			createFileDialog.Filter = "txt files (*.kek)|*.kek";
-			createFileDialog.FilterIndex = 2;
-			createFileDialog.RestoreDirectory = true;
-			createFileDialog.Title = "Создание нового файла";
-			if (createFileDialog.ShowDialog() == DialogResult.OK)
-			{
-				filepath = Path.GetFullPath(createFileDialog.FileName);
-				filesWork = new WorkWithFiles(filepath);
-				filesWork.rewriteFile(new List<Worker>());
-				fillingGridParam();
-			}
-		}
+            if (createFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            filepath = Path.GetFullPath(createFileDialog.FileName);
+            filesWork = new WorkWithFiles(filepath);
+            filesWork.rewriteFile(new List<Worker>());
+            fillingGridParam();
+        }
 
 		/// <summary>
 		/// Метод изменяющий fileNameLabel на название файла
@@ -264,13 +266,12 @@ namespace Laba4GUI
 		/// Метод производящий действия после нажатия кнопки "Сохранить"
 		/// </summary>
 		private void saveButton_Click(object sender, EventArgs e)
-		{
-			if (filesWork != null)
-			{
-				filesWork.rewriteFile(new List<Worker>(BindingWorkerList));
-				MessageBox.Show("Файл сохранен");
-			}
-		}
+        {
+            if (filesWork == null) return;
+
+            filesWork.rewriteFile(new List<Worker>(BindingWorkerList));
+            MessageBox.Show("Файл сохранен");
+        }
 
 		/// <summary>
 		/// Метод позволяющий изменять видимость некоторых объектов, 
