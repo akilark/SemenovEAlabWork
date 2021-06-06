@@ -37,11 +37,10 @@ namespace Laba4GUI
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.fileNameLabel = new System.Windows.Forms.Label();
 			this.workerListDataGrid = new System.Windows.Forms.DataGridView();
-			this.DownloadButton = new System.Windows.Forms.Button();
-			this.CreateRandomData = new System.Windows.Forms.Button();
+			this.downloadButton = new System.Windows.Forms.Button();
+			this.createRandomDataButton = new System.Windows.Forms.Button();
 			this.searchTextBox = new System.Windows.Forms.TextBox();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-			this.createButton = new System.Windows.Forms.Button();
 			this.saveButton = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.workerListDataGrid)).BeginInit();
@@ -59,7 +58,7 @@ namespace Laba4GUI
 			// 
 			// searchButton
 			// 
-			this.searchButton.Location = new System.Drawing.Point(225, 14);
+			this.searchButton.Location = new System.Drawing.Point(234, 14);
 			this.searchButton.Name = "searchButton";
 			this.searchButton.Size = new System.Drawing.Size(75, 23);
 			this.searchButton.TabIndex = 8;
@@ -89,7 +88,7 @@ namespace Laba4GUI
 			// 
 			// resetButton
 			// 
-			this.resetButton.Location = new System.Drawing.Point(306, 14);
+			this.resetButton.Location = new System.Drawing.Point(327, 14);
 			this.resetButton.Name = "resetButton";
 			this.resetButton.Size = new System.Drawing.Size(75, 23);
 			this.resetButton.TabIndex = 9;
@@ -115,9 +114,9 @@ namespace Laba4GUI
 			this.fileNameLabel.AutoSize = true;
 			this.fileNameLabel.Location = new System.Drawing.Point(119, 0);
 			this.fileNameLabel.Name = "fileNameLabel";
-			this.fileNameLabel.Size = new System.Drawing.Size(64, 13);
+			this.fileNameLabel.Size = new System.Drawing.Size(91, 13);
 			this.fileNameLabel.TabIndex = 13;
-			this.fileNameLabel.Text = "Имя файла";
+			this.fileNameLabel.Text = "Новый файл.kek";
 			// 
 			// workerListDataGrid
 			// 
@@ -128,29 +127,30 @@ namespace Laba4GUI
 			this.workerListDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.workerListDataGrid.Location = new System.Drawing.Point(6, 22);
 			this.workerListDataGrid.Name = "workerListDataGrid";
+			this.workerListDataGrid.ReadOnly = true;
 			this.workerListDataGrid.Size = new System.Drawing.Size(553, 264);
 			this.workerListDataGrid.TabIndex = 12;
 			// 
-			// DownloadButton
+			// downloadButton
 			// 
-			this.DownloadButton.Location = new System.Drawing.Point(99, 337);
-			this.DownloadButton.Name = "DownloadButton";
-			this.DownloadButton.Size = new System.Drawing.Size(75, 23);
-			this.DownloadButton.TabIndex = 1;
-			this.DownloadButton.Text = "Загрузить";
-			this.DownloadButton.UseCompatibleTextRendering = true;
-			this.DownloadButton.UseVisualStyleBackColor = true;
-			this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
+			this.downloadButton.Location = new System.Drawing.Point(18, 337);
+			this.downloadButton.Name = "downloadButton";
+			this.downloadButton.Size = new System.Drawing.Size(75, 23);
+			this.downloadButton.TabIndex = 1;
+			this.downloadButton.Text = "Загрузить";
+			this.downloadButton.UseCompatibleTextRendering = true;
+			this.downloadButton.UseVisualStyleBackColor = true;
+			this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
 			// 
-			// CreateRandomData
+			// createRandomDataButton
 			// 
-			this.CreateRandomData.Location = new System.Drawing.Point(496, 337);
-			this.CreateRandomData.Name = "CreateRandomData";
-			this.CreateRandomData.Size = new System.Drawing.Size(75, 23);
-			this.CreateRandomData.TabIndex = 5;
-			this.CreateRandomData.Text = "Заполнить";
-			this.CreateRandomData.UseVisualStyleBackColor = true;
-			this.CreateRandomData.Click += new System.EventHandler(this.CreateRandomData_Click);
+			this.createRandomDataButton.Location = new System.Drawing.Point(496, 337);
+			this.createRandomDataButton.Name = "createRandomDataButton";
+			this.createRandomDataButton.Size = new System.Drawing.Size(75, 23);
+			this.createRandomDataButton.TabIndex = 5;
+			this.createRandomDataButton.Text = "Заполнить";
+			this.createRandomDataButton.UseVisualStyleBackColor = true;
+			this.createRandomDataButton.Click += new System.EventHandler(this.createRandomDataButton_Click);
 			// 
 			// searchTextBox
 			// 
@@ -162,19 +162,9 @@ namespace Laba4GUI
 			this.searchTextBox.Leave += new System.EventHandler(this.searchTextBox_Leave);
 			this.searchTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.searchTextBox_MouseDown);
 			// 
-			// createButton
-			// 
-			this.createButton.Location = new System.Drawing.Point(18, 337);
-			this.createButton.Name = "createButton";
-			this.createButton.Size = new System.Drawing.Size(75, 23);
-			this.createButton.TabIndex = 2;
-			this.createButton.Text = "Создать";
-			this.createButton.UseVisualStyleBackColor = true;
-			this.createButton.Click += new System.EventHandler(this.createButton_Click);
-			// 
 			// saveButton
 			// 
-			this.saveButton.Location = new System.Drawing.Point(180, 337);
+			this.saveButton.Location = new System.Drawing.Point(109, 337);
 			this.saveButton.Name = "saveButton";
 			this.saveButton.Size = new System.Drawing.Size(75, 23);
 			this.saveButton.TabIndex = 4;
@@ -184,19 +174,18 @@ namespace Laba4GUI
 			// 
 			// StartForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(684, 371);
 			this.Controls.Add(this.saveButton);
-			this.Controls.Add(this.createButton);
 			this.Controls.Add(this.resetButton);
 			this.Controls.Add(this.searchTextBox);
-			this.Controls.Add(this.CreateRandomData);
-			this.Controls.Add(this.DownloadButton);
+			this.Controls.Add(this.createRandomDataButton);
+			this.Controls.Add(this.downloadButton);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.closeButton);
 			this.Controls.Add(this.searchButton);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.MaximizeBox = false;
 			this.Name = "StartForm";
 			this.Text = "Данные о работниках";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartForm_FormClosing);
@@ -218,11 +207,10 @@ namespace Laba4GUI
 		private System.Windows.Forms.Button resetButton;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.DataGridView workerListDataGrid;
-		private System.Windows.Forms.Button DownloadButton;
-		private System.Windows.Forms.Button CreateRandomData;
+		private System.Windows.Forms.Button downloadButton;
+		private System.Windows.Forms.Button createRandomDataButton;
 		private System.Windows.Forms.TextBox searchTextBox;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
-		private System.Windows.Forms.Button createButton;
 		private System.Windows.Forms.Label fileNameLabel;
 		private System.Windows.Forms.Button saveButton;
 	}

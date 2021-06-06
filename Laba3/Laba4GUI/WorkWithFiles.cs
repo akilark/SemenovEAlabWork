@@ -42,13 +42,13 @@ namespace Laba4GUI
 			}
 		}
 		
-		//TODO: RSDN naming
+		//TODO: RSDN naming (V)
 		/// <summary>
 		/// Метод для переписывания данных в файл
 		/// </summary>
 		/// <param name="workerList">Лист работников,
 		/// который необходимо записать в файл</param>
-		public void rewriteFile(List<Worker> workerList)
+		public void RewriteFile(List<Worker> workerList)
 		{
 			using (FileStream fs = new FileStream(_path, FileMode.Create))
 			{

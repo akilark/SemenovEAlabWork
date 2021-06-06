@@ -36,66 +36,21 @@ namespace Laba4GUI
 		}
 
 		/// <summary>
+		/// Метод который выполняется при загрузке данной формы
+		/// </summary>
+		private void AddWorkerForm_Load(object sender, EventArgs e)
+		{
+			VisibleChange(false);
+			WorkerTmp = new Worker(_allowWorkHours);
+			AddFlag = false;
+		}
+
+		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Выход"
 		/// </summary>
 		private void closeButton_Click(object sender, EventArgs e)
 		{
 			this.Close();
-		}
-
-		/// <summary>
-		/// Метод который выполняется при загрузке данной формы
-		/// </summary>
-		private void AddWorkerForm_Load(object sender, EventArgs e)
-		{
-			visibleChange(false);
-			WorkerTmp = new Worker(_allowWorkHours);
-			AddFlag = false;
-		}
-		
-		//TODO: RSDN naming
-		/// <summary>
-		/// Метод позволяющий изменять видимость некоторых объектов,
-		/// связанных с вводом информации для расчета ЗП
-		/// </summary>
-		/// <param name="visible">false - скрывает объекты
-		/// true - показывает объекты</param>
-		private void visibleChange(bool visible)
-		{
-			workHoursLabel.Visible = visible;
-			workHoursTextBox.Visible = visible;
-			workMoneyLabel.Visible = visible;
-			workMoneyTextBox.Visible = visible;
-		}
-
-		//TODO: RSDN naming
-		/// <summary>
-		/// Метод определяющий текст для workMoneyLabel и workHoursLabel 
-		/// в зависимости от выбранного radioButton
-		/// </summary>
-		private void wageTypeInfoChange()
-		{
-			var labelsText = new Dictionary<WageType,string[]>
-			{
-				{WageType.HorlyPayment, 
-					new string [] { "Ставка за час:", "Часов отработано:" } },
-				{WageType.Salary, 
-					new string [] { "Ставка за месяц:", "Дней отработано:" } },
-				{WageType.WageRate, 
-					new string [] { "Ставка за день:", "Дней отработано:"}}
-			};
-			var wageType = wageTypeFromRadioButton();
-			workMoneyLabel.Text = labelsText[wageType][0];
-			workHoursLabel.Text = labelsText[wageType][1];
-			visibleChange(true);
-		}
-
-		/// <summary>
-		/// Метод инициируемый при выборе salaryRadioButton
-		/// </summary>
-		private void RadioButton_CheckedChanged(object sender, EventArgs e)
-		{
-			wageTypeInfoChange();
 		}
 
 		/// <summary>
@@ -105,7 +60,7 @@ namespace Laba4GUI
 		{
 			try
 			{
-				if (secondNameTextBox.Text == "" || 
+				if (secondNameTextBox.Text == "" ||
 					firstNameTextBox.Text == "" ||
 					workHoursTextBox.Text == "" ||
 					workMoneyTextBox.Text == "")
@@ -115,26 +70,34 @@ namespace Laba4GUI
 				}
 				else
 				{
-					WorkerTmp.WageType(wageTypeFromRadioButton());
-					WorkerTmp.dateTime = new DateTime(DateTime.Now.Year,DateTime.Now.Month-1,1);
+					WorkerTmp.WageType(WageTypeFromRadioButton());
+					WorkerTmp.dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
 					if (horlyPaymentRadioButton.Checked == true)
 					{
-						WorkerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), 
+						WorkerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text),
 							Int32.Parse(workHoursTextBox.Text));
 					}
 					else
 					{
-						WorkerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text), 
-							Int32.Parse(workHoursTextBox.Text)* _allowWorkHours);
+						WorkerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text),
+							Int32.Parse(workHoursTextBox.Text) * _allowWorkHours);
 					}
 					AddFlag = true;
 					this.Hide();
 				}
 			}
-			catch(Exception exception)
+			catch (Exception exception)
 			{
 				MessageBox.Show(exception.Message, "Ошибка");
 			}
+		}
+
+		/// <summary>
+		/// Метод инициируемый при изменении firstNameTextBox
+		/// </summary>
+		private void firstNameTextBox_TextChanged(object sender, EventArgs e)
+		{
+			NameTextBoxes("Имя",firstNameTextBox);
 		}
 
 		/// <summary>
@@ -142,7 +105,7 @@ namespace Laba4GUI
 		/// </summary>
 		private void secondNameTextBox_TextChanged(object sender, EventArgs e)
 		{
-			nameTextBoxes("Фамилия");
+			NameTextBoxes("Фамилия",secondNameTextBox);
 		}
 
 		/// <summary>
@@ -161,18 +124,55 @@ namespace Laba4GUI
 		}
 
 		/// <summary>
-		/// Метод инициируемый при изменении firstNameTextBox
+		/// Метод инициируемый при выборе salaryRadioButton
 		/// </summary>
-		private void firstNameTextBox_TextChanged(object sender, EventArgs e)
+		private void radioButtons_CheckedChanged(object sender, EventArgs e)
 		{
-			nameTextBoxes("Имя");
+			WageTypeInfoChange();
+		}
+
+		//TODO: RSDN naming(V)
+		/// <summary>
+		/// Метод позволяющий изменять видимость некоторых объектов,
+		/// связанных с вводом информации для расчета ЗП
+		/// </summary>
+		/// <param name="visible">false - скрывает объекты
+		/// true - показывает объекты</param>
+		private void VisibleChange(bool visible)
+		{
+			workHoursLabel.Visible = visible;
+			workHoursTextBox.Visible = visible;
+			workMoneyLabel.Visible = visible;
+			workMoneyTextBox.Visible = visible;
+		}
+
+		//TODO: RSDN naming(V)
+		/// <summary>
+		/// Метод определяющий текст для workMoneyLabel и workHoursLabel 
+		/// в зависимости от выбранного radioButton
+		/// </summary>
+		private void WageTypeInfoChange()
+		{
+			var labelsText = new Dictionary<WageType,string[]>
+			{
+				{WageType.HorlyPayment, 
+					new string [] { "Ставка за час:", "Часов отработано:" } },
+				{WageType.Salary, 
+					new string [] { "Ставка за месяц:", "Дней отработано:" } },
+				{WageType.WageRate, 
+					new string [] { "Ставка за день:", "Дней отработано:"}}
+			};
+			var wageType = WageTypeFromRadioButton();
+			workMoneyLabel.Text = labelsText[wageType][0];
+			workHoursLabel.Text = labelsText[wageType][1];
+			VisibleChange(true);
 		}
 
 		/// <summary>
 		/// Метод определяющий какой RadioButton был выбран пользователем
 		/// </summary>
 		/// <returns>Тип заработной платы</returns>
-		private WageType wageTypeFromRadioButton()
+		private WageType WageTypeFromRadioButton()
 		{
 			var radioButtonsChecked = new Tuple<bool,WageType>[] 
 			{
@@ -206,38 +206,29 @@ namespace Laba4GUI
 		/// Метод производящий валидацию вводимых данных для имени и фамилии
 		/// </summary>
 		/// <param name="name">"Фамилия" или "Имя"</param>
-		private void nameTextBoxes(string name)
+		/// <param name="nameTextBox">Текстбокс</param>
+		private void NameTextBoxes(string name, TextBox nameTextBox)
 		{
-			switch(name)
+			try
 			{
-				case "Фамилия":
+				switch(name)
 				{
-					        //TODO: Duplication
-					try
+					case "Фамилия":
 					{
-						WorkerTmp.SecondName = secondNameTextBox.Text;
-						secondNameTextBox.BackColor = Color.White;
+						WorkerTmp.SecondName = nameTextBox.Text;
+						break;
 					}
-					catch (Exception)
+					case "Имя":
 					{
-						secondNameTextBox.BackColor = Color.DeepPink;
+						WorkerTmp.FirstName = nameTextBox.Text;
+						break;
 					}
-					break;
-				}
-				case "Имя":
-				{
-					//TODO: Duplication
-					try
-					{
-						WorkerTmp.FirstName = firstNameTextBox.Text;
-						firstNameTextBox.BackColor = Color.White;
-					}
-					catch (Exception)
-					{
-						firstNameTextBox.BackColor = Color.DeepPink;
-					}
-					break;
-				}
+				} 
+				nameTextBox.BackColor = Color.White;
+			}
+			catch (Exception)
+			{
+				nameTextBox.BackColor = Color.DeepPink;
 			}
 		}
 	}

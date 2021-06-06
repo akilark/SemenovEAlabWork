@@ -72,7 +72,7 @@ namespace Laba4GUI
 			this.salaryRadioButton.TabStop = true;
 			this.salaryRadioButton.Text = "Оклад";
 			this.salaryRadioButton.UseVisualStyleBackColor = true;
-			this.salaryRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+			this.salaryRadioButton.CheckedChanged += new System.EventHandler(this.radioButtons_CheckedChanged);
 			// 
 			// horlyPaymentRadioButton
 			// 
@@ -84,7 +84,7 @@ namespace Laba4GUI
 			this.horlyPaymentRadioButton.TabStop = true;
 			this.horlyPaymentRadioButton.Text = "Почасовая оплата";
 			this.horlyPaymentRadioButton.UseVisualStyleBackColor = true;
-			this.horlyPaymentRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+			this.horlyPaymentRadioButton.CheckedChanged += new System.EventHandler(this.radioButtons_CheckedChanged);
 			// 
 			// wageRateRadioButton
 			// 
@@ -96,7 +96,7 @@ namespace Laba4GUI
 			this.wageRateRadioButton.TabStop = true;
 			this.wageRateRadioButton.Text = "Тарифная ставка";
 			this.wageRateRadioButton.UseVisualStyleBackColor = true;
-			this.wageRateRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+			this.wageRateRadioButton.CheckedChanged += new System.EventHandler(this.radioButtons_CheckedChanged);
 			// 
 			// radioButton1
 			// 
@@ -223,6 +223,7 @@ namespace Laba4GUI
 			this.Controls.Add(this.firstNameTextBox);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.MaximizeBox = false;
 			this.Name = "AddWorkerForm";
 			this.Text = "Добавление нового работника";
 			this.Load += new System.EventHandler(this.AddWorkerForm_Load);
