@@ -42,7 +42,6 @@ namespace Laba4GUI
 			}
 		}
 		
-		//TODO: RSDN naming (V)
 		/// <summary>
 		/// Метод для переписывания данных в файл
 		/// </summary>

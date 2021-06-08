@@ -12,27 +12,29 @@ namespace Laba4GUI
 	/// </summary>
 	public partial class StartForm : Form
 	{
-		 //TODO: RSDN(V)
+		 //TODO: RSDN
         /// <summary>
 		/// Поле класса содержащее путь к файлу
 		/// </summary>
 		private string filePath = @"C:\";
 
-		 //TODO: RSDN(v)
+		 //TODO: RSDN
 		/// <summary>
 		/// Поле класса содержащее объект класса WorkWithFiles
 		/// </summary>
 		private WorkWithFiles filesWork;
 
-		//TODO: RSDN naming(v)
+		//TODO: RSDN naming
 		/// <summary>
 		/// Поле класса содержащее лист-источник для DataGridView 
 		/// с работниками
 		/// </summary>
 		private BindingList<Worker> bindingWorkerList;
 
+		//TODO: зачем?
 		private int bindingWorkerListCount = 0;
 
+		//TODO: const
 		/// <summary>
 		/// Поле класса хранящее текст для текстбокса поиска
 		/// </summary>
@@ -65,7 +67,7 @@ namespace Laba4GUI
 		private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (bindingWorkerList.Count == bindingWorkerListCount) return;				
-			//TODO: RSDN (V)
+
 			if (MessageBox.Show(this, "Сохранить список ?", "Предупреждение", 
 				MessageBoxButtons.YesNo) == DialogResult.Yes)
 			{
@@ -121,7 +123,6 @@ namespace Laba4GUI
 					{
 						collectionForSearch.Add(worker);
 					}
-					//TODO: Duplication(V)
 				}
 				SetDataSource(collectionForSearch);
 				VisibleAfterSearch(true);
@@ -159,7 +160,6 @@ namespace Laba4GUI
 		/// </summary>
 		private void deleteButton_Click(object sender, EventArgs e)
 		{
-			//BUG: (V)
 			try
 			{
 				if (workerListDataGrid.CurrentRow == null)
