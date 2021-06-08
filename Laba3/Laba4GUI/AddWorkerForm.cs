@@ -97,7 +97,7 @@ namespace Laba4GUI
 		/// </summary>
 		private void firstNameTextBox_TextChanged(object sender, EventArgs e)
 		{
-			NameTextBoxes("Имя",firstNameTextBox);
+			NameTextBoxes("Имя",  firstNameTextBox);
 		}
 
 		/// <summary>
@@ -131,7 +131,6 @@ namespace Laba4GUI
 			WageTypeInfoChange();
 		}
 
-		//TODO: RSDN naming(V)
 		/// <summary>
 		/// Метод позволяющий изменять видимость некоторых объектов,
 		/// связанных с вводом информации для расчета ЗП
@@ -146,7 +145,6 @@ namespace Laba4GUI
 			workMoneyTextBox.Visible = visible;
 		}
 
-		//TODO: RSDN naming(V)
 		/// <summary>
 		/// Метод определяющий текст для workMoneyLabel и workHoursLabel 
 		/// в зависимости от выбранного radioButton
@@ -155,13 +153,31 @@ namespace Laba4GUI
 		{
 			var labelsText = new Dictionary<WageType,string[]>
 			{
-				{WageType.HorlyPayment, 
-					new string [] { "Ставка за час:", "Часов отработано:" } },
-				{WageType.Salary, 
-					new string [] { "Ставка за месяц:", "Дней отработано:" } },
-				{WageType.WageRate, 
-					new string [] { "Ставка за день:", "Дней отработано:"}}
-			};
+				{
+                    WageType.HorlyPayment, 
+					new[]
+                    {
+                        "Ставка за час:", 
+                        "Часов отработано:"
+                    }
+                },
+				{
+                    WageType.Salary, 
+					new[]
+                    {
+                        "Ставка за месяц:", 
+                        "Дней отработано:"
+                    }
+                },
+				{
+                    WageType.WageRate, 
+					new[]
+                    {
+                        "Ставка за день:", 
+                        "Дней отработано:"
+                     }
+                }
+            };
 			var wageType = WageTypeFromRadioButton();
 			workMoneyLabel.Text = labelsText[wageType][0];
 			workHoursLabel.Text = labelsText[wageType][1];
