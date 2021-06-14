@@ -12,33 +12,33 @@ namespace Laba4GUI
 	/// </summary>
 	public partial class StartForm : Form
 	{
-		 //TODO: RSDN
+		//TODO: RSDN(v)
         /// <summary>
 		/// Поле класса содержащее путь к файлу
 		/// </summary>
-		private string filePath = @"C:\";
+		private string _filePath = @"C:\";
 
-		 //TODO: RSDN
+		 //TODO: RSDN(v)
 		/// <summary>
 		/// Поле класса содержащее объект класса WorkWithFiles
 		/// </summary>
-		private WorkWithFiles filesWork;
+		private WorkWithFiles _filesWork;
 
-		//TODO: RSDN naming
+		//TODO: RSDN naming(v)
 		/// <summary>
 		/// Поле класса содержащее лист-источник для DataGridView 
 		/// с работниками
 		/// </summary>
-		private BindingList<Worker> bindingWorkerList;
+		private BindingList<Worker> _bindingWorkerList;
 
-		//TODO: зачем?
-		private int bindingWorkerListCount = 0;
+		//TODO: зачем?(v)
+		private BindingList<Worker> _bindingWorkerListBefore;
 
-		//TODO: const
+		//TODO: const (V)
 		/// <summary>
 		/// Поле класса хранящее текст для текстбокса поиска
 		/// </summary>
-		private string searchTextBoxText = "Введите фамилию или имя:";
+		private const string  _searchTextBoxText = "Введите фамилию или имя:";
 
 #if !DEBUG
 		createRandomDataButton.Visible = false
@@ -66,14 +66,14 @@ namespace Laba4GUI
 		/// </summary>
 		private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (bindingWorkerList.Count == bindingWorkerListCount) return;				
+			if (_bindingWorkerList == _bindingWorkerListBefore) return;				
 
 			if (MessageBox.Show(this, "Сохранить список ?", "Предупреждение", 
 				MessageBoxButtons.YesNo) == DialogResult.Yes)
 			{
-				if (filePath == @"C:\")
+				if (_filePath == @"C:\")
 				{
-					saveButton_Click(sender, e);
+					SaveButton_Click(sender, e);
 				}
 			}
 		}
@@ -81,7 +81,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод обозначающий работу кнопки "Выход"
 		/// </summary>
-		private void closeButton_Click(object sender, EventArgs e)
+		private void CloseButton_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
@@ -89,7 +89,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Сохранить"
 		/// </summary>
-		private void saveButton_Click(object sender, EventArgs e)
+		private void SaveButton_Click(object sender, EventArgs e)
 		{
 			var createFileDialog = new SaveFileDialog
 			{
@@ -99,25 +99,25 @@ namespace Laba4GUI
 
 			if (createFileDialog.ShowDialog() != DialogResult.OK) return;
 
-			filePath = Path.GetFullPath(createFileDialog.FileName);
-			filesWork = new WorkWithFiles(filePath);
-			filesWork.RewriteFile(new List<Worker>(GetDataSource()));
+			_filePath = Path.GetFullPath(createFileDialog.FileName);
+			_filesWork = new WorkWithFiles(_filePath);
+			_filesWork.RewriteFile(new List<Worker>(GetDataSource()));
 			MessageBox.Show("Файл сохранен");
-			fileNameLabel.Text = Path.GetFileName(filePath);
+			fileNameLabel.Text = Path.GetFileName(_filePath);
 		}
 
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Поиск"
 		/// </summary>
-		private void searchButton_Click(object sender, EventArgs e)
+		private void SearchButton_Click(object sender, EventArgs e)
 		{
 			var collectionForSearch = new BindingList<Worker>();
-			if (searchTextBox.Text == searchTextBoxText)
+			if (searchTextBox.Text == _searchTextBoxText)
 			{
 			}
 			else
 			{
-				foreach (Worker worker in bindingWorkerList)
+				foreach (Worker worker in _bindingWorkerList)
 				{
 					if(SearchByName(worker.SecondName) || SearchByName(worker.FirstName))
 					{
@@ -129,18 +129,17 @@ namespace Laba4GUI
 			}
 		}
 
-
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Добавить"
 		/// </summary>
-		private void addButton_Click(object sender, EventArgs e)
+		private void AddButton_Click(object sender, EventArgs e)
 		{
 			var addWorkerForm = new AddWorkerForm();
 			this.Hide();
 			addWorkerForm.ShowDialog();
 			if (addWorkerForm.AddFlag)
 			{
-				bindingWorkerList.Add(addWorkerForm.WorkerTmp);
+				_bindingWorkerList.Add(addWorkerForm.WorkerTmp);
 			}
 			this.Show();
 		}
@@ -148,17 +147,17 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Сбросить"
 		/// </summary>
-		private void resetButton_Click(object sender, EventArgs e)
+		private void ResetButton_Click(object sender, EventArgs e)
 		{
-			SetDataSource(bindingWorkerList);
-			searchTextBox.Text = searchTextBoxText;
+			SetDataSource(_bindingWorkerList);
+			searchTextBox.Text = _searchTextBoxText;
 			VisibleAfterSearch(false);
 		}
 
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Удалить"
 		/// </summary>
-		private void deleteButton_Click(object sender, EventArgs e)
+		private void DeleteButton_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -166,21 +165,24 @@ namespace Laba4GUI
 				{
 					throw new Exception("ОБъекты в списке закончились");
 				}
-				int indexDataGrid = workerListDataGrid.CurrentRow.Index;
-				bindingWorkerList.Remove(
-					workerListDataGrid.CurrentRow.DataBoundItem as Worker);
+				if (workerListDataGrid.SelectedRows.Count > 0)
+				{
+					foreach(DataGridViewRow row in workerListDataGrid.SelectedRows)
+					{
+						_bindingWorkerList.Remove(row.DataBoundItem as Worker);
+					}
+				}
 			}
 			catch (Exception exception)
 			{
 				MessageBox.Show(exception.Message, "Ошибка");
 			}
-
 		}
 
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Загрузить"
 		/// </summary>
-		private void downloadButton_Click(object sender, EventArgs e)
+		private void DownloadButton_Click(object sender, EventArgs e)
 		{
 
 			using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -191,30 +193,30 @@ namespace Laba4GUI
 
 				if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
-				filePath = openFileDialog.FileName;
-				filesWork = new WorkWithFiles(filePath);
+				_filePath = openFileDialog.FileName;
+				_filesWork = new WorkWithFiles(_filePath);
 				FillingGridParamFromFile();
-				fileNameLabel.Text = Path.GetFileName(filePath);
+				fileNameLabel.Text = Path.GetFileName(_filePath);
 			}
 		}
 
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Заполнить"
 		/// </summary>
-		private void createRandomDataButton_Click(object sender, EventArgs e)
+		private void CreateRandomDataButton_Click(object sender, EventArgs e)
 		{
 			for (int i = 0; i < 10; i++)
 			{
-				bindingWorkerList.Add(RandomWorker.WorkerFullInformation(8));
+				_bindingWorkerList.Add(RandomWorker.WorkerFullInformation(8));
 			}
 		}
 
 		/// <summary>
 		/// Метод инициируемый при нажатии на searchTextBox
 		/// </summary>
-		private void searchTextBox_MouseDown(object sender, MouseEventArgs e)
+		private void SearchTextBox_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (searchTextBox.Text == searchTextBoxText)
+			if (searchTextBox.Text == _searchTextBoxText)
 			{
 				searchTextBox.Clear();
 			}
@@ -223,28 +225,27 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод инициируемый при смене фокуса с searchTextBox
 		/// </summary>
-		private void searchTextBox_Leave(object sender, EventArgs e)
+		private void SearchTextBox_Leave(object sender, EventArgs e)
 		{
 			if (searchTextBox.Text == "")
 			{
-				searchTextBox.Text = searchTextBoxText;
+				searchTextBox.Text = _searchTextBoxText;
 			}
 		}
 
-        //TODO: RSDN
+        //TODO: RSDN(v)
 		/// <summary>
 		/// Метод реализующий поиск по имени в DataGridView
 		/// </summary>
-		/// <param name="Name">Имя или фамилия для поиска</param>
+		/// <param name="name">Имя или фамилия для поиска</param>
 		/// <returns>true- если совпадения найдены,
 		/// false- если совпадений нет</returns>
-		private bool SearchByName(string Name)
+		private bool SearchByName(string name)
 		{
 			int searchLenght = searchTextBox.Text.Length;
-			if (Name.Length >= searchLenght)
+			if (name.Length >= searchLenght)
 			{
-				if (Name.ToLower().Substring(0, searchLenght) ==
-					searchTextBox.Text.ToLower())
+				if (name.Contains(searchTextBox.Text))
 				{
 					return true;
 				}
@@ -258,8 +259,8 @@ namespace Laba4GUI
 		/// </summary>
 		private void DataGridInitialization()
 		{
-			bindingWorkerList = new BindingList<Worker>();
-			var source = new BindingSource(bindingWorkerList, null);
+			_bindingWorkerList = new BindingList<Worker>();
+			var source = new BindingSource(_bindingWorkerList, null);
 			workerListDataGrid.DataSource = source;
 			workerListDataGrid.Columns[0].HeaderText = "Фамилия";
 			workerListDataGrid.Columns[1].HeaderText = "Имя";
@@ -275,9 +276,9 @@ namespace Laba4GUI
 		/// </summary>
 		private void FillingGridParamFromFile()
 		{
-			bindingWorkerList = new BindingList<Worker>(filesWork.ReadFileInfo());
-			SetDataSource(bindingWorkerList);
-			bindingWorkerListCount = bindingWorkerList.Count;
+			_bindingWorkerList = new BindingList<Worker>(_filesWork.ReadFileInfo());
+			SetDataSource(_bindingWorkerList);
+			_bindingWorkerListBefore = _bindingWorkerList;
 		}
 
 		/// <summary>

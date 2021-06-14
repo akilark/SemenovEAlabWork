@@ -48,7 +48,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Выход"
 		/// </summary>
-		private void closeButton_Click(object sender, EventArgs e)
+		private void CloseButton_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
@@ -56,7 +56,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод производящий действия после нажатия кнопки "Добавить"
 		/// </summary>
-		private void addButton_Click(object sender, EventArgs e)
+		private void AddButton_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -95,7 +95,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод инициируемый при изменении firstNameTextBox
 		/// </summary>
-		private void firstNameTextBox_TextChanged(object sender, EventArgs e)
+		private void FirstNameTextBox_TextChanged(object sender, EventArgs e)
 		{
 			NameTextBoxes("Имя",  firstNameTextBox);
 		}
@@ -103,7 +103,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод инициируемый при изменении secondNameTextBox
 		/// </summary>
-		private void secondNameTextBox_TextChanged(object sender, EventArgs e)
+		private void SecondNameTextBox_TextChanged(object sender, EventArgs e)
 		{
 			NameTextBoxes("Фамилия",secondNameTextBox);
 		}
@@ -111,7 +111,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод инициируемый при смене фокуса с secondNameTextBox
 		/// </summary>
-		private void secondNameTextBox_Validating(object sender, CancelEventArgs e)
+		private void SecondNameTextBox_Validating(object sender, CancelEventArgs e)
 		{
 			try
 			{
@@ -126,7 +126,7 @@ namespace Laba4GUI
 		/// <summary>
 		/// Метод инициируемый при выборе salaryRadioButton
 		/// </summary>
-		private void radioButtons_CheckedChanged(object sender, EventArgs e)
+		private void RadioButtons_CheckedChanged(object sender, EventArgs e)
 		{
 			WageTypeInfoChange();
 		}

@@ -54,7 +54,7 @@ namespace Laba4GUI
 			this.addButton.TabIndex = 6;
 			this.addButton.Text = "Добавить";
 			this.addButton.UseVisualStyleBackColor = true;
-			this.addButton.Click += new System.EventHandler(this.addButton_Click);
+			this.addButton.Click += new System.EventHandler(this.AddButton_Click);
 			// 
 			// searchButton
 			// 
@@ -64,7 +64,7 @@ namespace Laba4GUI
 			this.searchButton.TabIndex = 8;
 			this.searchButton.Text = "Поиск";
 			this.searchButton.UseVisualStyleBackColor = true;
-			this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+			this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
 			// 
 			// deleteButton
 			// 
@@ -74,7 +74,7 @@ namespace Laba4GUI
 			this.deleteButton.TabIndex = 7;
 			this.deleteButton.Text = "Удалить";
 			this.deleteButton.UseVisualStyleBackColor = true;
-			this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+			this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
 			// 
 			// closeButton
 			// 
@@ -84,7 +84,7 @@ namespace Laba4GUI
 			this.closeButton.TabIndex = 3;
 			this.closeButton.Text = "Выход";
 			this.closeButton.UseVisualStyleBackColor = true;
-			this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+			this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
 			// 
 			// resetButton
 			// 
@@ -94,7 +94,7 @@ namespace Laba4GUI
 			this.resetButton.TabIndex = 9;
 			this.resetButton.Text = "Сбросить";
 			this.resetButton.UseVisualStyleBackColor = true;
-			this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+			this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
 			// 
 			// groupBox1
 			// 
@@ -128,6 +128,11 @@ namespace Laba4GUI
 			this.workerListDataGrid.Location = new System.Drawing.Point(6, 22);
 			this.workerListDataGrid.Name = "workerListDataGrid";
 			this.workerListDataGrid.ReadOnly = true;
+			this.workerListDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.workerListDataGrid.ShowCellErrors = false;
+			this.workerListDataGrid.ShowCellToolTips = false;
+			this.workerListDataGrid.ShowEditingIcon = false;
+			this.workerListDataGrid.ShowRowErrors = false;
 			this.workerListDataGrid.Size = new System.Drawing.Size(553, 264);
 			this.workerListDataGrid.TabIndex = 12;
 			// 
@@ -140,7 +145,7 @@ namespace Laba4GUI
 			this.downloadButton.Text = "Загрузить";
 			this.downloadButton.UseCompatibleTextRendering = true;
 			this.downloadButton.UseVisualStyleBackColor = true;
-			this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
+			this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
 			// 
 			// createRandomDataButton
 			// 
@@ -150,7 +155,7 @@ namespace Laba4GUI
 			this.createRandomDataButton.TabIndex = 5;
 			this.createRandomDataButton.Text = "Заполнить";
 			this.createRandomDataButton.UseVisualStyleBackColor = true;
-			this.createRandomDataButton.Click += new System.EventHandler(this.createRandomDataButton_Click);
+			this.createRandomDataButton.Click += new System.EventHandler(this.CreateRandomDataButton_Click);
 			// 
 			// searchTextBox
 			// 
@@ -159,8 +164,8 @@ namespace Laba4GUI
 			this.searchTextBox.Size = new System.Drawing.Size(201, 20);
 			this.searchTextBox.TabIndex = 10;
 			this.searchTextBox.Text = "Введите фамилию или имя:";
-			this.searchTextBox.Leave += new System.EventHandler(this.searchTextBox_Leave);
-			this.searchTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.searchTextBox_MouseDown);
+			this.searchTextBox.Leave += new System.EventHandler(this.SearchTextBox_Leave);
+			this.searchTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SearchTextBox_MouseDown);
 			// 
 			// saveButton
 			// 
@@ -170,7 +175,7 @@ namespace Laba4GUI
 			this.saveButton.TabIndex = 4;
 			this.saveButton.Text = "Сохранить";
 			this.saveButton.UseVisualStyleBackColor = true;
-			this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+			this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
 			// 
 			// StartForm
 			// 

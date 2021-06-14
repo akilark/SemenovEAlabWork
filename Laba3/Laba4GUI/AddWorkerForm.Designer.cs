@@ -72,7 +72,7 @@ namespace Laba4GUI
 			this.salaryRadioButton.TabStop = true;
 			this.salaryRadioButton.Text = "Оклад";
 			this.salaryRadioButton.UseVisualStyleBackColor = true;
-			this.salaryRadioButton.CheckedChanged += new System.EventHandler(this.radioButtons_CheckedChanged);
+			this.salaryRadioButton.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
 			// 
 			// horlyPaymentRadioButton
 			// 
@@ -84,7 +84,7 @@ namespace Laba4GUI
 			this.horlyPaymentRadioButton.TabStop = true;
 			this.horlyPaymentRadioButton.Text = "Почасовая оплата";
 			this.horlyPaymentRadioButton.UseVisualStyleBackColor = true;
-			this.horlyPaymentRadioButton.CheckedChanged += new System.EventHandler(this.radioButtons_CheckedChanged);
+			this.horlyPaymentRadioButton.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
 			// 
 			// wageRateRadioButton
 			// 
@@ -96,7 +96,7 @@ namespace Laba4GUI
 			this.wageRateRadioButton.TabStop = true;
 			this.wageRateRadioButton.Text = "Тарифная ставка";
 			this.wageRateRadioButton.UseVisualStyleBackColor = true;
-			this.wageRateRadioButton.CheckedChanged += new System.EventHandler(this.radioButtons_CheckedChanged);
+			this.wageRateRadioButton.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
 			// 
 			// radioButton1
 			// 
@@ -149,7 +149,7 @@ namespace Laba4GUI
 			this.addButton.TabIndex = 10;
 			this.addButton.Text = "Добавить";
 			this.addButton.UseVisualStyleBackColor = true;
-			this.addButton.Click += new System.EventHandler(this.addButton_Click);
+			this.addButton.Click += new System.EventHandler(this.AddButton_Click);
 			// 
 			// closeButton
 			// 
@@ -159,7 +159,7 @@ namespace Laba4GUI
 			this.closeButton.TabIndex = 9;
 			this.closeButton.Text = "Назад";
 			this.closeButton.UseVisualStyleBackColor = true;
-			this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+			this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
 			// 
 			// label2
 			// 
@@ -176,7 +176,7 @@ namespace Laba4GUI
 			this.firstNameTextBox.Name = "firstNameTextBox";
 			this.firstNameTextBox.Size = new System.Drawing.Size(143, 20);
 			this.firstNameTextBox.TabIndex = 1;
-			this.firstNameTextBox.TextChanged += new System.EventHandler(this.firstNameTextBox_TextChanged);
+			this.firstNameTextBox.TextChanged += new System.EventHandler(this.FirstNameTextBox_TextChanged);
 			// 
 			// label1
 			// 
@@ -193,8 +193,8 @@ namespace Laba4GUI
 			this.secondNameTextBox.Name = "secondNameTextBox";
 			this.secondNameTextBox.Size = new System.Drawing.Size(229, 20);
 			this.secondNameTextBox.TabIndex = 2;
-			this.secondNameTextBox.TextChanged += new System.EventHandler(this.secondNameTextBox_TextChanged);
-			this.secondNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.secondNameTextBox_Validating);
+			this.secondNameTextBox.TextChanged += new System.EventHandler(this.SecondNameTextBox_TextChanged);
+			this.secondNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.SecondNameTextBox_Validating);
 			// 
 			// groupBox2
 			// 
