@@ -12,29 +12,27 @@ namespace Laba4GUI
 	/// </summary>
 	public partial class StartForm : Form
 	{
-		//TODO: RSDN(v)
         /// <summary>
 		/// Поле класса содержащее путь к файлу
 		/// </summary>
 		private string _filePath = @"C:\";
 
-		 //TODO: RSDN(v)
 		/// <summary>
 		/// Поле класса содержащее объект класса WorkWithFiles
 		/// </summary>
 		private WorkWithFiles _filesWork;
 
-		//TODO: RSDN naming(v)
 		/// <summary>
 		/// Поле класса содержащее лист-источник для DataGridView 
 		/// с работниками
 		/// </summary>
 		private BindingList<Worker> _bindingWorkerList;
 
-		//TODO: зачем?(v)
+		/// <summary>
+		/// 
+		/// </summary>
 		private BindingList<Worker> _bindingWorkerListBefore;
 
-		//TODO: const (V)
 		/// <summary>
 		/// Поле класса хранящее текст для текстбокса поиска
 		/// </summary>
@@ -233,7 +231,6 @@ namespace Laba4GUI
 			}
 		}
 
-        //TODO: RSDN(v)
 		/// <summary>
 		/// Метод реализующий поиск по имени в DataGridView
 		/// </summary>
