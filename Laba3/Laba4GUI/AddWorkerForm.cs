@@ -181,6 +181,8 @@ namespace Laba4GUI
 			var wageType = WageTypeFromRadioButton();
 			workMoneyLabel.Text = labelsText[wageType][0];
 			workHoursLabel.Text = labelsText[wageType][1];
+			workHoursTextBox.Text = "";
+			workMoneyTextBox.Text = "";
 			VisibleChange(true);
 		}
 
