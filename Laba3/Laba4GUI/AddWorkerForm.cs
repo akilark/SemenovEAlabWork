@@ -17,6 +17,7 @@ namespace Laba4GUI
 		/// </summary>
 		private int _allowWorkHours = 8;
 
+		//TODO: поле в свойство
 		/// <summary>
 		/// Поле класса хранящее работника
 		/// </summary>
