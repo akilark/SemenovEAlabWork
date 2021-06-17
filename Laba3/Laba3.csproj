@@ -56,7 +56,6 @@
     <Compile Include="Logic\Worker.cs" />
     <Compile Include="Logic\HorlyPayment.cs" />
     <Compile Include="Logic\Salary.cs" />
-    <Compile Include="Logic\WorkersArray.cs" />
     <Compile Include="Logic\WageRate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

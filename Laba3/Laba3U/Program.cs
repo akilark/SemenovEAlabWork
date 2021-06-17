@@ -19,7 +19,7 @@ namespace Laba3UI
 			{
 				int allowWorkHoursInDay = 8;
 				int arraySize = 3;
-				var workers = WorkersArray.Create(arraySize, allowWorkHoursInDay);
+				var workers = workerListCreate(arraySize, allowWorkHoursInDay);
 
 				for (int i = 0; i < workers.Count; i++)
 				{
@@ -219,15 +219,35 @@ namespace Laba3UI
 		/// Метод с помощью которого выводится информация о 
 		/// всех работниках из списка работников
 		/// </summary>
-		/// <param name="workersArray">Список работников</param>
-		public static void ShowInfo(WorkersArray workersArray)
+		/// <param name="workers">Список работников</param>
+		public static void ShowInfo(List<Worker> workers)
 		{
-			foreach (string workerInfo in workersArray.WorkerInfo())
+			foreach (Worker workertmp in workers)
 			{
-				Console.WriteLine(workerInfo);
+				Console.WriteLine(workertmp.Info());
 				Console.WriteLine();
 			}
 			Console.WriteLine();
+		}
+
+		/// <summary>
+		/// Статический метод создания нового листа случайных 
+		/// работников с полной информацией
+		/// </summary>
+		/// <param name="quantity">Размерность массива</param>
+		/// <param name="allowWorkHoursInDay">Сколько часов в день разрешается 
+		/// работать</param>
+		/// <returns>Лист работников</returns>
+		private static List<Worker> workerListCreate(
+			int quantity, int allowWorkHoursInDay)
+		{
+			var workersTmp = new List<Worker>();
+			for (int i = 0; i < quantity; i++)
+			{
+				workersTmp.Add(
+					RandomWorker.WorkerWithoutWageInformation(allowWorkHoursInDay));
+			}
+			return workersTmp;
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace Laba4GUI
         /// <summary>
 		/// Поле класса содержащее путь к файлу
 		/// </summary>
-		private string _filePath = @"C:\";
+		private string _filePath = @"C:\\";
 
 		/// <summary>
 		/// Поле класса содержащее объект класса WorkWithFiles
@@ -29,18 +29,18 @@ namespace Laba4GUI
 		private BindingList<Worker> _bindingWorkerList;
 
 		/// <summary>
-		/// 
+		/// Поле класса содержащее лист с работниками
+		/// соответствует листу _bindingWorkerList при загрузке
 		/// </summary>
-		private BindingList<Worker> _bindingWorkerListBefore;
+		private BindingList<Worker> _bindingWorkerListBefore = 
+			new BindingList<Worker>();
 
 		/// <summary>
 		/// Поле класса хранящее текст для текстбокса поиска
 		/// </summary>
 		private const string  _searchTextBoxText = "Введите фамилию или имя:";
 
-#if !DEBUG
-		createRandomDataButton.Visible = false
-#endif
+
 
 		/// <summary>
 		/// Конструктор класса без параметров
@@ -49,6 +49,9 @@ namespace Laba4GUI
 		{
 			InitializeComponent();
 			DataGridInitialization();
+			#if !DEBUG
+			createRandomDataButton.Visible = false;
+			#endif
 		}
 
 		/// <summary>
@@ -64,15 +67,12 @@ namespace Laba4GUI
 		/// </summary>
 		private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (_bindingWorkerList == _bindingWorkerListBefore) return;				
+			if (DataMatching()) return;				
 
 			if (MessageBox.Show(this, "Сохранить список ?", "Предупреждение", 
 				MessageBoxButtons.YesNo) == DialogResult.Yes)
 			{
-				if (_filePath == @"C:\")
-				{
-					SaveButton_Click(sender, e);
-				}
+				SaveButton_Click(sender, e);
 			}
 		}
 
@@ -91,6 +91,7 @@ namespace Laba4GUI
 		{
 			var createFileDialog = new SaveFileDialog
 			{
+				InitialDirectory = _filePath,
 				Filter = "txt files (*.kek)|*.kek",
 				RestoreDirectory = true,
 			};
@@ -185,7 +186,7 @@ namespace Laba4GUI
 
 			using (OpenFileDialog openFileDialog = new OpenFileDialog())
 			{
-				openFileDialog.InitialDirectory = "c:\\";
+				openFileDialog.InitialDirectory = _filePath;
 				openFileDialog.Filter = "txt files (*.kek)|*.kek";
 				openFileDialog.RestoreDirectory = true;
 
@@ -242,7 +243,7 @@ namespace Laba4GUI
 			int searchLenght = searchTextBox.Text.Length;
 			if (name.Length >= searchLenght)
 			{
-				if (name.Contains(searchTextBox.Text))
+				if (name.ToLower().Contains(searchTextBox.Text.ToLower()))
 				{
 					return true;
 				}
@@ -275,7 +276,7 @@ namespace Laba4GUI
 		{
 			_bindingWorkerList = new BindingList<Worker>(_filesWork.ReadFileInfo());
 			SetDataSource(_bindingWorkerList);
-			_bindingWorkerListBefore = _bindingWorkerList;
+			DataTransfer();
 		}
 
 		/// <summary>
@@ -313,5 +314,35 @@ namespace Laba4GUI
 			deleteButton.Visible = !visible;
 
 		}
+
+		/// <summary>
+		/// Метод для переноса данных из bindingWorkerList
+		/// в bindingWorkerListBefore
+		/// </summary>
+		private void DataTransfer()
+		{
+			_bindingWorkerListBefore.Clear();
+			foreach(Worker worker in _bindingWorkerList)
+			{
+				_bindingWorkerListBefore.Add(worker);
+			}
+		}
+
+		/// <summary>
+		/// метод сравнения данных из bindingWorkerList
+		/// и bindingWorkerListBefore
+		/// </summary>
+		/// <returns>true если данные одинаковые, false- если разные</returns>
+		private bool DataMatching()
+		{
+			
+			foreach (Worker worker in _bindingWorkerList)
+			{
+				if (_bindingWorkerListBefore.Contains(worker)) continue;
+				return false;
+			}
+			return true;
+		}
+
 	}
 }
