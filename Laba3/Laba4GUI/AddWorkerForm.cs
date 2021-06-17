@@ -17,16 +17,12 @@ namespace Laba4GUI
 		/// </summary>
 		private int _allowWorkHours = 8;
 
-		//TODO: поле в свойство
+		//TODO: поле в свойство(v)
 		/// <summary>
-		/// Поле класса хранящее работника
+		/// Свойство хранящее работника
 		/// </summary>
-		public Worker WorkerTmp;
+		public Worker WorkerTmp { get; private set; }
 
-		/// <summary>
-		/// Поле класса необходимо для определения добавлена ли персона
-		/// </summary>
-		public bool AddFlag = false;
 
 		/// <summary>
 		/// Конструктор класса без параметров
@@ -43,7 +39,6 @@ namespace Laba4GUI
 		{
 			VisibleChange(false);
 			WorkerTmp = new Worker(_allowWorkHours);
-			AddFlag = false;
 		}
 
 		/// <summary>
@@ -83,7 +78,6 @@ namespace Laba4GUI
 						WorkerTmp.MoneyEarnedInMonth(Int32.Parse(workMoneyTextBox.Text),
 							Int32.Parse(workHoursTextBox.Text) * _allowWorkHours);
 					}
-					AddFlag = true;
 					this.Hide();
 				}
 			}

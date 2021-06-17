@@ -136,7 +136,7 @@ namespace Laba4GUI
 			var addWorkerForm = new AddWorkerForm();
 			this.Hide();
 			addWorkerForm.ShowDialog();
-			if (addWorkerForm.AddFlag)
+			if (addWorkerForm.WorkerTmp.Wage != null)
 			{
 				_bindingWorkerList.Add(addWorkerForm.WorkerTmp);
 			}
